@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Project — Prša Productions</title>
+<meta name="description" content="Public source page for selected work by Prša Productions." />
+<link rel="icon" href="assets/brand/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png" />
+<link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png" />
+<link rel="stylesheet" href="assets/fonts.css" />
+<link rel="stylesheet" href="styles.css?v=dark-54" />
+</head>
+<body>
+
+<nav id="nav" class="scrolled cs-nav">
+  <div class="wrap nav-in">
+    <a href="index.html#top" class="wordmark" aria-label="Prša Productions home"><img src="assets/brand/prsa-productions-wordmark.png" alt="" /></a>
+    <a class="cs-back" href="index.html#work">All work</a>
+  </div>
+</nav>
+
+<main class="cs-main">
+  <section class="cs-hero">
+    <div class="wrap cs-heading">
+      <h1 id="csTitle"></h1>
+      <p class="cs-meta" id="csMeta"></p>
+    </div>
+  </section>
+
+  <section class="poster-section">
+    <div class="wrap">
+      <div class="video-shell" id="videoShell"></div>
+      <div class="cs-actions">
+        <a id="watchLink" href="#" target="_blank" rel="noopener">Watch on YouTube</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="nextup">
+    <div class="wrap">
+      <a class="next-link" id="nextProject" href="#">
+        <span>Next project</span>
+        <b id="nextTitle"></b>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <a href="index.html#top" class="wordmark" aria-label="Prša Productions home"><img src="assets/brand/prsa-productions-wordmark.png" alt="" /></a>
+    <span>&copy; <span id="yr"></span> Prša Productions</span>
+    <div class="foot-socials" aria-label="Social profiles">
+      <a href="https://ytjobs.co/talent/profile/58142" target="_blank" rel="noopener noreferrer" aria-label="YTJobs"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6V4.75C8 3.78 8.78 3 9.75 3h4.5C15.22 3 16 3.78 16 4.75V6h2.25A2.75 2.75 0 0 1 21 8.75v8.5A2.75 2.75 0 0 1 18.25 20H5.75A2.75 2.75 0 0 1 3 17.25v-8.5A2.75 2.75 0 0 1 5.75 6H8Zm1.5 0h5V4.75a.25.25 0 0 0-.25-.25h-4.5a.25.25 0 0 0-.25.25V6Zm1.05 3.45v7.1L16.2 13l-5.65-3.55Z" fill="currentColor"/></svg></a>
+      <a href="https://www.instagram.com/gregor.vfx/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17.4" cy="6.7" r="1" fill="currentColor"/></svg></a>
+      <a href="https://x.com/gregorprsaa" target="_blank" rel="noopener noreferrer" aria-label="X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.7 4h4.8l3.4 4.55L16.9 4h2.35l-5.26 6.2L19.7 20h-4.8l-3.82-5.1L6.75 20H4.4l5.58-6.77L4.7 4Zm3.62 1.75H7.7l8.08 12.5h1.62L8.32 5.75Z" fill="currentColor"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const FALLBACK_WORKS = [
+  {rank:1,id:'gar4U3n-ILY',title:'Guess What Age Punched You',url:'https://youtu.be/gar4U3n-ILY',thumb:'https://i.ytimg.com/vi/gar4U3n-ILY/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/gar4U3n-ILY/hqdefault.jpg',views:'354.48M',likes:'4.88M',role:null},
+  {rank:2,id:'yy-Nt0dRhNI',title:'Winner Picks Our Honeymoon',url:'https://youtu.be/yy-Nt0dRhNI',thumb:'https://i.ytimg.com/vi/yy-Nt0dRhNI/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/yy-Nt0dRhNI/hqdefault.jpg',views:'127.11M',likes:'2.09M',role:null},
+  {rank:3,id:'FVm-hMh4Q9A',title:'I Tested BANNED School Products!',url:'https://youtu.be/FVm-hMh4Q9A',thumb:'https://i.ytimg.com/vi/FVm-hMh4Q9A/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/FVm-hMh4Q9A/hqdefault.jpg',views:'63.34M',likes:'330.96K',role:null},
+  {rank:4,id:'6EtuOTq5TmM',title:'Clean The Sports Car, Keep It!',url:'https://youtu.be/6EtuOTq5TmM',thumb:'https://i.ytimg.com/vi/6EtuOTq5TmM/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/6EtuOTq5TmM/hqdefault.jpg',views:'62.17M',likes:'303.5K',role:'VFX'},
+  {rank:5,id:'oUee1Bv0sFE',title:'I Murdered KPop Demon Hunters..',url:'https://youtu.be/oUee1Bv0sFE',thumb:'https://i.ytimg.com/vi/oUee1Bv0sFE/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/oUee1Bv0sFE/hqdefault.jpg',views:'52.98M',likes:'291.94K',role:null},
+  {rank:6,id:'q1DwSS3O8k4',title:'KPop Demon Hunters Are MISSING..',url:'https://youtu.be/q1DwSS3O8k4',thumb:'https://i.ytimg.com/vi/q1DwSS3O8k4/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/q1DwSS3O8k4/hqdefault.jpg',views:'28.44M',likes:'249.8K',role:'VFX'},
+  {rank:7,id:'Q1g8PYEFcHc',title:"Can We Beat the World's Strongest Man?",url:'https://youtu.be/Q1g8PYEFcHc',thumb:'https://i.ytimg.com/vi/Q1g8PYEFcHc/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/Q1g8PYEFcHc/hqdefault.jpg',views:'27.47M',likes:'514.22K',role:null},
+  {rank:8,id:'9Ib1rni1SCc',title:'3 YouTubers Were Murdered..',url:'https://youtu.be/9Ib1rni1SCc',thumb:'https://i.ytimg.com/vi/9Ib1rni1SCc/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/9Ib1rni1SCc/hqdefault.jpg',views:'26.98M',likes:'201.41K',role:'Intro visual'},
+  {rank:9,id:'KaUuPNYHFNg',title:'I Built a School in Mexico',url:'https://youtu.be/KaUuPNYHFNg',thumb:'https://i.ytimg.com/vi/KaUuPNYHFNg/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/KaUuPNYHFNg/hqdefault.jpg',views:'26.59M',likes:'984.67K',role:null},
+  {rank:10,id:'k6tPeMMUn6A',title:'SIDEMEN GUESS THE FOOTBALLER ft Erling Haaland',url:'https://youtu.be/k6tPeMMUn6A',thumb:'https://i.ytimg.com/vi/k6tPeMMUn6A/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/k6tPeMMUn6A/hqdefault.jpg',views:'11.25M',likes:'383.31K',role:null},
+  {rank:11,id:'vQz3T9Vot1Q',title:'Testing Real Life Video Game Weapons!',url:'https://youtu.be/vQz3T9Vot1Q',thumb:'https://i.ytimg.com/vi/vQz3T9Vot1Q/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/vQz3T9Vot1Q/hqdefault.jpg',views:'9.34M',likes:'152.99K',role:null},
+  {rank:12,id:'S_KiWI6dNK4',title:'GUESS THE LANGUAGE (ft. Mrwhosetheboss & Callux)',url:'https://youtu.be/S_KiWI6dNK4',thumb:'https://i.ytimg.com/vi/S_KiWI6dNK4/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/S_KiWI6dNK4/hqdefault.jpg',views:'6.67M',likes:'175.78K',role:'Cutdown + pacing'},
+  {rank:13,id:'WU05jZnUiYs',title:'7 Days Escaping Cardboard Prison!',url:'https://youtu.be/WU05jZnUiYs',thumb:'https://i.ytimg.com/vi/WU05jZnUiYs/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/WU05jZnUiYs/hqdefault.jpg',views:'5.97M',likes:'43.38K',role:null},
+  {rank:14,id:'FHF1CNBdBmI',title:'Kids World Cup Tournament',url:'https://youtu.be/FHF1CNBdBmI',thumb:'https://i.ytimg.com/vi/FHF1CNBdBmI/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/FHF1CNBdBmI/hqdefault.jpg',views:'5.84M',likes:'54.15K',role:'Intro + segmentation graphics'},
+  {rank:15,id:'9DPzZIbp9Ck',title:'Which plane will fly the furthest?',url:'https://youtu.be/9DPzZIbp9Ck',thumb:'https://i.ytimg.com/vi/9DPzZIbp9Ck/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/9DPzZIbp9Ck/hqdefault.jpg',views:'4.92M',likes:'44.27K',role:null},
+  {rank:16,id:'qNfFC-v1jfY',title:'Guess The World Cup Footballer',url:'https://youtu.be/qNfFC-v1jfY',thumb:'https://i.ytimg.com/vi/qNfFC-v1jfY/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/qNfFC-v1jfY/hqdefault.jpg',views:'4.86M',likes:'50.39K',role:null}
+];
+
+const byId = (id) => document.getElementById(id);
+const roleLabel = (work) => work.role || 'Editor';
+const projectHref = (work) => 'case-study.html?id=' + encodeURIComponent(work.id);
+const PORTRAIT_VIDEO_IDS = new Set(['gar4U3n-ILY', 'yy-Nt0dRhNI', 'Q1g8PYEFcHc', 'KaUuPNYHFNg', 'vQz3T9Vot1Q', '9DPzZIbp9Ck']);
+
+let works = FALLBACK_WORKS;
+
+function selectWork() {
+  const params = new URLSearchParams(location.search);
+  const requested = params.get('id') || location.hash.replace('#', '');
+  return works.find((work) => work.id === requested) || works[0];
+}
+
+function renderCase() {
+  const work = selectWork();
+  const index = works.findIndex((item) => item.id === work.id);
+  const next = works[(index + 1) % works.length];
+  const portrait = work.format === 'portrait' || PORTRAIT_VIDEO_IDS.has(work.id);
+  const thumb = portrait ? `https://i.ytimg.com/vi/${work.id}/oar2.jpg` : (work.thumb || `https://i.ytimg.com/vi/${work.id}/maxresdefault.jpg`);
+
+  document.title = work.title + ' — Prša Productions';
+  byId('csTitle').textContent = work.title;
+  byId('csMeta').textContent = [roleLabel(work), 'YouTube'].join(' / ');
+  byId('videoShell').classList.toggle('is-portrait', portrait);
+  byId('videoShell').innerHTML = `<a class="video-poster" href="${work.url}" target="_blank" rel="noopener"><img src="${thumb}" alt="${work.title}" loading="eager" onerror="this.onerror=null;this.src='${work.thumbFallback || `https://i.ytimg.com/vi/${work.id}/hqdefault.jpg`}'"><span>Watch on YouTube</span></a>`;
+  byId('watchLink').href = work.url;
+  byId('nextProject').href = projectHref(next);
+  byId('nextTitle').textContent = next.title;
+}
+
+async function hydrateWorks() {
+  try {
+    const response = await fetch('works.json', { cache: 'no-store' });
+    if (response.ok) {
+      const data = await response.json();
+      if (Array.isArray(data.featured) && data.featured.length) {
+        works = data.featured;
+      }
+    }
+  } catch (error) {
+    works = FALLBACK_WORKS;
+  }
+  renderCase();
+}
+
+function initChrome() {
+  const nav = byId('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 16);
+  }, { passive: true });
+
+  byId('yr').textContent = new Date().getFullYear();
+  document.addEventListener('copy', (event) => event.preventDefault());
+  document.addEventListener('dragstart', (event) => event.preventDefault());
+}
+
+initChrome();
+hydrateWorks();
+</script>
+</body>
+</html>
