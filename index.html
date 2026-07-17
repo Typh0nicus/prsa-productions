@@ -86,6 +86,7 @@
 
   <section class="work" id="work" aria-label="Work">
     <div class="wrap work-head">
+      <span class="kicker">+ (Work)</span>
       <h2 class="work-title">Work that&rsquo;s been watched <strong>1.57B</strong> times.</h2>
     </div>
     <div class="work-rails" id="workWall"></div>
@@ -93,21 +94,21 @@
 
   <section class="credits" id="credits" aria-labelledby="creditsTitle">
     <div class="wrap credits-head">
-      <h2 id="creditsTitle">Credits.</h2>
-      <p id="creditsCount">35 channels</p>
+      <span class="kicker">+ (Credits)</span>
+      <h2 class="credits-statement" id="creditsStatement">35 channels. <strong>1B+</strong> subscribers combined.</h2>
     </div>
     <div class="wrap credits-board" id="creditsBoard"></div>
   </section>
 
   <section class="about" id="about" aria-labelledby="aboutTitle">
     <div class="wrap about-head">
-      <h2 id="aboutTitle">About.</h2>
-      <p>Prša Productions</p>
+      <span class="kicker" id="aboutTitle">+ (About)</span>
     </div>
     <div class="wrap about-scene">
       <div class="about-copy">
         <p>Prša Productions is the editing practice of Gregor Prša.</p>
         <p>Led by Gregor, with collaborators behind the scenes.</p>
+        <a class="btn btn--blue" href="#work"><span>See the work</span><span class="btn-arrow" aria-hidden="true">&rarr;</span></a>
       </div>
       <figure class="about-image">
         <img src="assets/gregor-profile.png" alt="Gregor Prša" />
@@ -117,8 +118,8 @@
 
   <section class="contact" id="contact" aria-labelledby="contactTitle">
     <div class="wrap contact-head">
-      <h2 id="contactTitle">Contact.</h2>
-      <p>Public profiles</p>
+      <span class="kicker" id="contactTitle">+ (Contact)</span>
+      <h2 class="contact-statement">Reach Gregor directly.</h2>
     </div>
     <div class="wrap contact-links">
       <a class="contact-link" href="https://ytjobs.co/talent/profile/58142" target="_blank" rel="noopener noreferrer">
@@ -308,13 +309,13 @@ function creditSize(subs) {
 function renderCredits() {
   const board = byId('creditsBoard');
   if (!board || !credits.length) return;
-  const count = byId('creditsCount');
-  if (count) {
+  const statement = byId('creditsStatement');
+  if (statement) {
     const total = credits.reduce((sum, entry) => sum + (Number(entry.subs) || 0), 0);
     const label = total >= 1000
       ? (Math.floor(total / 100) / 10).toFixed(1).replace(/\.0$/, '') + 'B+'
       : Math.floor(total / 10) * 10 + 'M+';
-    count.innerHTML = '<strong>' + label + '</strong><span>subscribers combined</span>';
+    statement.innerHTML = credits.length + ' channels. <strong>' + label + '</strong> subscribers combined.';
   }
   board.innerHTML = credits.map((entry, index) => {
     const spot = CREDIT_LAYOUT[entry.name] || [8 + ((index * 37) % 85), 8 + ((index * 53) % 82)];
