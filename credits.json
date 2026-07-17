@@ -6,7 +6,7 @@
     {"name": "Ben Azelart", "avatar": "assets/channels/benazelart-logo.jpg", "subs": 50.9},
     {"name": "SSSniperWolf", "avatar": "assets/channels/sniperwolf-logo.jpg", "subs": 35},
     {"name": "Preston", "avatar": "assets/channels/preston-logo.webp", "subs": 32.2},
-    {"name": "Sidemen", "avatar": "assets/channels/sidemen-wordmark.png", "subs": 23.3, "emblem": true},
+    {"name": "Sidemen", "avatar": "assets/channels/sidemen-wordmark.png", "subs": 23.3, "emblem": true, "invert": true},
     {"name": "FutCrunch", "avatar": "assets/channels/futcrunch-logo.jpg", "subs": 20.8},
     {"name": "Unspeakable", "avatar": "assets/channels/unspeakable-logo.jpg", "subs": 19.9},
     {"name": "LawByMike", "avatar": "assets/channels/lawbymike-new-logo.jpg", "subs": 19.3},
