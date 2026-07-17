@@ -10,7 +10,15 @@ This brief supersedes the retired personal-portfolio direction. `archive/DESIGN_
 - Keep attribution honest: do not silently turn Gregor's historic personal credits into company-wide claims.
 - Do not invent metrics, testimonials, client results, awards, job titles, or services.
 
-### Art direction
+### CURRENT DIRECTION (July 2026, from Gregor): white + blue, Overluce base
+
+- The site is now **light**: #F5F5F5 field, #313336 ink, #1033FF electric blue as the ONLY accent (sampled from Overluce). The HERO stays the dark cinematic cover ("front page is fine") and ends in a crisp cut into the white world — do not blend the seam.
+- Overluce grammar is adopted sitewide: `+ (Label)` kickers open sections (this supersedes the old kicker ban), medium-weight statements (clamp(34,3.6vw,56)/500/-.038em) instead of giant display heads, no head hairlines (whitespace rhythm), filled-rectangle `.btn` system (blue/ink, caps 11px, arrow nudge).
+- Theme switching: `#nav` gains `nav-light` past the hero (wordmark inverts via `filter:invert(1)`); the HUD adapts via `mix-blend-mode:difference`; Sidemen's emblem uses the `invert` data flag on light. Case pages are light via `cs-body`.
+- All interaction systems (word-rise, scramble, beam, rails, constellation, HUD, loader) survive the pivot — they are the "innovate on top" layer Gregor asked for. Dark-only devices (starfield, smoke plates, aurora) are retired but preserved in git history / assets.
+- Repo: github.com/Typh0nicus/prsa-productions (main). The complete dark build is the baseline commit — never force-push over it.
+
+## Art direction (dark-era notes below; superseded where they conflict with the pivot)
 
 - Professional, premium, dark production-studio atmosphere.
 - Use dimensional backgrounds, restrained spatial grids, layered surfaces, and cinematic image treatment inspired by the supplied Workflow Accelerator/COSMOQ and studio references.
