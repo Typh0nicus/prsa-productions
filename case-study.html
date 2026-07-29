@@ -3,28 +3,129 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>document.documentElement.classList.add('js');</script>
 <title>Project — Prša Productions</title>
-<meta name="description" content="Public source page for selected work by Prša Productions." />
+<meta name="theme-color" content="#f5f5f5" />
+<meta name="color-scheme" content="light" />
+<meta name="description" content="Selected editing work by Prša Productions." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Prša Productions" />
+<meta property="og:title" id="csOgTitle" content="Selected work · Prša Productions" />
+<meta property="og:description" id="csOgDescription" content="Selected editing work by Prša Productions." />
+<meta property="og:image" id="csOgImage" content="assets/hero/creator-ensemble-merged-v1.png" />
+<meta property="og:image:alt" id="csOgImageAlt" content="Selected work thumbnail" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" id="csTwitterTitle" content="Selected work · Prša Productions" />
+<meta name="twitter:description" id="csTwitterDescription" content="Selected editing work by Prša Productions." />
+<meta name="twitter:image" id="csTwitterImage" content="assets/hero/creator-ensemble-merged-v1.png" />
+<meta name="twitter:image:alt" id="csTwitterImageAlt" content="Selected work thumbnail" />
 <link rel="icon" href="assets/brand/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png" />
 <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png" />
+<link rel="preconnect" href="https://i.ytimg.com" crossorigin />
+<link rel="dns-prefetch" href="https://i.ytimg.com" />
 <link rel="stylesheet" href="assets/fonts.css" />
-<link rel="stylesheet" href="styles.css?v=dark-54" />
+<link rel="stylesheet" href="styles.css?v=remaster-158" />
+<script src="assets/project-transition.js?v=2" defer></script>
+<script>try{if(sessionStorage.getItem('prsa-route')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('route-arrived')}}catch(e){}</script>
 </head>
 <body class="cs-body">
+
+<a class="skip-link" href="#csTitle">Skip to project</a>
+
+<div class="route-transition" id="routeTransition" aria-hidden="true">
+  <div class="route-transition-field" aria-hidden="true"></div>
+  <div class="route-transition-inner">
+    <div class="route-transition-copy">
+      <span id="routeTransitionMeta">Prša Productions</span>
+      <strong id="routeTransitionTitle">Selected work</strong>
+    </div>
+    <figure class="route-transition-media"><img id="routeTransitionImage" src="" alt="" decoding="async" /></figure>
+  </div>
+  <span class="route-transition-brand">Prša Productions</span>
+  <span class="route-transition-progress" aria-hidden="true"></span>
+</div>
+<script>
+(function () {
+  if (!document.documentElement.classList.contains('route-arrived')) return;
+  try {
+    var payload = JSON.parse(sessionStorage.getItem('prsa-route') || '{}');
+    var layer = document.getElementById('routeTransition');
+    var title = document.getElementById('routeTransitionTitle');
+    var image = document.getElementById('routeTransitionImage');
+    if (payload.title && title) title.textContent = payload.title;
+    if (layer && payload.format === 'portrait') layer.classList.add('route-transition--portrait');
+    if (image && payload.thumb) {
+      image.onerror = () => { if (layer) layer.classList.add('has-no-media'); };
+      image.src = payload.thumb;
+    } else if (layer) {
+      layer.classList.add('has-no-media');
+    }
+  } catch (error) {}
+})();
+</script>
 
 <nav id="nav" class="scrolled cs-nav">
   <div class="wrap nav-in">
     <a href="index.html#top" class="wordmark" aria-label="Prša Productions home"><img src="assets/brand/prsa-productions-wordmark.png" alt="" /></a>
-    <a class="cs-back" href="index.html#work">All work</a>
+    <div class="cs-nav-actions">
+      <a class="cs-back" href="index.html#work">All work</a>
+      <button class="menu-btn" type="button" aria-label="Open menu" aria-controls="mnav" aria-expanded="false" id="menuBtn">
+        <span class="menu-bars" aria-hidden="true"><i></i><i></i></span>
+      </button>
+    </div>
   </div>
 </nav>
 
-<main class="cs-main">
+<div class="mnav cs-mnav" id="mnav" role="dialog" aria-modal="true" aria-label="Site menu" aria-hidden="true">
+  <div class="menu-panel">
+    <div class="mtop">
+      <div class="wrap nav-in">
+        <a href="index.html#top" class="wordmark" data-case-menu-link aria-label="Prša Productions home"><img src="assets/brand/prsa-productions-wordmark.png" alt="" /></a>
+        <button class="mclose" type="button" aria-label="Close menu" id="mClose">
+          <span class="mclose-mark" aria-hidden="true"><i></i><i></i></span>
+        </button>
+      </div>
+    </div>
+    <nav class="mlinks" aria-label="Primary navigation">
+      <a href="index.html#work" data-case-menu-link><span class="mlabel">Work</span></a>
+      <a href="index.html#about" data-case-menu-link><span class="mlabel">About</span></a>
+      <a href="index.html#credits" data-case-menu-link><span class="mlabel">Credits</span></a>
+      <a href="index.html#contact" data-case-menu-link><span class="mlabel">Contact</span></a>
+    </nav>
+    <nav class="menu-socials" aria-label="Social profiles">
+      <span>Socials</span>
+      <a href="https://ytjobs.co/talent/profile/58142" target="_blank" rel="noopener noreferrer" aria-label="YTJobs"><svg class="social-mark social-mark--ytjobs" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6V4.75C8 3.78 8.78 3 9.75 3h4.5C15.22 3 16 3.78 16 4.75V6h2.25A2.75 2.75 0 0 1 21 8.75v8.5A2.75 2.75 0 0 1 18.25 20H5.75A2.75 2.75 0 0 1 3 17.25v-8.5A2.75 2.75 0 0 1 5.75 6H8Zm1.5 0h5V4.75a.25.25 0 0 0-.25-.25h-4.5a.25.25 0 0 0-.25.25V6Zm1.05 3.45v7.1L16.2 13l-5.65-3.55Z" fill="currentColor"/></svg></a>
+      <a href="https://www.instagram.com/gregor.vfx/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg class="social-mark" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17.4" cy="6.7" r="1" fill="currentColor"/></svg></a>
+      <a href="https://x.com/gregorprsaa" target="_blank" rel="noopener noreferrer" aria-label="X"><svg class="social-mark social-mark--x" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.7 4h4.8l3.4 4.55L16.9 4h2.35l-5.26 6.2L19.7 20h-4.8l-3.82-5.1L6.75 20H4.4l5.58-6.77L4.7 4Zm3.62 1.75H7.7l8.08 12.5h1.62L8.32 5.75Z" fill="currentColor"/></svg></a>
+      <a href="https://www.linkedin.com/in/gregor-pr%C5%A1a-825ab5265/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg class="social-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 8.6H3.56v11.4h3.38V8.6ZM5.25 7.14a1.96 1.96 0 1 0 0-3.92 1.96 1.96 0 0 0 0 3.92ZM20.44 13.75c0-3.06-.66-5.41-4.23-5.41-1.72 0-2.87.94-3.34 1.83h-.05V8.6H9.44V20h3.38v-5.64c0-1.42.27-2.8 2.03-2.8 1.73 0 1.76 1.63 1.76 2.89V20h3.83v-6.25Z" fill="currentColor"/></svg></a>
+    </nav>
+    <aside class="cs-menu-project" aria-hidden="true">
+      <span class="cs-menu-project-label">Selected work</span>
+      <figure><img id="csMenuImage" src="" alt="" decoding="async" /></figure>
+      <p id="csMenuTitle">Selected work</p>
+    </aside>
+  </div>
+</div>
+
+<main class="cs-main" id="project">
   <section class="cs-hero">
     <div class="wrap cs-heading">
-      <h1 id="csTitle"></h1>
-      <p class="cs-meta" id="csMeta"></p>
+      <div class="cs-heading-copy">
+        <span class="kicker">+ (Selected work)</span>
+        <h1 class="skip-target" id="csTitle" tabindex="-1"></h1>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-facts" aria-label="Project details">
+    <div class="wrap cs-facts-grid" id="csFactsGrid"></div>
+  </section>
+
+  <section class="cs-scope" id="csScope" hidden>
+    <div class="wrap cs-scope-grid">
+      <span class="kicker">+ (Project scope)</span>
+      <p id="csScopeText"></p>
     </div>
   </section>
 
@@ -32,16 +133,21 @@
     <div class="wrap">
       <div class="video-shell" id="videoShell"></div>
       <div class="cs-actions">
-        <a id="watchLink" href="#" target="_blank" rel="noopener">Watch on YouTube</a>
+        <a id="watchLink" href="#" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+        <a href="mailto:gregor@prsa.productions">Discuss a project</a>
       </div>
     </div>
   </section>
 
+
   <section class="nextup">
     <div class="wrap">
       <a class="next-link" id="nextProject" href="#">
-        <span>Next project</span>
-        <b id="nextTitle"></b>
+        <span class="next-copy">
+          <span class="kicker">+ (Next project)</span>
+          <b id="nextTitle"></b>
+        </span>
+        <span class="next-preview" aria-hidden="true"><img id="nextThumb" src="" alt="" loading="lazy" decoding="async" /></span>
       </a>
     </div>
   </section>
@@ -51,40 +157,83 @@
   <div class="wrap foot">
     <a href="index.html#top" class="wordmark" aria-label="Prša Productions home"><img src="assets/brand/prsa-productions-wordmark.png" alt="" /></a>
     <span>&copy; <span id="yr"></span> Prša Productions</span>
-    <div class="foot-socials" aria-label="Social profiles">
+    <nav class="foot-socials" aria-label="Social profiles">
       <a href="https://ytjobs.co/talent/profile/58142" target="_blank" rel="noopener noreferrer" aria-label="YTJobs"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6V4.75C8 3.78 8.78 3 9.75 3h4.5C15.22 3 16 3.78 16 4.75V6h2.25A2.75 2.75 0 0 1 21 8.75v8.5A2.75 2.75 0 0 1 18.25 20H5.75A2.75 2.75 0 0 1 3 17.25v-8.5A2.75 2.75 0 0 1 5.75 6H8Zm1.5 0h5V4.75a.25.25 0 0 0-.25-.25h-4.5a.25.25 0 0 0-.25.25V6Zm1.05 3.45v7.1L16.2 13l-5.65-3.55Z" fill="currentColor"/></svg></a>
       <a href="https://www.instagram.com/gregor.vfx/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17.4" cy="6.7" r="1" fill="currentColor"/></svg></a>
       <a href="https://x.com/gregorprsaa" target="_blank" rel="noopener noreferrer" aria-label="X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.7 4h4.8l3.4 4.55L16.9 4h2.35l-5.26 6.2L19.7 20h-4.8l-3.82-5.1L6.75 20H4.4l5.58-6.77L4.7 4Zm3.62 1.75H7.7l8.08 12.5h1.62L8.32 5.75Z" fill="currentColor"/></svg></a>
-    </div>
+      <a href="https://www.linkedin.com/in/gregor-pr%C5%A1a-825ab5265/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 8.6H3.56v11.4h3.38V8.6ZM5.25 7.14a1.96 1.96 0 1 0 0-3.92 1.96 1.96 0 0 0 0 3.92ZM20.44 13.75c0-3.06-.66-5.41-4.23-5.41-1.72 0-2.87.94-3.34 1.83h-.05V8.6H9.44V20h3.38v-5.64c0-1.42.27-2.8 2.03-2.8 1.73 0 1.76 1.63 1.76 2.89V20h3.83v-6.25Z" fill="currentColor"/></svg></a>
+    </nav>
   </div>
 </footer>
 
 <script>
 const FALLBACK_WORKS = [
-  {rank:1,id:'gar4U3n-ILY',title:'Guess What Age Punched You',url:'https://youtu.be/gar4U3n-ILY',thumb:'https://i.ytimg.com/vi/gar4U3n-ILY/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/gar4U3n-ILY/hqdefault.jpg',views:'354.48M',likes:'4.88M',role:null},
-  {rank:2,id:'yy-Nt0dRhNI',title:'Winner Picks Our Honeymoon',url:'https://youtu.be/yy-Nt0dRhNI',thumb:'https://i.ytimg.com/vi/yy-Nt0dRhNI/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/yy-Nt0dRhNI/hqdefault.jpg',views:'127.11M',likes:'2.09M',role:null},
-  {rank:3,id:'FVm-hMh4Q9A',title:'I Tested BANNED School Products!',url:'https://youtu.be/FVm-hMh4Q9A',thumb:'https://i.ytimg.com/vi/FVm-hMh4Q9A/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/FVm-hMh4Q9A/hqdefault.jpg',views:'63.34M',likes:'330.96K',role:null},
-  {rank:4,id:'6EtuOTq5TmM',title:'Clean The Sports Car, Keep It!',url:'https://youtu.be/6EtuOTq5TmM',thumb:'https://i.ytimg.com/vi/6EtuOTq5TmM/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/6EtuOTq5TmM/hqdefault.jpg',views:'62.17M',likes:'303.5K',role:'VFX'},
-  {rank:5,id:'oUee1Bv0sFE',title:'I Murdered KPop Demon Hunters..',url:'https://youtu.be/oUee1Bv0sFE',thumb:'https://i.ytimg.com/vi/oUee1Bv0sFE/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/oUee1Bv0sFE/hqdefault.jpg',views:'52.98M',likes:'291.94K',role:null},
-  {rank:6,id:'q1DwSS3O8k4',title:'KPop Demon Hunters Are MISSING..',url:'https://youtu.be/q1DwSS3O8k4',thumb:'https://i.ytimg.com/vi/q1DwSS3O8k4/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/q1DwSS3O8k4/hqdefault.jpg',views:'28.44M',likes:'249.8K',role:'VFX'},
-  {rank:7,id:'Q1g8PYEFcHc',title:"Can We Beat the World's Strongest Man?",url:'https://youtu.be/Q1g8PYEFcHc',thumb:'https://i.ytimg.com/vi/Q1g8PYEFcHc/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/Q1g8PYEFcHc/hqdefault.jpg',views:'27.47M',likes:'514.22K',role:null},
-  {rank:8,id:'9Ib1rni1SCc',title:'3 YouTubers Were Murdered..',url:'https://youtu.be/9Ib1rni1SCc',thumb:'https://i.ytimg.com/vi/9Ib1rni1SCc/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/9Ib1rni1SCc/hqdefault.jpg',views:'26.98M',likes:'201.41K',role:'Intro visual'},
-  {rank:9,id:'KaUuPNYHFNg',title:'I Built a School in Mexico',url:'https://youtu.be/KaUuPNYHFNg',thumb:'https://i.ytimg.com/vi/KaUuPNYHFNg/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/KaUuPNYHFNg/hqdefault.jpg',views:'26.59M',likes:'984.67K',role:null},
-  {rank:10,id:'k6tPeMMUn6A',title:'SIDEMEN GUESS THE FOOTBALLER ft Erling Haaland',url:'https://youtu.be/k6tPeMMUn6A',thumb:'https://i.ytimg.com/vi/k6tPeMMUn6A/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/k6tPeMMUn6A/hqdefault.jpg',views:'11.25M',likes:'383.31K',role:null},
-  {rank:11,id:'vQz3T9Vot1Q',title:'Testing Real Life Video Game Weapons!',url:'https://youtu.be/vQz3T9Vot1Q',thumb:'https://i.ytimg.com/vi/vQz3T9Vot1Q/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/vQz3T9Vot1Q/hqdefault.jpg',views:'9.34M',likes:'152.99K',role:null},
-  {rank:12,id:'S_KiWI6dNK4',title:'GUESS THE LANGUAGE (ft. Mrwhosetheboss & Callux)',url:'https://youtu.be/S_KiWI6dNK4',thumb:'https://i.ytimg.com/vi/S_KiWI6dNK4/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/S_KiWI6dNK4/hqdefault.jpg',views:'6.67M',likes:'175.78K',role:'Cutdown + pacing'},
-  {rank:13,id:'WU05jZnUiYs',title:'7 Days Escaping Cardboard Prison!',url:'https://youtu.be/WU05jZnUiYs',thumb:'https://i.ytimg.com/vi/WU05jZnUiYs/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/WU05jZnUiYs/hqdefault.jpg',views:'5.97M',likes:'43.38K',role:null},
-  {rank:14,id:'FHF1CNBdBmI',title:'Kids World Cup Tournament',url:'https://youtu.be/FHF1CNBdBmI',thumb:'https://i.ytimg.com/vi/FHF1CNBdBmI/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/FHF1CNBdBmI/hqdefault.jpg',views:'5.84M',likes:'54.15K',role:'Intro + segmentation graphics'},
-  {rank:15,id:'9DPzZIbp9Ck',title:'Which plane will fly the furthest?',url:'https://youtu.be/9DPzZIbp9Ck',thumb:'https://i.ytimg.com/vi/9DPzZIbp9Ck/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/9DPzZIbp9Ck/hqdefault.jpg',views:'4.92M',likes:'44.27K',role:null},
-  {rank:16,id:'qNfFC-v1jfY',title:'Guess The World Cup Footballer',url:'https://youtu.be/qNfFC-v1jfY',thumb:'https://i.ytimg.com/vi/qNfFC-v1jfY/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/qNfFC-v1jfY/hqdefault.jpg',views:'4.86M',likes:'50.39K',role:null}
+  {rank:1,id:"FVm-hMh4Q9A",title:"I Tested BANNED School Products!",url:"https://youtu.be/FVm-hMh4Q9A",thumb:"https://i.ytimg.com/vi/FVm-hMh4Q9A/maxresdefault.jpg",thumbFallback:"https://i.ytimg.com/vi/FVm-hMh4Q9A/hqdefault.jpg",views:"63.34M",likes:"330.96K",role:null,channel:"Stokes Twins",format:"landscape"},
+  {rank:2,id:"6EtuOTq5TmM",title:"Clean The Sports Car, Keep It!",url:"https://youtu.be/6EtuOTq5TmM",thumb:"https://i.ytimg.com/vi/6EtuOTq5TmM/maxresdefault.jpg",thumbFallback:"https://i.ytimg.com/vi/6EtuOTq5TmM/hqdefault.jpg",views:"62.17M",likes:"303.5K",role:"VFX",channel:"Stokes Twins",format:"landscape"},
+  {rank:3,id:"oUee1Bv0sFE",title:"I Murdered KPop Demon Hunters..",url:"https://youtu.be/oUee1Bv0sFE",thumb:"https://i.ytimg.com/vi/oUee1Bv0sFE/maxresdefault.jpg",thumbFallback:"https://i.ytimg.com/vi/oUee1Bv0sFE/hqdefault.jpg",views:"52.98M",likes:"291.94K",role:null,channel:"Stokes Twins",format:"landscape"},
+  {rank:4,id:"q1DwSS3O8k4",title:"KPop Demon Hunters Are MISSING..",url:"https://youtu.be/q1DwSS3O8k4",thumb:"https://i.ytimg.com/vi/q1DwSS3O8k4/maxresdefault.jpg",thumbFallback:"https://i.ytimg.com/vi/q1DwSS3O8k4/hqdefault.jpg",views:"28.44M",likes:"249.8K",role:"VFX",channel:"Stokes Twins",format:"landscape"},
+  {rank:5,id:"9Ib1rni1SCc",title:"3 YouTubers Were Murdered..",url:"https://youtu.be/9Ib1rni1SCc",thumb:"https://i.ytimg.com/vi/9Ib1rni1SCc/maxresdefault.jpg",thumbFallback:"https://i.ytimg.com/vi/9Ib1rni1SCc/hqdefault.jpg",views:"26.98M",likes:"201.41K",role:"Intro visual",channel:"Stokes Twins",format:"landscape"},
+  {rank:6,id:"k6tPeMMUn6A",title:"SIDEMEN GUESS THE FOOTBALLER ft Erling Haaland",url:"https://youtu.be/k6tPeMMUn6A",thumb:"https://i.ytimg.com/vi/k6tPeMMUn6A/maxresdefault.jpg",thumbFallback:"https://i.ytimg.com/vi/k6tPeMMUn6A/hqdefault.jpg",views:"14.35M",likes:"448.07K",role:null,channel:"Sidemen",format:"landscape"},
+  {rank:7,id:"FHF1CNBdBmI",title:"Kids World Cup Tournament",url:"https://youtu.be/FHF1CNBdBmI",thumb:"https://i.ytimg.com/vi/FHF1CNBdBmI/maxresdefault.jpg",thumbFallback:"https://i.ytimg.com/vi/FHF1CNBdBmI/hqdefault.jpg",views:"9.01M",likes:"78.6K",role:"Intro + segmentation graphics",channel:"FutCrunch",format:"landscape"},
+  {rank:8,id:"S_KiWI6dNK4",title:"GUESS THE LANGUAGE (ft. Mrwhosetheboss & Callux)",url:"https://youtu.be/S_KiWI6dNK4",thumb:"https://i.ytimg.com/vi/S_KiWI6dNK4/maxresdefault.jpg",thumbFallback:"https://i.ytimg.com/vi/S_KiWI6dNK4/hqdefault.jpg",views:"6.67M",likes:"175.78K",role:"Cutdown + pacing",channel:"KSI",format:"landscape"},
+  {rank:9,id:"qNfFC-v1jfY",title:"Guess The World Cup Footballer",url:"https://youtu.be/qNfFC-v1jfY",thumb:"https://i.ytimg.com/vi/qNfFC-v1jfY/maxresdefault.jpg",thumbFallback:"https://i.ytimg.com/vi/qNfFC-v1jfY/hqdefault.jpg",views:"4.86M",likes:"50.39K",role:null,channel:"John Nellis",format:"landscape"},
+  {rank:10,id:"s-XhQ2Ong14",title:"If You Beat The Maze, You Win $1,000!",url:"https://youtu.be/s-XhQ2Ong14",thumb:"https://i.ytimg.com/vi/s-XhQ2Ong14/maxresdefault.jpg",thumbFallback:"https://i.ytimg.com/vi/s-XhQ2Ong14/hqdefault.jpg",views:"4.22M",likes:"23.46K",role:null,channel:"Ben Azelart",format:"landscape"},
+  {rank:11,id:"vToG6mOkYh8",title:"WE TRIED AMERICA’S MOST FAMOUS FAST FOOD!",url:"https://youtu.be/vToG6mOkYh8",thumb:"https://i.ytimg.com/vi/vToG6mOkYh8/maxresdefault.jpg",thumbFallback:"https://i.ytimg.com/vi/vToG6mOkYh8/hqdefault.jpg",views:"2.71M",likes:"76.01K",role:null,channel:"Miniminter",format:"landscape"},
+  {rank:12,id:"DKdWRROo9_U",title:"GUESS THE ATHLETE!",url:"https://youtu.be/DKdWRROo9_U",thumb:"https://i.ytimg.com/vi/DKdWRROo9_U/maxresdefault.jpg",thumbFallback:"https://i.ytimg.com/vi/DKdWRROo9_U/hqdefault.jpg",views:"1.51M",likes:"43.24K",role:null,channel:"Miniminter",format:"landscape"},
 ];
 
+const CASE_AVATARS = {
+  "Stokes Twins": "assets/wordmarks/stoketwins-fig.png",
+  "Ben Azelart": "assets/wordmarks/benazelart-fig.png",
+  "Sidemen": "assets/wordmarks/sidemen-row.png",
+  "FutCrunch": "assets/wordmarks/futcrunch-fig.png",
+  "KSI": "assets/wordmarks/ksi-row.png",
+  "John Nellis": "assets/wordmarks/johnnellis-fig.png",
+  "Miniminter": "assets/wordmarks/miniminter-row.png",
+};
+
 const byId = (id) => document.getElementById(id);
-const roleLabel = (work) => work.role || 'Editor';
+
+function fmtStat(value) {
+  return String(value || '').replace(/(\d+(?:\.\d+)?)([KMB])/i, (m, num, suf) => {
+    const n = parseFloat(num);
+    const r = n >= 100 ? Math.round(n) : Math.round(n * 10) / 10;
+    return r + suf;
+  });
+}
 const projectHref = (work) => 'case-study.html?id=' + encodeURIComponent(work.id);
 const PORTRAIT_VIDEO_IDS = new Set(['gar4U3n-ILY', 'yy-Nt0dRhNI', 'Q1g8PYEFcHc', 'KaUuPNYHFNg', 'vQz3T9Vot1Q', '9DPzZIbp9Ck']);
+const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[char]));
+
+function handleCaseImageError(image, fallback) {
+  const current = image.getAttribute('src') || '';
+  if (fallback && image.dataset.fallbackTried !== 'true' && current !== fallback) {
+    image.dataset.fallbackTried = 'true';
+    image.src = fallback;
+    return;
+  }
+  image.hidden = true;
+  const host = image.closest('.video-poster, .next-preview, .cs-menu-project figure, .cs-browser-thumb');
+  if (host) host.classList.add('media-unavailable');
+}
 
 let works = FALLBACK_WORKS;
+
+function splitCaseTitle(el) {
+  const words = (el.textContent || '').trim().split(/\s+/);
+  el.textContent = '';
+  words.forEach((word, index) => {
+    const mask = document.createElement('span');
+    mask.className = 'w-mask';
+    const inner = document.createElement('span');
+    inner.className = 'w';
+    inner.style.setProperty('--wi', index);
+    inner.textContent = word;
+    mask.appendChild(inner);
+    el.appendChild(mask);
+    if (index < words.length - 1) el.appendChild(document.createTextNode(' '));
+  });
+}
 
 function selectWork() {
   const params = new URLSearchParams(location.search);
@@ -92,21 +241,215 @@ function selectWork() {
   return works.find((work) => work.id === requested) || works[0];
 }
 
+function caseThumb(work) {
+  const portrait = work.format === 'portrait' || PORTRAIT_VIDEO_IDS.has(work.id);
+  return portrait ? `https://i.ytimg.com/vi/${work.id}/oar2.jpg` : (work.thumb || `https://i.ytimg.com/vi/${work.id}/maxresdefault.jpg`);
+}
+
 function renderCase() {
   const work = selectWork();
   const index = works.findIndex((item) => item.id === work.id);
   const next = works[(index + 1) % works.length];
   const portrait = work.format === 'portrait' || PORTRAIT_VIDEO_IDS.has(work.id);
-  const thumb = portrait ? `https://i.ytimg.com/vi/${work.id}/oar2.jpg` : (work.thumb || `https://i.ytimg.com/vi/${work.id}/maxresdefault.jpg`);
+  const thumb = caseThumb(work);
+  const nextPortrait = next.format === 'portrait' || PORTRAIT_VIDEO_IDS.has(next.id);
+  const nextThumb = caseThumb(next);
 
   document.title = work.title + ' — Prša Productions';
-  byId('csTitle').textContent = work.title;
-  byId('csMeta').textContent = [roleLabel(work), 'YouTube'].join(' / ');
-  byId('videoShell').classList.toggle('is-portrait', portrait);
-  byId('videoShell').innerHTML = `<a class="video-poster" href="${work.url}" target="_blank" rel="noopener"><img src="${thumb}" alt="${work.title}" loading="eager" onerror="this.onerror=null;this.src='${work.thumbFallback || `https://i.ytimg.com/vi/${work.id}/hqdefault.jpg`}'"><span>Watch on YouTube</span></a>`;
+  const description = document.querySelector('meta[name="description"]');
+  const projectDescription = work.title + ' — selected editing work by Prša Productions.';
+  if (description) description.content = projectDescription;
+  byId('csOgTitle').content = document.title;
+  byId('csOgDescription').content = projectDescription;
+  byId('csOgImage').content = thumb;
+  byId('csOgImageAlt').content = work.title + ' thumbnail';
+  byId('csTwitterTitle').content = document.title;
+  byId('csTwitterDescription').content = projectDescription;
+  byId('csTwitterImage').content = thumb;
+  byId('csTwitterImageAlt').content = work.title + ' thumbnail';
+  const title = byId('csTitle');
+  title.textContent = work.title;
+  splitCaseTitle(title);
+  const facts = [];
+  if (work.channel) {
+    const avatar = CASE_AVATARS[work.channel]
+      ? '<img class="cs-fact-avatar" src="' + escapeHtml(CASE_AVATARS[work.channel]) + '" alt="" loading="lazy" decoding="async" onerror="this.hidden=true" />'
+      : '';
+    facts.push({ label: 'Channel', html: avatar + escapeHtml(work.channel) });
+  }
+  if (work.role) facts.push({ label: 'Role', html: escapeHtml(work.role) });
+  facts.push({ label: 'Views', html: escapeHtml(fmtStat(work.views) || '—') });
+  facts.push({ label: 'Likes', html: escapeHtml(fmtStat(work.likes) || '—') });
+  byId('csFactsGrid').innerHTML = facts.map((fact) => '<div class="cs-fact"><span>' + fact.label + '</span><strong>' + fact.html + '</strong></div>').join('');
+  byId('csMenuTitle').textContent = work.title;
+  const menuImage = byId('csMenuImage');
+  menuImage.dataset.fallbackTried = 'false';
+  menuImage.hidden = false;
+  menuImage.closest('figure')?.classList.remove('media-unavailable');
+  menuImage.onerror = () => handleCaseImageError(menuImage, work.thumbFallback || `https://i.ytimg.com/vi/${work.id}/hqdefault.jpg`);
+  menuImage.src = thumb;
+  const shell = byId('videoShell');
+  shell.classList.toggle('is-portrait', portrait);
+  shell.classList.remove('is-playing');
+  shell.innerHTML = `<a class="video-poster" href="${escapeHtml(work.url)}" target="_blank" rel="noopener noreferrer" aria-label="Play ${escapeHtml(work.title)}">
+    <img src="${escapeHtml(thumb)}" alt="${escapeHtml(work.title)}" loading="eager" onerror="handleCaseImageError(this,'${escapeHtml(work.thumbFallback || `https://i.ytimg.com/vi/${work.id}/hqdefault.jpg`)}')">
+    <span class="video-play" aria-hidden="true"><i></i></span>
+  </a>`;
+  // Inline playback: the poster stays an honest external link (no-JS, modified clicks, media failures),
+  // but a plain click plays the edit right here in the shell. file:// is excluded - YouTube embeds
+  // reject referer-less origins with error 153, so local viewing keeps the external-link behavior.
+  const poster = shell.querySelector('.video-poster');
+  if (location.protocol !== 'file:') poster.addEventListener('click', (event) => {
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    if (poster.classList.contains('media-unavailable')) return;
+    event.preventDefault();
+    shell.classList.add('is-playing');
+    shell.innerHTML = `<div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(work.id)}?autoplay=1&rel=0&playsinline=1" title="${escapeHtml(work.title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`;
+  });
   byId('watchLink').href = work.url;
   byId('nextProject').href = projectHref(next);
+  byId('nextProject').classList.toggle('next-link--portrait', nextPortrait);
+  byId('nextProject').dataset.projectTransition = '';
+  byId('nextProject').dataset.projectTitle = next.title;
+  byId('nextProject').dataset.projectFormat = nextPortrait ? 'portrait' : 'landscape';
+  byId('nextProject').dataset.projectThumb = nextThumb;
+  byId('nextProject').dataset.projectFallback = next.thumbFallback || `https://i.ytimg.com/vi/${next.id}/hqdefault.jpg`;
   byId('nextTitle').textContent = next.title;
+  const nextImage = byId('nextThumb');
+  nextImage.dataset.fallbackTried = 'false';
+  nextImage.hidden = false;
+  nextImage.closest('.next-preview')?.classList.remove('media-unavailable');
+  nextImage.onerror = () => handleCaseImageError(nextImage, next.thumbFallback || `https://i.ytimg.com/vi/${next.id}/hqdefault.jpg`);
+  nextImage.src = nextThumb;
+  const scopeSection = byId('csScope');
+  if (work.scope) {
+    byId('csScopeText').textContent = work.scope;
+    scopeSection.hidden = false;
+  } else {
+    scopeSection.hidden = true;
+  }
+  initPosterMotion();
+  const coveredArrival = document.documentElement.classList.contains('route-arrived');
+  setTimeout(() => requestAnimationFrame(() => document.body.classList.add('cs-ready')), coveredArrival ? 300 : 0);
+}
+
+function departRouteCover() {
+  try { sessionStorage.removeItem('prsa-route'); } catch (error) {}
+  if (!document.documentElement.classList.contains('route-arrived')) return;
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    setTimeout(() => {
+      document.documentElement.classList.add('route-depart');
+      setTimeout(() => {
+        document.documentElement.classList.add('route-gone');
+        document.documentElement.classList.remove('route-arrived', 'route-depart');
+      }, 880);
+    }, 420);
+  }));
+}
+
+function initPosterMotion() {
+  const stage = byId('videoShell');
+  if (!stage || stage.dataset.motionBound || matchMedia('(prefers-reduced-motion: reduce)').matches || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  stage.dataset.motionBound = 'true';
+  let frame = 0;
+  stage.addEventListener('pointermove', (event) => {
+    if (frame) return;
+    frame = requestAnimationFrame(() => {
+      frame = 0;
+      const rect = stage.getBoundingClientRect();
+      stage.style.setProperty('--poster-x', ((((event.clientX - rect.left) / rect.width) - .5) * -10).toFixed(2) + 'px');
+      stage.style.setProperty('--poster-y', ((((event.clientY - rect.top) / rect.height) - .5) * -8).toFixed(2) + 'px');
+    });
+  }, { passive: true });
+  stage.addEventListener('pointerleave', () => {
+    stage.style.setProperty('--poster-x', '0px');
+    stage.style.setProperty('--poster-y', '0px');
+  });
+}
+
+function initCaseMenu() {
+  const nav = byId('nav');
+  const mnav = byId('mnav');
+  const menuBtn = byId('menuBtn');
+  const menuClose = byId('mClose');
+  if (!nav || !mnav || !menuBtn || !menuClose) return;
+
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const pageRegions = [nav, document.querySelector('main'), document.querySelector('footer')].filter(Boolean);
+  let exitTimer = 0;
+
+  const openMenu = () => {
+    clearTimeout(exitTimer);
+    mnav.classList.remove('exiting');
+    mnav.classList.add('open');
+    mnav.setAttribute('aria-hidden', 'false');
+    mnav.removeAttribute('inert');
+    menuBtn.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('menu-open');
+    pageRegions.forEach((region) => { region.inert = true; });
+    setTimeout(() => menuClose.focus({ preventScroll: true }), reduceMotion ? 0 : 40);
+  };
+
+  const closeMenu = (restoreFocus = false) => {
+    if (mnav.contains(document.activeElement)) document.activeElement.blur();
+    mnav.classList.remove('open', 'exiting');
+    mnav.setAttribute('aria-hidden', 'true');
+    mnav.setAttribute('inert', '');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('menu-open');
+    pageRegions.forEach((region) => { region.inert = false; });
+    if (restoreFocus) menuBtn.focus({ preventScroll: true });
+  };
+
+  const exitMenu = (restoreFocus = false, after) => {
+    if (!mnav.classList.contains('open') || mnav.classList.contains('exiting')) return;
+    mnav.classList.add('exiting');
+    exitTimer = setTimeout(() => {
+      closeMenu(restoreFocus);
+      if (after) after();
+    }, reduceMotion ? 0 : 340);
+  };
+
+  mnav.setAttribute('inert', '');
+  menuBtn.addEventListener('click', openMenu);
+  menuClose.addEventListener('click', () => exitMenu(true));
+
+  mnav.querySelectorAll('[data-case-menu-link]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || !mnav.classList.contains('open')) return;
+      const destination = link.href;
+      if (!destination || mnav.classList.contains('exiting')) return;
+      event.preventDefault();
+      exitMenu(false, () => window.location.assign(destination));
+    });
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (!mnav.classList.contains('open')) return;
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      exitMenu(true);
+      return;
+    }
+    if (event.key !== 'Tab') return;
+    const focusable = Array.from(mnav.querySelectorAll('a[href],button:not([disabled])')).filter((element) => element.offsetParent !== null);
+    if (!focusable.length) {
+      event.preventDefault();
+      return;
+    }
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus({ preventScroll: true });
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus({ preventScroll: true });
+    }
+  });
+
+  window.addEventListener('pageshow', () => closeMenu(false));
+  window.addEventListener('pagehide', () => clearTimeout(exitTimer));
 }
 
 async function hydrateWorks() {
@@ -131,11 +474,12 @@ function initChrome() {
   }, { passive: true });
 
   byId('yr').textContent = new Date().getFullYear();
-  document.addEventListener('copy', (event) => event.preventDefault());
-  document.addEventListener('dragstart', (event) => event.preventDefault());
 }
 
 initChrome();
+initCaseMenu();
+renderCase();
+departRouteCover();
 hydrateWorks();
 </script>
 </body>

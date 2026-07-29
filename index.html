@@ -5,16 +5,51 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Prša Productions · Video Editing</title>
 <meta name="theme-color" content="#060709" />
-<meta name="description" content="Selected public YouTube editing work by Prša Productions." />
+<meta name="color-scheme" content="light" />
+<meta name="description" content="Prša Productions is an editing studio led by Gregor Prša. Explore selected work, credits, and contact." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Prša Productions" />
+<meta property="og:title" content="Prša Productions · Video Editing" />
+<meta property="og:description" content="An editing studio led by Gregor Prša, presenting selected work and credits." />
+<meta property="og:image" content="assets/hero/creator-ensemble-merged-v1.png" />
+<meta property="og:image:alt" content="Prša Productions creator ensemble" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Prša Productions · Video Editing" />
+<meta name="twitter:description" content="An editing studio led by Gregor Prša, presenting selected work and credits." />
+<meta name="twitter:image" content="assets/hero/creator-ensemble-merged-v1.png" />
+<meta name="twitter:image:alt" content="Prša Productions creator ensemble" />
 <link rel="icon" href="assets/brand/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png" />
 <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png" />
+<link rel="preload" as="image" href="assets/hero/creator-ensemble-merged-v1.png" fetchpriority="high" />
+<link rel="preconnect" href="https://i.ytimg.com" crossorigin />
+<link rel="dns-prefetch" href="https://i.ytimg.com" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Prša Productions",
+  "description": "Editing studio led by Gregor Prša.",
+  "email": "gregor@prsa.productions",
+  "logo": "assets/brand/prsa-productions-wordmark.png",
+  "image": "assets/hero/creator-ensemble-merged-v1.png",
+  "sameAs": [
+    "https://ytjobs.co/talent/profile/58142",
+    "https://www.instagram.com/gregor.vfx/",
+    "https://x.com/gregorprsaa",
+    "https://www.linkedin.com/in/gregor-pr%C5%A1a-825ab5265/"
+  ]
+}
+</script>
 <script>document.documentElement.classList.add('js')</script>
 <link rel="stylesheet" href="assets/fonts.css" />
-  <link rel="stylesheet" href="styles.css?v=dark-56" />
-<noscript><style>#preloader{display:none}</style></noscript>
+  <link rel="stylesheet" href="styles.css?v=remaster-158" />
+<script src="assets/project-transition.js?v=2" defer></script>
+<noscript><style>#preloader{display:none!important}body.lock{overflow:auto!important}</style></noscript>
 </head>
 <body class="lock">
+
+<a class="skip-link" href="#workTitle">Skip to work</a>
 
 <div id="preloader" aria-hidden="true">
   <div class="pl-field"></div>
@@ -23,33 +58,54 @@
     <span class="pl-aperture" aria-hidden="true"><i></i></span>
   </div>
 </div>
+<script>
+window.__prsaIntroFailsafe = window.setTimeout(function () {
+  document.body.classList.add('in');
+  document.body.classList.remove('lock');
+  var stalledPreloader = document.getElementById('preloader');
+  if (stalledPreloader) stalledPreloader.classList.add('gone');
+}, 5200);
+</script>
+
+<div class="route-transition" id="routeTransition" aria-hidden="true">
+  <div class="route-transition-field" aria-hidden="true"></div>
+  <div class="route-transition-inner">
+    <div class="route-transition-copy">
+      <span id="routeTransitionMeta">Prša Productions</span>
+      <strong id="routeTransitionTitle">Selected work</strong>
+    </div>
+    <figure class="route-transition-media"><img id="routeTransitionImage" src="" alt="" decoding="async" /></figure>
+  </div>
+  <span class="route-transition-brand">Prša Productions</span>
+  <span class="route-transition-progress" aria-hidden="true"></span>
+</div>
 
 <nav id="nav">
   <div class="wrap nav-in">
     <a href="#top" class="wordmark" aria-label="Prša Productions home"><img src="assets/brand/prsa-productions-wordmark.png" alt="" /></a>
-    <button class="menu-btn" aria-label="Open menu" aria-controls="mnav" aria-expanded="false" id="menuBtn">
+    <button class="menu-btn" type="button" aria-label="Open menu" aria-controls="mnav" aria-expanded="false" id="menuBtn">
       <span class="menu-bars" aria-hidden="true"><i></i><i></i></span>
     </button>
   </div>
 </nav>
 
-<div class="mnav" id="mnav" aria-hidden="true">
+<div class="mnav" id="mnav" role="dialog" aria-modal="true" aria-label="Site menu" aria-hidden="true">
   <div class="menu-panel">
     <div class="mtop">
       <div class="wrap nav-in">
         <a href="#top" class="wordmark" data-mclose aria-label="Prša Productions home"><img src="assets/brand/prsa-productions-wordmark.png" alt="" /></a>
-        <button class="mclose" aria-label="Close menu" id="mClose">
+        <button class="mclose" type="button" aria-label="Close menu" id="mClose">
           <span class="mclose-mark" aria-hidden="true"><i></i><i></i></span>
         </button>
       </div>
     </div>
-    <div class="mlinks" aria-label="Primary navigation">
-      <a href="#work" data-mclose>Work</a>
-      <a href="#about" data-mclose>About</a>
-      <a href="#credits" data-mclose>Credits</a>
-      <a href="#contact" data-mclose>Contact</a>
-    </div>
-    <div class="menu-socials" aria-label="Social profiles">
+    <nav class="mlinks" aria-label="Primary navigation">
+      <a href="#work" data-mclose><span class="mlabel">Work</span></a>
+      <a href="#about" data-mclose><span class="mlabel">About</span></a>
+      <a href="#credits" data-mclose><span class="mlabel">Credits</span></a>
+      <a href="#contact" data-mclose><span class="mlabel">Contact</span></a>
+    </nav>
+    <nav class="menu-socials" aria-label="Social profiles">
       <span>Socials</span>
       <a href="https://ytjobs.co/talent/profile/58142" target="_blank" rel="noopener noreferrer" aria-label="YTJobs">
         <svg class="social-mark social-mark--ytjobs" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6V4.75C8 3.78 8.78 3 9.75 3h4.5C15.22 3 16 3.78 16 4.75V6h2.25A2.75 2.75 0 0 1 21 8.75v8.5A2.75 2.75 0 0 1 18.25 20H5.75A2.75 2.75 0 0 1 3 17.25v-8.5A2.75 2.75 0 0 1 5.75 6H8Zm1.5 0h5V4.75a.25.25 0 0 0-.25-.25h-4.5a.25.25 0 0 0-.25.25V6Zm1.05 3.45v7.1L16.2 13l-5.65-3.55Z" fill="currentColor"/></svg>
@@ -63,8 +119,19 @@
       <a href="https://www.linkedin.com/in/gregor-pr%C5%A1a-825ab5265/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
         <svg class="social-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 8.6H3.56v11.4h3.38V8.6ZM5.25 7.14a1.96 1.96 0 1 0 0-3.92 1.96 1.96 0 0 0 0 3.92ZM20.44 13.75c0-3.06-.66-5.41-4.23-5.41-1.72 0-2.87.94-3.34 1.83h-.05V8.6H9.44V20h3.38v-5.64c0-1.42.27-2.8 2.03-2.8 1.73 0 1.76 1.63 1.76 2.89V20h3.83v-6.25Z" fill="currentColor"/></svg>
       </a>
-    </div>
+    </nav>
     <div class="menu-media" id="menuMedia" aria-hidden="true"></div>
+  </div>
+</div>
+
+<div class="vlib" id="vlib" role="dialog" aria-modal="true" aria-label="Video library" hidden>
+  <div class="wrap vlib-inner">
+    <div class="vlib-head">
+      <h2 class="vlib-title">Video library</h2>
+      <button class="vlib-close" type="button" aria-label="Close library" data-vlib-close>&times;</button>
+    </div>
+    <div class="vlib-filters" data-vlib-filters aria-label="Filter by channel"></div>
+    <div class="vlib-grid" data-vlib-grid></div>
   </div>
 </div>
 
@@ -75,7 +142,7 @@
       <div class="hero-copy">
         <h1 class="hero-title"><span>We edit</span><span>what <strong>you watch.</strong></span></h1>
         <p class="hero-deck">Post-production behind some of the world&rsquo;s biggest channels.</p>
-            <a class="hero-cta" href="#work"><span>See the work</span><span class="hero-cta-arrow" aria-hidden="true"></span><i class="cta-beam" aria-hidden="true"></i></a>
+            <a class="hero-cta" href="#work"><span>See the work</span><i class="cta-beam" aria-hidden="true"></i></a>
       </div>
     </div>
     <figure class="hero-ensemble" aria-label="Creators Prša Productions has edited for">
@@ -84,169 +151,233 @@
     </figure>
   </header>
 
-  <section class="work" id="work" aria-label="Work">
+  <section class="work" id="work" aria-labelledby="workTitle">
     <div class="wrap work-head">
       <span class="kicker">+ (Work)</span>
-      <h2 class="work-title">Work that&rsquo;s been watched <strong>1.57B</strong> times.</h2>
+      <h2 class="work-title skip-target" id="workTitle" tabindex="-1">Work that&rsquo;s been watched <strong>1.6B+</strong> times.</h2>
     </div>
     <div class="work-rails" id="workWall"></div>
   </section>
 
-  <section class="credits" id="credits" aria-labelledby="creditsTitle">
+  <section class="credits" id="credits" aria-labelledby="creditsStatement">
     <div class="wrap credits-head">
       <span class="kicker">+ (Credits)</span>
-      <h2 class="credits-statement" id="creditsStatement">35 channels. <strong>1B+</strong> subscribers combined.</h2>
+      <h2 class="credits-statement" id="creditsStatement">Editing credits across 41 channels with <strong>1.1B+</strong> subscribers combined.</h2>
     </div>
     <div class="wrap credits-board" id="creditsBoard"></div>
   </section>
 
-  <section class="about" id="about" aria-labelledby="aboutTitle">
+  <section class="about" id="about" aria-labelledby="aboutTitle" data-about-scene>
     <div class="wrap about-head">
-      <span class="kicker" id="aboutTitle">+ (About)</span>
+      <span class="kicker">+ (About)</span>
     </div>
+    <figure class="about-figure">
+      <img src="assets/gregor-profile.png" alt="Gregor Prša" loading="lazy" decoding="async" />
+    </figure>
     <div class="wrap about-scene">
-      <div class="about-copy">
-        <p>Prša Productions is the editing practice of Gregor Prša.</p>
-        <p>Led by Gregor, with collaborators behind the scenes.</p>
-        <a class="btn btn--blue" href="#work"><span>See the work</span><span class="btn-arrow" aria-hidden="true">&rarr;</span></a>
-      </div>
-      <figure class="about-image">
-        <img src="assets/gregor-profile.png" alt="Gregor Prša" />
-      </figure>
+      <h2 id="aboutTitle">The part you <span class="hl">don&rsquo;t see.</span></h2>
+      <p>An editing studio led by Gregor Prša, cutting for channels the world watches. Collaborators join when a project needs them.</p>
     </div>
   </section>
 
   <section class="contact" id="contact" aria-labelledby="contactTitle">
     <div class="wrap contact-head">
-      <span class="kicker" id="contactTitle">+ (Contact)</span>
-      <h2 class="contact-statement">Reach Gregor directly.</h2>
+      <span class="kicker">+ (Contact)</span>
+      <h2 class="contact-statement" id="contactTitle"><span class="hl">Talk</span> to Gregor.</h2>
     </div>
-    <div class="wrap contact-links">
-      <a class="contact-link" href="https://ytjobs.co/talent/profile/58142" target="_blank" rel="noopener noreferrer">
-        <span class="contact-identity"><svg class="contact-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6V4.75C8 3.78 8.78 3 9.75 3h4.5C15.22 3 16 3.78 16 4.75V6h2.25A2.75 2.75 0 0 1 21 8.75v8.5A2.75 2.75 0 0 1 18.25 20H5.75A2.75 2.75 0 0 1 3 17.25v-8.5A2.75 2.75 0 0 1 5.75 6H8Zm1.5 0h5V4.75a.25.25 0 0 0-.25-.25h-4.5a.25.25 0 0 0-.25.25V6Zm1.05 3.45v7.1L16.2 13l-5.65-3.55Z" fill="currentColor"/></svg><strong>YTJobs</strong></span>
-        <span>Talent profile</span>
-      </a>
-      <a class="contact-link" href="https://www.instagram.com/gregor.vfx/" target="_blank" rel="noopener noreferrer">
-        <span class="contact-identity"><svg class="contact-mark" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17.4" cy="6.7" r="1" fill="currentColor"/></svg><strong>Instagram</strong></span>
-        <span>@gregor.vfx</span>
-      </a>
-      <a class="contact-link" href="https://x.com/gregorprsaa" target="_blank" rel="noopener noreferrer">
-        <span class="contact-identity"><svg class="contact-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.7 4h4.8l3.4 4.55L16.9 4h2.35l-5.26 6.2L19.7 20h-4.8l-3.82-5.1L6.75 20H4.4l5.58-6.77L4.7 4Zm3.62 1.75H7.7l8.08 12.5h1.62L8.32 5.75Z" fill="currentColor"/></svg><strong>X</strong></span>
-        <span>@gregorprsaa</span>
-      </a>
-      <a class="contact-link" href="https://www.linkedin.com/in/gregor-pr%C5%A1a-825ab5265/" target="_blank" rel="noopener noreferrer">
-        <span class="contact-identity"><svg class="contact-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 8.6H3.56v11.4h3.38V8.6ZM5.25 7.14a1.96 1.96 0 1 0 0-3.92 1.96 1.96 0 0 0 0 3.92ZM20.44 13.75c0-3.06-.66-5.41-4.23-5.41-1.72 0-2.87.94-3.34 1.83h-.05V8.6H9.44V20h3.38v-5.64c0-1.42.27-2.8 2.03-2.8 1.73 0 1.76 1.63 1.76 2.89V20h3.83v-6.25Z" fill="currentColor"/></svg><strong>LinkedIn</strong></span>
-        <span>Gregor Prša</span>
-      </a>
+    <div class="wrap contact-hero">
+      <a class="contact-email" href="mailto:gregor@prsa.productions" aria-label="Email Gregor at gregor@prsa.productions">gregor@prsa.productions</a>
+    </div>
+    <div class="wrap contact-utility">
+      <button class="contact-copy" type="button" data-copy-email="gregor@prsa.productions">
+        <span data-copy-label>Copy email</span><span data-copy-symbol aria-hidden="true">+</span>
+      </button>
+      <span class="visually-hidden" id="copyStatus" aria-live="polite"></span>
+      <nav class="contact-elsewhere-links" aria-label="Other ways to connect">
+        <a href="https://ytjobs.co/talent/profile/58142" target="_blank" rel="noopener noreferrer">YTJobs</a>
+        <a href="https://www.instagram.com/gregor.vfx/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="https://x.com/gregorprsaa" target="_blank" rel="noopener noreferrer">X</a>
+        <a href="https://www.linkedin.com/in/gregor-pr%C5%A1a-825ab5265/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </nav>
     </div>
   </section>
 </main>
 
-<footer>
+<footer class="site-footer">
+  <div class="footer-cta">
+    <div class="wrap footer-cta-inner">
+      <span class="footer-kicker">+ (Next project)</span>
+      <div class="footer-cta-main">
+        <p class="footer-statement">Let&rsquo;s make the next one worth watching.</p>
+        <a class="btn btn--ink footer-button" href="mailto:gregor@prsa.productions" data-label="Email Gregor">
+          <span>Email Gregor</span>
+        </a>
+      </div>
+    </div>
+  </div>
   <div class="wrap foot">
     <a href="#top" class="wordmark" aria-label="Prša Productions home"><img src="assets/brand/prsa-productions-wordmark.png" alt="" /></a>
-    <span>&copy; <span id="yr"></span> Prša Productions</span>
-    <div class="foot-socials" aria-label="Social profiles">
+    <span class="foot-copyright">&copy; <span id="yr"></span> Prša Productions</span>
+    <nav class="foot-socials" aria-label="Social profiles">
       <a href="https://ytjobs.co/talent/profile/58142" target="_blank" rel="noopener noreferrer" aria-label="YTJobs"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6V4.75C8 3.78 8.78 3 9.75 3h4.5C15.22 3 16 3.78 16 4.75V6h2.25A2.75 2.75 0 0 1 21 8.75v8.5A2.75 2.75 0 0 1 18.25 20H5.75A2.75 2.75 0 0 1 3 17.25v-8.5A2.75 2.75 0 0 1 5.75 6H8Zm1.5 0h5V4.75a.25.25 0 0 0-.25-.25h-4.5a.25.25 0 0 0-.25.25V6Zm1.05 3.45v7.1L16.2 13l-5.65-3.55Z" fill="currentColor"/></svg></a>
       <a href="https://www.instagram.com/gregor.vfx/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17.4" cy="6.7" r="1" fill="currentColor"/></svg></a>
       <a href="https://x.com/gregorprsaa" target="_blank" rel="noopener noreferrer" aria-label="X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.7 4h4.8l3.4 4.55L16.9 4h2.35l-5.26 6.2L19.7 20h-4.8l-3.82-5.1L6.75 20H4.4l5.58-6.77L4.7 4Zm3.62 1.75H7.7l8.08 12.5h1.62L8.32 5.75Z" fill="currentColor"/></svg></a>
       <a href="https://www.linkedin.com/in/gregor-pr%C5%A1a-825ab5265/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 8.6H3.56v11.4h3.38V8.6ZM5.25 7.14a1.96 1.96 0 1 0 0-3.92 1.96 1.96 0 0 0 0 3.92ZM20.44 13.75c0-3.06-.66-5.41-4.23-5.41-1.72 0-2.87.94-3.34 1.83h-.05V8.6H9.44V20h3.38v-5.64c0-1.42.27-2.8 2.03-2.8 1.73 0 1.76 1.63 1.76 2.89V20h3.83v-6.25Z" fill="currentColor"/></svg></a>
-    </div>
+    </nav>
   </div>
 </footer>
 
-<div class="hud" aria-hidden="true"><span id="hudClock"></span><span id="hudPos">0000 X · 0000 Y</span></div>
-
 <script src="assets/vendor/lenis.min.js" async onload="window.__lenisReady && window.__lenisReady()"></script>
+<script src="data/videos.js?v=5"></script>
 <script>
 const FALLBACK_WORKS = [
-  {rank:1,id:'gar4U3n-ILY',title:'Guess What Age Punched You',url:'https://youtu.be/gar4U3n-ILY',thumb:'https://i.ytimg.com/vi/gar4U3n-ILY/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/gar4U3n-ILY/hqdefault.jpg',views:'354.48M',likes:'4.88M',role:null},
-  {rank:2,id:'yy-Nt0dRhNI',title:'Winner Picks Our Honeymoon',url:'https://youtu.be/yy-Nt0dRhNI',thumb:'https://i.ytimg.com/vi/yy-Nt0dRhNI/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/yy-Nt0dRhNI/hqdefault.jpg',views:'127.11M',likes:'2.09M',role:null},
-  {rank:3,id:'FVm-hMh4Q9A',title:'I Tested BANNED School Products!',url:'https://youtu.be/FVm-hMh4Q9A',thumb:'https://i.ytimg.com/vi/FVm-hMh4Q9A/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/FVm-hMh4Q9A/hqdefault.jpg',views:'63.34M',likes:'330.96K',role:null},
-  {rank:4,id:'6EtuOTq5TmM',title:'Clean The Sports Car, Keep It!',url:'https://youtu.be/6EtuOTq5TmM',thumb:'https://i.ytimg.com/vi/6EtuOTq5TmM/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/6EtuOTq5TmM/hqdefault.jpg',views:'62.17M',likes:'303.5K',role:'VFX'},
-  {rank:5,id:'oUee1Bv0sFE',title:'I Murdered KPop Demon Hunters..',url:'https://youtu.be/oUee1Bv0sFE',thumb:'https://i.ytimg.com/vi/oUee1Bv0sFE/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/oUee1Bv0sFE/hqdefault.jpg',views:'52.98M',likes:'291.94K',role:null},
-  {rank:6,id:'q1DwSS3O8k4',title:'KPop Demon Hunters Are MISSING..',url:'https://youtu.be/q1DwSS3O8k4',thumb:'https://i.ytimg.com/vi/q1DwSS3O8k4/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/q1DwSS3O8k4/hqdefault.jpg',views:'28.44M',likes:'249.8K',role:'VFX'},
-  {rank:7,id:'Q1g8PYEFcHc',title:"Can We Beat the World's Strongest Man?",url:'https://youtu.be/Q1g8PYEFcHc',thumb:'https://i.ytimg.com/vi/Q1g8PYEFcHc/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/Q1g8PYEFcHc/hqdefault.jpg',views:'27.47M',likes:'514.22K',role:null},
-  {rank:8,id:'9Ib1rni1SCc',title:'3 YouTubers Were Murdered..',url:'https://youtu.be/9Ib1rni1SCc',thumb:'https://i.ytimg.com/vi/9Ib1rni1SCc/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/9Ib1rni1SCc/hqdefault.jpg',views:'26.98M',likes:'201.41K',role:'Intro visual'},
-  {rank:9,id:'KaUuPNYHFNg',title:'I Built a School in Mexico',url:'https://youtu.be/KaUuPNYHFNg',thumb:'https://i.ytimg.com/vi/KaUuPNYHFNg/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/KaUuPNYHFNg/hqdefault.jpg',views:'26.59M',likes:'984.67K',role:null},
-  {rank:10,id:'k6tPeMMUn6A',title:'SIDEMEN GUESS THE FOOTBALLER ft Erling Haaland',url:'https://youtu.be/k6tPeMMUn6A',thumb:'https://i.ytimg.com/vi/k6tPeMMUn6A/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/k6tPeMMUn6A/hqdefault.jpg',views:'11.25M',likes:'383.31K',role:null},
-  {rank:11,id:'vQz3T9Vot1Q',title:'Testing Real Life Video Game Weapons!',url:'https://youtu.be/vQz3T9Vot1Q',thumb:'https://i.ytimg.com/vi/vQz3T9Vot1Q/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/vQz3T9Vot1Q/hqdefault.jpg',views:'9.34M',likes:'152.99K',role:null},
-  {rank:12,id:'S_KiWI6dNK4',title:'GUESS THE LANGUAGE (ft. Mrwhosetheboss & Callux)',url:'https://youtu.be/S_KiWI6dNK4',thumb:'https://i.ytimg.com/vi/S_KiWI6dNK4/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/S_KiWI6dNK4/hqdefault.jpg',views:'6.67M',likes:'175.78K',role:'Cutdown + pacing'},
-  {rank:13,id:'WU05jZnUiYs',title:'7 Days Escaping Cardboard Prison!',url:'https://youtu.be/WU05jZnUiYs',thumb:'https://i.ytimg.com/vi/WU05jZnUiYs/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/WU05jZnUiYs/hqdefault.jpg',views:'5.97M',likes:'43.38K',role:null},
-  {rank:14,id:'FHF1CNBdBmI',title:'Kids World Cup Tournament',url:'https://youtu.be/FHF1CNBdBmI',thumb:'https://i.ytimg.com/vi/FHF1CNBdBmI/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/FHF1CNBdBmI/hqdefault.jpg',views:'5.84M',likes:'54.15K',role:'Intro + segmentation graphics'},
-  {rank:15,id:'9DPzZIbp9Ck',title:'Which plane will fly the furthest?',url:'https://youtu.be/9DPzZIbp9Ck',thumb:'https://i.ytimg.com/vi/9DPzZIbp9Ck/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/9DPzZIbp9Ck/hqdefault.jpg',views:'4.92M',likes:'44.27K',role:null},
-  {rank:16,id:'qNfFC-v1jfY',title:'Guess The World Cup Footballer',url:'https://youtu.be/qNfFC-v1jfY',thumb:'https://i.ytimg.com/vi/qNfFC-v1jfY/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/qNfFC-v1jfY/hqdefault.jpg',views:'4.86M',likes:'50.39K',role:null}
+  {rank:1,id:'FVm-hMh4Q9A',title:"I Tested BANNED School Products!",url:'https://youtu.be/FVm-hMh4Q9A',thumb:'https://i.ytimg.com/vi/FVm-hMh4Q9A/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/FVm-hMh4Q9A/hqdefault.jpg',views:'63.34M',likes:'330.96K',role:null,channel:"Stokes Twins"},
+  {rank:2,id:'6EtuOTq5TmM',title:"Clean The Sports Car, Keep It!",url:'https://youtu.be/6EtuOTq5TmM',thumb:'https://i.ytimg.com/vi/6EtuOTq5TmM/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/6EtuOTq5TmM/hqdefault.jpg',views:'62.17M',likes:'303.5K',role:"VFX",channel:"Stokes Twins"},
+  {rank:3,id:'oUee1Bv0sFE',title:"I Murdered KPop Demon Hunters..",url:'https://youtu.be/oUee1Bv0sFE',thumb:'https://i.ytimg.com/vi/oUee1Bv0sFE/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/oUee1Bv0sFE/hqdefault.jpg',views:'52.98M',likes:'291.94K',role:null,channel:"Stokes Twins"},
+  {rank:4,id:'q1DwSS3O8k4',title:"KPop Demon Hunters Are MISSING..",url:'https://youtu.be/q1DwSS3O8k4',thumb:'https://i.ytimg.com/vi/q1DwSS3O8k4/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/q1DwSS3O8k4/hqdefault.jpg',views:'28.44M',likes:'249.8K',role:"VFX",channel:"Stokes Twins"},
+  {rank:5,id:'9Ib1rni1SCc',title:"3 YouTubers Were Murdered..",url:'https://youtu.be/9Ib1rni1SCc',thumb:'https://i.ytimg.com/vi/9Ib1rni1SCc/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/9Ib1rni1SCc/hqdefault.jpg',views:'26.98M',likes:'201.41K',role:"Intro visual",channel:"Stokes Twins"},
+  {rank:6,id:'k6tPeMMUn6A',title:"SIDEMEN GUESS THE FOOTBALLER ft Erling Haaland",url:'https://youtu.be/k6tPeMMUn6A',thumb:'https://i.ytimg.com/vi/k6tPeMMUn6A/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/k6tPeMMUn6A/hqdefault.jpg',views:'14.35M',likes:'448.07K',role:null,channel:"Sidemen"},
+  {rank:7,id:'FHF1CNBdBmI',title:"Kids World Cup Tournament",url:'https://youtu.be/FHF1CNBdBmI',thumb:'https://i.ytimg.com/vi/FHF1CNBdBmI/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/FHF1CNBdBmI/hqdefault.jpg',views:'9.01M',likes:'78.6K',role:"Intro + segmentation graphics",channel:"FutCrunch"},
+  {rank:8,id:'S_KiWI6dNK4',title:"GUESS THE LANGUAGE (ft. Mrwhosetheboss & Callux)",url:'https://youtu.be/S_KiWI6dNK4',thumb:'https://i.ytimg.com/vi/S_KiWI6dNK4/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/S_KiWI6dNK4/hqdefault.jpg',views:'6.67M',likes:'175.78K',role:"Cutdown + pacing",channel:"KSI"},
+  {rank:9,id:'qNfFC-v1jfY',title:"Guess The World Cup Footballer",url:'https://youtu.be/qNfFC-v1jfY',thumb:'https://i.ytimg.com/vi/qNfFC-v1jfY/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/qNfFC-v1jfY/hqdefault.jpg',views:'4.86M',likes:'50.39K',role:null,channel:"John Nellis"},
+  {rank:10,id:'s-XhQ2Ong14',title:"If You Beat The Maze, You Win $1,000!",url:'https://youtu.be/s-XhQ2Ong14',thumb:'https://i.ytimg.com/vi/s-XhQ2Ong14/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/s-XhQ2Ong14/hqdefault.jpg',views:'4.22M',likes:'23.46K',role:null,channel:"Ben Azelart"},
+  {rank:11,id:'vToG6mOkYh8',title:"WE TRIED AMERICA’S MOST FAMOUS FAST FOOD!",url:'https://youtu.be/vToG6mOkYh8',thumb:'https://i.ytimg.com/vi/vToG6mOkYh8/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/vToG6mOkYh8/hqdefault.jpg',views:'2.71M',likes:'76.01K',role:null,channel:"Miniminter"},
+  {rank:12,id:'DKdWRROo9_U',title:"GUESS THE ATHLETE!",url:'https://youtu.be/DKdWRROo9_U',thumb:'https://i.ytimg.com/vi/DKdWRROo9_U/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/DKdWRROo9_U/hqdefault.jpg',views:'1.51M',likes:'43.24K',role:null,channel:"Miniminter"},
+];
+
+const FALLBACK_RAIL_IDS = ['FVm-hMh4Q9A','6EtuOTq5TmM','oUee1Bv0sFE','q1DwSS3O8k4','9Ib1rni1SCc','k6tPeMMUn6A','FHF1CNBdBmI','S_KiWI6dNK4','qNfFC-v1jfY','s-XhQ2Ong14','vToG6mOkYh8','DKdWRROo9_U'];
+const FALLBACK_RAIL_WORKS = FALLBACK_RAIL_IDS.map((id) => FALLBACK_WORKS.find((work) => work.id === id)).filter(Boolean);
+const FALLBACK_MENU_WORKS = [
+  {id:'-ibmJHt0aKM',title:'$5 vs $50,000 MYSTERY BOX!',thumb:'https://i.ytimg.com/vi/-ibmJHt0aKM/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/-ibmJHt0aKM/hqdefault.jpg',format:'landscape'},
+  {id:'Oiouepix6OQ',title:'I Met 9 People Who Shouldn\'t Exist!',thumb:'https://i.ytimg.com/vi/Oiouepix6OQ/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/Oiouepix6OQ/hqdefault.jpg',format:'landscape'},
+  {id:'DaiRIsIhxwE',title:'GUESS THE SINGER (ft. JME and Myles Smith)',thumb:'https://i.ytimg.com/vi/DaiRIsIhxwE/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/DaiRIsIhxwE/hqdefault.jpg',format:'landscape'},
+  {id:'X5kAQTXC-cI',title:'World\'s Biggest Bowl Of Cereal!',thumb:'https://i.ytimg.com/vi/X5kAQTXC-cI/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/X5kAQTXC-cI/hqdefault.jpg',format:'landscape'},
+  {id:'e9wVmbn373c',title:'I Survived The Worst 1 Star Hotels!',thumb:'https://i.ytimg.com/vi/e9wVmbn373c/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/e9wVmbn373c/hqdefault.jpg',format:'landscape'},
+  {id:'ubPMZjJWUns',title:'If You Break My Ice House, You Keep It!',thumb:'https://i.ytimg.com/vi/ubPMZjJWUns/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/ubPMZjJWUns/hqdefault.jpg',format:'landscape'},
+  {id:'Nx-oA7bsuCY',title:'Surviving First Day Of DREAM SCHOOL!',thumb:'https://i.ytimg.com/vi/Nx-oA7bsuCY/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/Nx-oA7bsuCY/hqdefault.jpg',format:'landscape'},
+  {id:'NxNlfjVeTas',title:'Strong Women vs. Skinny Men - (Who\'s Stronger?)',thumb:'https://i.ytimg.com/vi/NxNlfjVeTas/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/NxNlfjVeTas/hqdefault.jpg',format:'landscape'},
+  {id:'ZesUFz6tZZc',title:'7 Days Living In a Trampoline Park',thumb:'https://i.ytimg.com/vi/ZesUFz6tZZc/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/ZesUFz6tZZc/hqdefault.jpg',format:'landscape'},
+  {id:'V9C5o2P5wGY',title:'BRUTALLY RANKING CELEBRITY PRODUCTS!',thumb:'https://i.ytimg.com/vi/V9C5o2P5wGY/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/V9C5o2P5wGY/hqdefault.jpg',format:'landscape'},
+  {id:'EweueGyghaE',title:'GUESS THE MODEL (ft. Behz and George Clarke)',thumb:'https://i.ytimg.com/vi/EweueGyghaE/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/EweueGyghaE/hqdefault.jpg',format:'landscape'},
+  {id:'_rO1pVAR_rc',title:'Every Hour = My Friend\'s House EXPLODES!',thumb:'https://i.ytimg.com/vi/_rO1pVAR_rc/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/_rO1pVAR_rc/hqdefault.jpg',format:'landscape'}
 ];
 
 const byId = (id) => document.getElementById(id);
+
+function splitChars(el, start) {
+  // COSMOQ hero grammar: words wrapped nowrap, every character its own span dissolving in from blur.
+  // No masks anywhere, so descenders can never clip.
+  let ci = start || 0;
+  const walk = (root) => {
+    Array.from(root.childNodes).forEach((node) => {
+      if (node.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        String(node.textContent || '').split(/(\s+)/).forEach((tok) => {
+          if (!tok) return;
+          if (/^\s+$/.test(tok)) { frag.appendChild(document.createTextNode(tok)); return; }
+          const word = document.createElement('span');
+          word.className = 'chw';
+          Array.from(tok).forEach((chr) => {
+            const c = document.createElement('span');
+            c.className = 'ch';
+            c.style.setProperty('--ci', ci);
+            ci += 1;
+            c.textContent = chr;
+            word.appendChild(c);
+          });
+          frag.appendChild(word);
+        });
+        root.replaceChild(frag, node);
+      } else if (node.nodeType === 1) {
+        walk(node);
+      }
+    });
+  };
+  walk(el);
+  return ci;
+}
 
 function splitWords(el) {
   const nodes = Array.from(el.childNodes);
   el.textContent = '';
   let wordIndex = 0;
-  const append = (word, strong) => {
-    if (!word) return;
+  const appendUnit = (content, strong) => {
     const mask = document.createElement('span');
     mask.className = 'w-mask';
     const inner = document.createElement('span');
     inner.className = 'w' + (strong ? ' w-strong' : '');
-    inner.textContent = word;
+    if (typeof content === 'string') inner.textContent = content;
+    else inner.appendChild(content);
     inner.style.setProperty('--wi', wordIndex++);
     mask.appendChild(inner);
     el.appendChild(mask);
     el.appendChild(document.createTextNode(' '));
   };
   nodes.forEach((node) => {
+    // Element children other than STRONG (e.g. .hl highlight boxes) rise as one intact unit.
+    if (node.nodeType === 1 && node.nodeName !== 'STRONG') {
+      appendUnit(node, false);
+      return;
+    }
     const strong = node.nodeName === 'STRONG';
-    (node.textContent || '').trim().split(/\s+/).forEach((word) => append(word, strong));
+    (node.textContent || '').trim().split(/\s+/).forEach((word) => { if (word) appendUnit(word, strong); });
   });
 }
-const pad = (n) => String(n).padStart(2, '0');
-const roleLabel = (work) => work.role || 'Editor';
+function prepareStatement(el) {
+  if (!el || el.querySelector('.w-mask')) return;
+  splitWords(el);
+  el.classList.add('statement-split');
+}
 const projectHref = (work) => 'case-study.html?id=' + encodeURIComponent(work.id);
 const PORTRAIT_VIDEO_IDS = new Set(['gar4U3n-ILY', 'yy-Nt0dRhNI', 'Q1g8PYEFcHc', 'KaUuPNYHFNg', 'vQz3T9Vot1Q', '9DPzZIbp9Ck']);
 
 const FALLBACK_CREDITS = [
-  {name:'MrBeast',avatar:'assets/channels/mrbeast-logo.png',subs:506,emblem:true},
-  {name:'Stokes Twins',avatar:'assets/channels/stoketwins-logo.jpg',subs:141},
-  {name:'Ben Azelart',avatar:'assets/channels/benazelart-logo.jpg',subs:50.9},
-  {name:'SSSniperWolf',avatar:'assets/channels/sniperwolf-logo.jpg',subs:35},
-  {name:'Preston',avatar:'assets/channels/preston-logo.webp',subs:32.2},
-  {name:'Sidemen',avatar:'assets/channels/sidemen-wordmark.png',subs:23.3,emblem:true,invert:true},
-  {name:'FutCrunch',avatar:'assets/channels/futcrunch-logo.jpg',subs:20.8},
-  {name:'Unspeakable',avatar:'assets/channels/unspeakable-logo.jpg',subs:19.9},
-  {name:'LawByMike',avatar:'assets/channels/lawbymike-new-logo.jpg',subs:19.3},
-  {name:'KSI',avatar:'assets/channels/ksi-logo.jpg',subs:18.5,logo:true},
-  {name:'Landen Purifoy',avatar:'assets/channels/landen-logo.jpg',subs:15.8},
-  {name:'John Nellis',avatar:'assets/channels/johnnellis-logo.jpg',subs:14.8},
-  {name:'Eystreem',avatar:'assets/channels/eystreem.jpg',subs:13.7},
-  {name:'AMP',avatar:'assets/channels/ampworld-logo.jpg',subs:12.8,logo:true},
-  {name:'Browney',avatar:'assets/channels/browney-logo.jpg',subs:12.1},
-  {name:'Kat',avatar:'assets/channels/kat-logo.jpg',subs:11.8},
-  {name:'Cash',avatar:'assets/channels/cash-logo.jpg',subs:11.3},
-  {name:'Miniminter',avatar:'assets/channels/miniminter-logo.png',subs:10.6,logo:true},
-  {name:'SypherPK',avatar:'assets/channels/SypherPK-logo.png',subs:10.6,logo:true},
-  {name:'Jesse James West',avatar:'assets/channels/jessejameswest-logo.jpg',subs:9.77},
-  {name:"Lana's Life",avatar:'assets/channels/lanarae-logo.jpg',subs:9.54},
-  {name:'Bionic',avatar:'assets/channels/bionic-logo.jpg',subs:8.73},
-  {name:'Carter Kench',avatar:'assets/channels/karterkench-logo.jpg',subs:6.5},
-  {name:'BriannaPlayz',avatar:'assets/channels/briannaplayz-logo.jpg',subs:6.37},
-  {name:'SV2',avatar:'assets/channels/sv2-logo.jpg',subs:5.78},
-  {name:'Cash & Maverick',avatar:'assets/channels/cashnmaverik-logo.jpg',subs:5.34},
-  {name:'TBJZL',avatar:'assets/channels/tbjzl-logo.jpg',subs:5.13,logo:true},
-  {name:'Leah Ashe',avatar:'assets/channels/leahashe-logo.jpg',subs:5.1},
-  {name:'Drew Dirksen',avatar:'assets/channels/drewdirksen-logo.jpg',subs:4.6},
-  {name:'LoverFella',avatar:'assets/channels/loverfella-logo.png',subs:3.13,emblem:true},
-  {name:'RussoPlays',avatar:'assets/channels/russoplayz-logo.jpg',subs:2.86},
-  {name:'CouRage Gaming',avatar:'assets/channels/couragegaming-logo.jpg',subs:2.86,logo:true},
-  {name:"What's Inside",avatar:'assets/channels/whatsinside-logo.png',subs:2.75,emblem:true},
-  {name:'NoLuvMar',avatar:'assets/channels/noluvmar-logo.jpg',subs:2.74},
-  {name:'AJ Shabeel',avatar:'assets/channels/ajshabeel-logo.jpg',subs:2.13}
+  {name:"MrBeast",avatar:"assets/wordmarks/mrbeast-lockup-color.png",subs:509},
+  {name:"Stokes Twins",avatar:"assets/wordmarks/stoketwins-fig.png",subs:142},
+  {name:"Ben Azelart",avatar:"assets/wordmarks/benazelart-fig.png",subs:50.9},
+  {name:"SSSniperWolf",avatar:"assets/wordmarks/sniperwolf-fig.png",subs:35},
+  {name:"Preston",avatar:"assets/wordmarks/preston-fig.png",subs:32.2},
+  {name:"Sidemen",avatar:"assets/wordmarks/sidemen-row.png",subs:23.3},
+  {name:"FutCrunch",avatar:"assets/wordmarks/futcrunch-fig.png",subs:21.8},
+  {name:"Unspeakable",avatar:"assets/wordmarks/unspeakable-fig.png",subs:19.9},
+  {name:"LawByMike",avatar:"assets/wordmarks/lawbymike-fig.png",subs:19.3},
+  {name:"KSI",avatar:"assets/wordmarks/ksi-row.png",subs:18.6},
+  {name:"Landen Purifoy",avatar:"assets/wordmarks/landen-fig.png",subs:15.9},
+  {name:"Lachlan",avatar:"assets/channels/lachlan-logo.jpg",subs:15.3},
+  {name:"John Nellis",avatar:"assets/wordmarks/johnnellis-fig.png",subs:15.3},
+  {name:"Eystreem",avatar:"assets/wordmarks/eystreem-fig.png",subs:13.8},
+  {name:"AMP",avatar:"assets/wordmarks/ampworld-fig.png",subs:12.8},
+  {name:"Browney",avatar:"assets/wordmarks/browney-fig.png",subs:12.2},
+  {name:"Kat",avatar:"assets/wordmarks/kat-fig.png",subs:12},
+  {name:"Cash",avatar:"assets/wordmarks/cash-fig.png",subs:11.3},
+  {name:"Carter Sharer",avatar:"assets/channels/cartersharer-logo.jpg",subs:11.2},
+  {name:"Miniminter",avatar:"assets/wordmarks/miniminter-row.png",subs:10.6},
+  {name:"SypherPK",avatar:"assets/wordmarks/sypherpk-fig.png",subs:10.6},
+  {name:"Jesse James West",avatar:"assets/wordmarks/jessejameswest-fig.png",subs:9.8},
+  {name:"Lana's Life",avatar:"assets/wordmarks/lanarae-fig.png",subs:9.6},
+  {name:"Bionic",avatar:"assets/wordmarks/bionic-fig.png",subs:8.8},
+  {name:"Carter Kench",avatar:"assets/wordmarks/karterkench-fig.png",subs:6.5},
+  {name:"BriannaPlayz",avatar:"assets/wordmarks/briannaplayz-fig.png",subs:6.4},
+  {name:"SV2",avatar:"assets/wordmarks/sv2-fig.png",subs:5.9},
+  {name:"Cash & Maverick",avatar:"assets/wordmarks/cashnmaverik-fig.png",subs:5.3},
+  {name:"TBJZL",avatar:"assets/wordmarks/tbjzl-row.png",subs:5.1},
+  {name:"Leah Ashe",avatar:"assets/wordmarks/leahashe-fig.png",subs:5.1},
+  {name:"Drew Dirksen",avatar:"assets/wordmarks/drewdirksen-fig.png",subs:4.6},
+  {name:"LoverFella",avatar:"assets/wordmarks/loverfella-row.png",subs:3.1},
+  {name:"RussoPlays",avatar:"assets/wordmarks/russoplayz-fig.png",subs:2.9},
+  {name:"CouRage Gaming",avatar:"assets/wordmarks/couragegaming-row.png",subs:2.9},
+  {name:"What's Inside",avatar:"assets/wordmarks/whatsinside-row.png",subs:2.8},
+  {name:"NoLuvMar",avatar:"assets/wordmarks/noluvmar-fig.png",subs:2.7},
+  {name:"Senne Jackson",avatar:"assets/channels/sennejackson-logo.jpg",subs:2.6},
+  {name:"AJ Shabeel",avatar:"assets/wordmarks/ajshabeel-fig.png",subs:2.1},
+  {name:"Kenji",avatar:"assets/channels/kenji-logo.jpg",subs:1.2},
+  {name:"AveryB",avatar:"assets/channels/averyb-logo.jpg",subs:1.2},
+  {name:"JACK TV",avatar:"assets/channels/jacktv-logo.jpg",subs:1.2},
 ];
 
 let works = FALLBACK_WORKS;
-let menuWorks = FALLBACK_WORKS;
-let railWorks = FALLBACK_WORKS;
+let menuWorks = [...FALLBACK_WORKS, ...FALLBACK_MENU_WORKS];
+let railWorks = FALLBACK_RAIL_WORKS;
 let credits = FALLBACK_CREDITS;
 
 function escapeHtml(value) {
@@ -259,51 +390,24 @@ function escapeHtml(value) {
   }[char]));
 }
 
-// Hand-composed board layout: [x%, y%, size px] per channel, tuned as one composition.
-// Constellation layout: renown = gravity. MrBeast at center, giants in the inner
-// orbit, mid channels in the second ring, ensemble on the dim outer rim.
-const CREDIT_LAYOUT = {
-  'MrBeast': [47, 46],
-  'Ben Azelart': [47, 15],
-  'Stokes Twins': [64, 26],
-  'SSSniperWolf': [30, 27],
-  'Preston': [66, 64],
-  'Sidemen': [29, 65],
-  'FutCrunch': [47, 79],
-  'LawByMike': [72, 12],
-  'Landen Purifoy': [22, 13],
-  'Unspeakable': [81, 42],
-  'KSI': [12, 42],
-  'John Nellis': [76, 77],
-  'AMP': [16, 77],
-  'Eystreem': [61, 91],
-  'Browney': [33, 91],
-  'Miniminter': [17, 4],
-  'Jesse James West': [30, 4],
-  'Bionic': [44, 3],
-  "Lana's Life": [58, 4],
-  'LoverFella': [78, 3],
-  'SypherPK': [84, 8],
-  'Carter Kench': [8, 13],
-  'BriannaPlayz': [4, 28],
-  'Cash': [93, 19],
-  'SV2': [96, 35],
-  'Cash & Maverick': [96, 53],
-  'TBJZL': [93, 71],
-  'Leah Ashe': [86, 89],
-  'Drew Dirksen': [70, 95],
-  'RussoPlays': [54, 97],
-  'CouRage Gaming': [38, 97],
-  'NoLuvMar': [22, 94],
-  'AJ Shabeel': [9, 88],
-  'Kat': [4, 71],
-  "What's Inside": [2, 51]
-};
+function handleRemoteImageError(image, fallback) {
+  const current = image.getAttribute('src') || '';
+  if (fallback && image.dataset.fallbackTried !== 'true' && current !== fallback) {
+    image.dataset.fallbackTried = 'true';
+    image.src = fallback;
+    return;
+  }
+  image.hidden = true;
+  const host = image.closest('.rail-card, .menu-media-card, .credit-media');
+  if (host) host.classList.add('media-unavailable');
+}
 
-function creditSize(subs) {
-  const safe = Math.max(1, Number(subs) || 2);
-  const t = (Math.log10(safe) - Math.log10(2)) / (Math.log10(506) - Math.log10(2));
-  return Math.round(56 + 112 * Math.min(Math.max(t, 0), 1));
+function fmtViews(value) {
+  return String(value || '').replace(/(\d+(?:\.\d+)?)([KMB])/i, (m, num, suf) => {
+    const n = parseFloat(num);
+    const r = n >= 100 ? Math.round(n) : Math.round(n * 10) / 10;
+    return r + suf;
+  });
 }
 
 function renderCredits() {
@@ -315,114 +419,745 @@ function renderCredits() {
     const label = total >= 1000
       ? (Math.floor(total / 100) / 10).toFixed(1).replace(/\.0$/, '') + 'B+'
       : Math.floor(total / 10) * 10 + 'M+';
-    statement.innerHTML = credits.length + ' channels. <strong>' + label + '</strong> subscribers combined.';
+    statement.innerHTML = 'Editing credits across <span class="hl-blue">' + credits.length + ' channels</span> with <strong>' + label + '</strong> subscribers combined.';
+    prepareStatement(statement);
   }
-  board.innerHTML = credits.map((entry, index) => {
-    const spot = CREDIT_LAYOUT[entry.name] || [8 + ((index * 37) % 85), 8 + ((index * 53) % 82)];
-    const size = creditSize(entry.subs);
-    const depth = (0.3 + 0.7 * (size - 56) / 112).toFixed(2);
-    const variant = entry.emblem ? ' board-item--emblem' : entry.logo ? ' board-item--logo' : '';
-    const invert = entry.invert ? ' board-item--invert' : '';
-    const far = size < 72 ? ' board-item--far' : '';
-    return `<figure class="board-item${variant}${invert}${far}" style="left:${spot[0]}%;top:${spot[1]}%;--s:${size}px;--d:${((index % 9) * -1.15).toFixed(2)}s;--p:${depth};--i:${index};z-index:${size}">
-      <span class="board-pop"><span class="board-bob"><img src="${escapeHtml(entry.avatar)}" alt="" loading="lazy" /></span></span>
-      <figcaption>${escapeHtml(entry.name)}</figcaption>
-    </figure>`;
+  const CHANNEL_PLATES = {
+    'MrBeast': '#2453D6', 'Stokes Twins': '#E23B47', 'Ben Azelart': '#18AAC2', 'SSSniperWolf': '#E23A96', 'Preston': '#F5761C',
+    'Sidemen': '#3A3F48', 'FutCrunch': '#1EAFDC', 'Unspeakable': '#33B94F', 'LawByMike': '#2E7CE0', 'KSI': '#2E4FC4',
+    'Landen Purifoy': '#E0B02E', 'John Nellis': '#C77A3C', 'Eystreem': '#2F74D6', 'AMP': '#2AA3E8', 'Browney': '#3B87E0',
+    'Kat': '#D08A3E', 'Cash': '#D0357A', 'Miniminter': '#E0A82C', 'SypherPK': '#E23048', 'Jesse James West': '#C0743E',
+    "Lana's Life": '#D046A6', 'Bionic': '#E06A26', 'Carter Kench': '#C77A44', 'BriannaPlayz': '#D653A0', 'SV2': '#C4CE34',
+    'Cash & Maverick': '#2E63D6', 'TBJZL': '#CEBE2E', 'Leah Ashe': '#D64AB4', 'Drew Dirksen': '#C4894A', 'LoverFella': '#E0335A',
+    'RussoPlays': '#E0742C', 'CouRage Gaming': '#E0A62C', "What's Inside": '#22A6D8', 'NoLuvMar': '#D05E38', 'AJ Shabeel': '#E23C28',
+    'Carter Sharer': '#E0472C', 'Senne Jackson': '#2E86E0', 'Lachlan': '#3FC441', 'Kenji': '#E0517A', 'AveryB': '#22B4D6', 'JACK TV': '#8E5AD0'
+  };
+  const plateLuma = (hex) => {
+    const h = String(hex).replace('#', '');
+    const r = parseInt(h.slice(0, 2), 16) * 0.9 + 13 * 0.1;
+    const g = parseInt(h.slice(2, 4), 16) * 0.9 + 17 * 0.1;
+    const b = parseInt(h.slice(4, 6), 16) * 0.9 + 23 * 0.1;
+    return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+  };
+  const subsOf = (entry) => Number(entry.subs) || 0;
+  const vals = credits.map(subsOf).filter((v) => v > 0);
+  const lo = Math.log(Math.min(...vals));
+  const hi = Math.log(Math.max(...vals));
+  const nameMinOf = (entry) => {
+    const len = String(entry.name || '').length;
+    return Math.max(7, Math.min(23, len * 0.72 + 4.8));
+  };
+  const weightOf = (entry) => {
+    const v = subsOf(entry);
+    const n = (!v || hi === lo) ? 0.4 : (Math.log(v) - lo) / (hi - lo);
+    return 5 + Math.pow(n, 1.45) * 58;
+  };
+  // BALANCED lane assignment: flexbox distributes per lane, so equal per-lane weight pools are what make a clip's
+  // width mean the same thing in every lane (round-robin skewed the pools - Cash & Maverick rendered wider than
+  // FutCrunch). Deterministic greedy: biggest first into the lightest lane; cap keeps rows at 6-7 clips;
+  // MrBeast seeds L1 and the hero multiplier + superlinear curve keep him unmistakably dominant (name floors hold).
+  const LANE_COUNT = 6;
+  const lanes = Array.from({ length: LANE_COUNT }, () => ({ clips: [], sum: 0 }));
+  const hueOf = (hex) => {
+    const h = String(hex).replace('#', '');
+    const r = parseInt(h.slice(0, 2), 16) / 255;
+    const g2 = parseInt(h.slice(2, 4), 16) / 255;
+    const b = parseInt(h.slice(4, 6), 16) / 255;
+    const mx = Math.max(r, g2, b);
+    const mn = Math.min(r, g2, b);
+    const d = mx - mn;
+    if (d < 0.04) return -1;
+    let hue = 0;
+    if (mx === r) hue = ((g2 - b) / d) % 6;
+    else if (mx === g2) hue = (b - r) / d + 2;
+    else hue = (r - g2) / d + 4;
+    return (hue * 60 + 360) % 360;
+  };
+  const weighted = credits.map((entry, i) => ({ entry, i, g: Math.round(weightOf(entry) * (i === 0 ? 1.5 : 1) * 10) / 10, hue: hueOf(CHANNEL_PLATES[entry.name] || '#3E5C76') }));
+  const laneCap = Math.ceil(weighted.length / LANE_COUNT);
+  lanes[0].clips.push(weighted[0]);
+  lanes[0].sum = weighted[0].g;
+  // secondary objective while assigning: keep same-hue clips out of the same lane (the palette is amber-heavy;
+  // pure weight balance once packed five warm plates into one lane and no in-lane order could separate them).
+  // Weight balance stays dominant; the hue term only steers ties and near-ties.
+  const laneHuePen = (lane, c) => {
+    let minD = 180;
+    lane.clips.forEach((m) => {
+      const d = (m.hue < 0 || c.hue < 0) ? 180 : Math.min(Math.abs(m.hue - c.hue), 360 - Math.abs(m.hue - c.hue));
+      minD = Math.min(minD, d);
+    });
+    return minD < 35 ? (35 - minD) * 1.6 : 0;
+  };
+  weighted.slice(1).forEach((c) => {
+    const open = lanes.filter((l) => l.clips.length < laneCap);
+    const target = open.reduce((a, b) => ((b.sum + laneHuePen(b, c)) < (a.sum + laneHuePen(a, c)) ? b : a), open[0]);
+    target.clips.push(c);
+    target.sum += c.g;
+  });
+  // ARRANGEMENT OPTIMIZER (deterministic, runs once): within each balanced lane, search ALL orders (Heap's
+  // algorithm, <=5040 perms/lane) and keep the one with the fewest aesthetic penalties - same-hue horizontal
+  // neighbors, same-hue clips stacked against the lane above, adjacent giants, monotonic size runs. This is
+  // Gregor's "mixed em up" made provably maximal while size honesty (balanced pools) stays intact.
+  const hueDelta = (a, b) => {
+    if (a < 0 || b < 0) return 180;
+    const d = Math.abs(a - b);
+    return Math.min(d, 360 - d);
+  };
+  const laneSpans = (clips) => {
+    const total = clips.reduce((s, c) => s + c.g, 0) || 1;
+    let acc = 0;
+    return clips.map((c) => { const w = c.g / total; const span = { c, a: acc, b: acc + w }; acc += w; return span; });
+  };
+  const BIG_G = 30;
+  const scoreOrder = (clips, prevSpans) => {
+    let pen = 0;
+    for (let i = 1; i < clips.length; i++) {
+      const dh = hueDelta(clips[i].hue, clips[i - 1].hue);
+      if (dh < 40) pen += (40 - dh) * 2;
+      if (clips[i].g >= BIG_G && clips[i - 1].g >= BIG_G) pen += 70;
+      if (i >= 2) {
+        const d1 = clips[i - 1].g - clips[i - 2].g;
+        const d2 = clips[i].g - clips[i - 1].g;
+        if ((d1 > 0 && d2 > 0) || (d1 < 0 && d2 < 0)) pen += 26;
+      }
+    }
+    if (prevSpans) {
+      const spans = laneSpans(clips);
+      for (const s of spans) {
+        for (const p of prevSpans) {
+          const overlap = Math.min(s.b, p.b) - Math.max(s.a, p.a);
+          if (overlap > 0.04) {
+            const dh = hueDelta(s.c.hue, p.c.hue);
+            if (dh < 35) pen += (35 - dh) * overlap * 6;
+          }
+        }
+      }
+    }
+    return pen;
+  };
+  const bestOrder = (clips, anchorFirst, prevSpans) => {
+    const head = anchorFirst ? clips.slice(0, 1) : [];
+    const arr = anchorFirst ? clips.slice(1) : [...clips];
+    if (arr.length <= 1) return head.concat(arr);
+    let best = null;
+    let bestPen = Infinity;
+    const permute = (k) => {
+      if (k === 1) {
+        const cand = head.concat(arr);
+        const pen = scoreOrder(cand, prevSpans);
+        if (pen < bestPen) { bestPen = pen; best = [...cand]; }
+        return;
+      }
+      for (let i = 0; i < k; i++) {
+        permute(k - 1);
+        const j = k % 2 === 0 ? i : 0;
+        const t = arr[j]; arr[j] = arr[k - 1]; arr[k - 1] = t;
+      }
+    };
+    permute(arr.length);
+    return best;
+  };
+  let prevSpans = null;
+  lanes.forEach((lane, li) => {
+    lane.clips = bestOrder(lane.clips, li === 0, prevSpans);
+    prevSpans = laneSpans(lane.clips);
+  });
+  const ticks = [];
+  for (let s = 0; s <= 60; s += 2) {
+    const major = s % 10 === 0;
+    // the 60s tick anchors 1px inside the edge - at left:100% it pokes past the scroll area and summons a scrollbar
+    const pos = s === 60 ? 'left:calc(100% - 1px)' : 'left:' + (s / 60 * 100).toFixed(2) + '%';
+    ticks.push('<i class="tl-tick' + (major ? ' tl-tick--major' : '') + '" style="' + pos + ';--td:' + (s * 16) + 'ms"></i>');
+    if (major && s < 60) ticks.push('<span class="tl-tick-label" style="' + pos + ';--td:' + (s * 16) + 'ms">00:' + String(s).padStart(2, '0') + '</span>');
+  }
+  const clipHtml = (c, laneIdx, pos) => {
+    const color = CHANNEL_PLATES[c.entry.name] || '#3E5C76';
+    const delay = laneIdx * 70 + pos * 46;
+    const wide = c.g >= 42 ? ' clip--wide' : '';
+    const narrow = c.g < 12 ? ' clip--s' : '';
+    const heroClip = c.i === 0 ? ' clip--hero' : '';
+    const light = plateLuma(color) > 0.52 ? ' clip--light' : '';
+    const inner = c.i === 0
+      ? '<img class="clip-mark" src="assets/wordmarks/mrbeast-white.png" alt="" decoding="async" />'
+      : '<img class="clip-pfp" src="' + escapeHtml(c.entry.avatar) + '" alt="" loading="lazy" decoding="async" onerror="this.hidden=true" /><span>' + escapeHtml(c.entry.name) + '</span>';
+    return '<button type="button" class="clip' + heroClip + wide + narrow + light + '" style="--g:' + c.g + ';--c:' + color + ';--d:' + delay + 'ms" data-idx="' + c.i + '" aria-pressed="false" aria-label="' + escapeHtml(c.entry.name) + '">' + inner + '</button>';
+  };
+  // deterministic per-lane air: lead-ins, one mid-lane cut gap, ragged out-points (edit rhythm, not a justified grid)
+  const LANE_AIR = [
+    { lead: 0,   mid: { before: 5, w: 1.2 }, trail: 1.8 },
+    { lead: 3.2, mid: { before: 3, w: 2.0 }, trail: 0 },
+    { lead: 1.5, mid: { before: 2, w: 1.0 }, trail: 3.4 },
+    { lead: 4.6, mid: { before: 2, w: 1.6 }, trail: 0.7 },
+    { lead: 0.9, mid: { before: 4, w: 2.4 }, trail: 2.8 },
+    { lead: 2.6, mid: { before: 1, w: 1.4 }, trail: 4.8 },
+  ];
+  const air = (w) => w > 0 ? '<i class="lane-air" style="flex:0 0 ' + w + '%" aria-hidden="true"></i>' : '';
+  const tracks = lanes.map((lane, li) => {
+    const a = LANE_AIR[li % LANE_AIR.length];
+    const cells = lane.clips.map((c, pos) => (a.mid.before === pos ? air(a.mid.w) : '') + clipHtml(c, li, pos)).join('');
+    return '<div class="tl-track' + (li % 2 ? ' tl-track--alt' : '') + '"><span class="tl-track-label">L' + (li + 1) + '</span><div class="tl-lane">' + air(a.lead) + cells + air(a.trail) + '</div></div>';
   }).join('');
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!reduce) {
-    let boardFrame = 0;
-    board.addEventListener('pointermove', (event) => {
-      if (boardFrame) return;
-      boardFrame = requestAnimationFrame(() => {
-        boardFrame = 0;
-        const rect = board.getBoundingClientRect();
-        board.style.setProperty('--bx', ((event.clientX - rect.left) / rect.width - 0.5).toFixed(3));
-        board.style.setProperty('--by', ((event.clientY - rect.top) / rect.height - 0.5).toFixed(3));
-      });
-    });
-    board.addEventListener('pointerleave', () => {
-      board.style.setProperty('--bx', '0');
-      board.style.setProperty('--by', '0');
-    });
-  }
+  board.innerHTML = '<div class="tl" role="group" aria-label="Editing timeline of channel credits">'
+    + '<div class="tl-monitor"><span class="tl-monitor-tag">PGM &middot; PR&Scaron;A PRODUCTIONS</span><span class="tl-monitor-tc" data-tc><b data-tc-main>00:00:00</b><i data-tc-frames>:00</i></span>'
+    + '<div class="tl-monitor-stage"><div class="tl-monitor-identity"><div class="tl-monitor-card" data-mon-card><img data-mon-img class="is-lockup" src="assets/wordmarks/mrbeast-lockup-white.png" alt="" decoding="async" /><strong data-mon-name>MrBeast</strong><span class="tl-monitor-ch" data-mon-ch>509M subscribers</span><span class="tl-monitor-hint" data-mon-hint aria-hidden="true">View edits</span></div></div></div><div class="tl-browse" data-browse hidden><div class="tl-browse-head"><span data-browse-label></span><button type="button" class="tl-browse-close" data-browse-close aria-label="Close videos"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></button></div><div class="tl-browse-track" data-browse-track data-lenis-prevent><div class="tl-browse-row" data-browse-row></div><div class="tl-browse-bar" data-browse-bar><i data-browse-thumb></i></div></div></div></div>'
+    + '<div class="tl-body" data-lenis-prevent-horizontal><div class="tl-scroll"><div class="tl-rail"><span class="tl-corner"></span><div class="tl-ruler">' + ticks.join('') + '</div></div>'
+    + tracks
+    + '<div class="tl-field"><i class="tl-playhead"></i></div></div></div></div>';
+  initTimeline();
   setupWorkReveal();
 }
 
-function initStarfield() {
+let vlibFilter = null;
+let vlibReturnFocus = null;
+
+function renderVideoLibrary() {
+  const grid = document.querySelector('[data-vlib-grid]');
+  const filters = document.querySelector('[data-vlib-filters]');
+  if (!grid || !filters) return;
+  const list = (typeof works !== 'undefined' && Array.isArray(works)) ? works : [];
+  const channels = [...new Set(list.map((w) => w.channel).filter(Boolean))];
+  if (vlibFilter && !channels.includes(vlibFilter)) vlibFilter = null;
+  const chip = (label, count, value) => '<button type="button" class="vlib-chip' + ((value || null) === vlibFilter ? ' is-on' : '') + '" data-vlib-filter="' + escapeHtml(value || '') + '">' + escapeHtml(label) + ' &middot; ' + count + '</button>';
+  filters.innerHTML = chip('All', list.length, null) + channels.map((c) => chip(c, list.filter((w) => w.channel === c).length, c)).join('');
+  const items = vlibFilter ? list.filter((w) => w.channel === vlibFilter) : list;
+  grid.innerHTML = items.map((w, i) => '<a class="vlib-card" style="--i:' + i + '" href="case-study.html?id=' + encodeURIComponent(w.id) + '" data-project-transition data-project-title="' + escapeHtml(w.title) + '" data-project-format="' + (w.format === 'portrait' ? 'portrait' : 'landscape') + '" data-project-thumb="' + escapeHtml(w.thumb) + '" data-project-fallback="' + escapeHtml(w.thumbFallback || w.thumb) + '"><span class="vlib-thumb"><img src="' + escapeHtml(w.thumb) + '" alt="" loading="lazy" decoding="async" onerror="handleRemoteImageError(this,this.closest(\'a\').dataset.projectFallback)" />' + (w.format === 'portrait' ? '<i class="vlib-tag">Short</i>' : '') + '</span><span class="vlib-name">' + escapeHtml(w.title) + '</span><span class="vlib-meta">' + (w.channel ? escapeHtml(w.channel) + ' &middot; ' : '') + escapeHtml(fmtViews(w.views || '')) + (w.views ? ' views' : '') + '</span></a>').join('');
+}
+
+function openVideoLibrary(preferChannel) {
+  const vlib = byId('vlib');
+  if (!vlib) return;
+  const list = (typeof works !== 'undefined' && Array.isArray(works)) ? works : [];
+  vlibFilter = (preferChannel && list.some((w) => w.channel === preferChannel)) ? preferChannel : null;
+  renderVideoLibrary();
+  vlibReturnFocus = document.activeElement;
+  vlib.hidden = false;
+  document.body.classList.add('vlib-lock');
+  requestAnimationFrame(() => vlib.classList.add('open'));
+  const close = vlib.querySelector('[data-vlib-close]');
+  if (close) close.focus();
+}
+
+function closeVideoLibrary() {
+  const vlib = byId('vlib');
+  if (!vlib || !vlib.classList.contains('open')) return;
+  vlib.classList.remove('open');
+  document.body.classList.remove('vlib-lock');
+  window.setTimeout(() => { vlib.hidden = true; }, 420);
+  if (vlibReturnFocus && vlibReturnFocus.focus) vlibReturnFocus.focus();
+}
+
+function initVideoLibrary() {
+  const vlib = byId('vlib');
+  if (!vlib || vlib.dataset.wired) return;
+  vlib.dataset.wired = '1';
+  vlib.addEventListener('click', (event) => {
+    if (event.target.closest('[data-vlib-close]')) { closeVideoLibrary(); return; }
+    const chipEl = event.target.closest('[data-vlib-filter]');
+    if (chipEl) { vlibFilter = chipEl.dataset.vlibFilter || null; renderVideoLibrary(); }
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && vlib.classList.contains('open')) closeVideoLibrary();
+  });
+}
+
+function initTimeline() {
   const board = byId('creditsBoard');
-  if (!board || board.querySelector('.board-stars') || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const canvas = document.createElement('canvas');
-  canvas.className = 'board-stars';
-  board.prepend(canvas);
-  const ctx = canvas.getContext('2d');
-  let stars = [];
-  let raf = 0;
-  let w = 0;
-  let h = 0;
-  const size = () => {
-    const rect = board.getBoundingClientRect();
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    w = rect.width;
-    h = rect.height;
-    canvas.width = w * dpr;
-    canvas.height = h * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    stars = Array.from({ length: 110 }, () => ({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      r: 0.4 + Math.random() * 1.1,
-      p: Math.random() * Math.PI * 2,
-      a: 0.14 + Math.random() * 0.38,
-      d: 0.05 + Math.random() * 0.12
-    }));
+  const body = board ? board.querySelector('.tl-body') : null;
+  if (!body) return;
+  if (window.__tlAbort) window.__tlAbort.abort();
+  const tlAbort = new AbortController();
+  window.__tlAbort = tlAbort;
+  const tlSig = tlAbort.signal;
+  const timeline = board.querySelector('.tl');
+  const monitor = board.querySelector('.tl-monitor');
+  const monImg = board.querySelector('[data-mon-img]');
+  const monName = board.querySelector('[data-mon-name]');
+  const monCh = board.querySelector('[data-mon-ch]');
+  const stage = board.querySelector('.tl-monitor-stage');
+  const tc = board.querySelector('[data-tc]');
+  const field = board.querySelector('.tl-field');
+  const playhead = board.querySelector('.tl-playhead');
+  const clips = Array.from(board.querySelectorAll('.clip'));
+  const MONITOR_MARKS = { 'MrBeast': 'assets/wordmarks/mrbeast-lockup-white.png', 'Sidemen': 'assets/wordmarks/sidemen-white.png', 'KSI': 'assets/wordmarks/ksi-white.png', 'Miniminter': 'assets/wordmarks/miniminter-white.png', 'TBJZL': 'assets/wordmarks/tbjzl-white.png', 'LoverFella': 'assets/wordmarks/loverfella-white.png', 'CouRage Gaming': 'assets/wordmarks/couragegaming-white.png', "What's Inside": 'assets/wordmarks/whatsinside-white.png' };
+  const MARK_SPELLS_NAME = new Set(['MrBeast', 'Sidemen', 'KSI', 'TBJZL']);
+  const fmtSubs = (v) => v >= 1000 ? ((v / 1000).toFixed(1).replace(/\.0$/, '') + 'B') : v >= 10 ? Math.round(v) + 'M' : (Number(v).toFixed(1).replace(/\.0$/, '') + 'M');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let snaps = [];
+  const measureSnaps = () => {
+    const fr = field.getBoundingClientRect();
+    if (!fr.width) return;
+    const arr = [];
+    clips.forEach((cl) => { const b = cl.getBoundingClientRect(); if (b.width) { arr.push((b.left - fr.left) / fr.width * 100); arr.push((b.right - fr.left) / fr.width * 100); } });
+    arr.sort((a, b) => a - b);
+    snaps = arr;
   };
-  const tick = (t) => {
-    ctx.clearRect(0, 0, w, h);
-    ctx.fillStyle = '#cfe4f5';
-    for (const star of stars) {
-      star.x += star.d * 0.14;
-      if (star.x > w + 2) star.x = -2;
-      ctx.globalAlpha = star.a * (0.55 + 0.45 * Math.sin(star.p + t / 1400));
-      ctx.beginPath();
-      ctx.arc(star.x, star.y, star.r, 0, 6.2832);
-      ctx.fill();
-    }
-    raf = requestAnimationFrame(tick);
+  requestAnimationFrame(measureSnaps);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => requestAnimationFrame(measureSnaps));
+  window.addEventListener('resize', measureSnaps, { passive: true, signal: tlSig });
+  let current = 0;
+  let cutTimer = 0;
+  let intentTimer = 0;
+  let intentIdx = -1;
+  let performing = false;
+  let performRaf = 0;
+  let pinnedIdx = -1;
+  let browsing = false;
+  let retargetTimer = 0;
+  const browsePanel = board.querySelector('[data-browse]');
+  const browseTrack = board.querySelector('[data-browse-track]');
+  const browseRow = board.querySelector('[data-browse-row]');
+  const browseBar = board.querySelector('[data-browse-bar]');
+  const browseThumb = board.querySelector('[data-browse-thumb]');
+  const browseLabel = board.querySelector('[data-browse-label]');
+  const vidsFor = (entry) => {
+    if (!entry) return [];
+    const list = (typeof works !== 'undefined' && Array.isArray(works)) ? works : [];
+    const feats = list.filter((w) => w.channel === entry.name).map((w) => ({ id: w.id, title: w.title, thumb: w.thumb, thumbFallback: w.thumbFallback, views: w.views, format: w.format, cased: true }));
+    const featIds = new Set(feats.map((v) => v.id));
+    const extras = (window.PRSA_VIDEOS || []).filter((v) => v.channel === entry.name && !featIds.has(v.id)).map((v) => ({ id: v.id, title: v.title, thumb: v.thumb, thumbFallback: 'https://i.ytimg.com/vi/' + v.id + '/hqdefault.jpg', views: v.views, cased: false }));
+    return feats.concat(extras);
   };
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        if (!raf) { size(); raf = requestAnimationFrame(tick); }
-      } else if (raf) {
-        cancelAnimationFrame(raf);
-        raf = 0;
+  const buildBrowse = (entry) => {
+    if (!browseTrack || !browseLabel) return;
+    const vids = vidsFor(entry);
+    browseLabel.textContent = entry.name + ' \u00b7 ' + vids.length + (vids.length === 1 ? ' video' : ' videos');
+    browseRow.innerHTML = vids.map((w, i) => {
+      const portrait = w.format === 'portrait';
+      const cardSrc = portrait ? 'https://i.ytimg.com/vi/' + encodeURIComponent(w.id) + '/oar2.jpg' : w.thumb;
+      const media = '<span class="tl-browse-thumb"><img src="' + escapeHtml(cardSrc) + '" alt="" loading="lazy" decoding="async" onerror="handleRemoteImageError(this,this.closest(\'a\').dataset.projectFallback)" /></span>';
+      const text = '<span class="tl-browse-title">' + escapeHtml(w.title) + '</span><span class="tl-browse-meta">' + (w.views ? escapeHtml(fmtViews(w.views)) + ' views' : 'YouTube') + (portrait ? ' · Short' : '') + '</span>';
+      const cls = 'tl-browse-card' + (portrait ? ' tl-browse-card--portrait' : '');
+      if (w.cased) {
+        return '<a class="' + cls + '" style="--i:' + i + '" href="case-study.html?id=' + encodeURIComponent(w.id) + '" data-project-transition data-project-title="' + escapeHtml(w.title) + '" data-project-format="' + (portrait ? 'portrait' : 'landscape') + '" data-project-thumb="' + escapeHtml(w.thumb) + '" data-project-fallback="' + escapeHtml(w.thumbFallback || w.thumb) + '">' + media + text + '</a>';
       }
+      return '<a class="' + cls + '" style="--i:' + i + '" href="https://youtu.be/' + encodeURIComponent(w.id) + '" target="_blank" rel="noopener noreferrer" data-project-fallback="' + escapeHtml(w.thumbFallback || w.thumb) + '" aria-label="Watch ' + escapeHtml(w.title) + ' on YouTube">' + media + text + '</a>';
+    }).join('');
+    requestAnimationFrame(() => { if (typeof browseMeasure === 'function') browseMeasure(true); });
+  };
+  const openBrowse = () => {
+    const entry = credits[current];
+    if (!entry || !vidsFor(entry).length) return;
+    browsing = true;
+    buildBrowse(entry);
+    if (browsePanel) browsePanel.hidden = false;
+    requestAnimationFrame(() => { if (monitor) monitor.classList.add('browsing'); });
+    const close = board.querySelector('[data-browse-close]');
+    if (close) close.focus();
+  };
+  let browseMeasure = null;
+  if (browseTrack && browseRow && browseBar && browseThumb) {
+    let bx = 0;
+    let bTarget = 0;
+    let bMax = 0;
+    let bRaf = 0;
+    let bLast = 0;
+    const bPaint = () => {
+      browseRow.style.transform = 'translate3d(' + (-bx).toFixed(2) + 'px,0,0)';
+      if (bMax > 0) {
+        const span = browseBar.clientWidth - browseThumb.clientWidth;
+        browseThumb.style.transform = 'translateX(' + ((bx / bMax) * span).toFixed(2) + 'px)';
+      }
+    };
+    const bTick = (now) => {
+      const dt = Math.min(0.05, (now - bLast) / 1000);
+      bLast = now;
+      bx += (bTarget - bx) * (1 - Math.exp(-dt * 9));
+      if (Math.abs(bTarget - bx) < 0.3) { bx = bTarget; bPaint(); bRaf = 0; return; }
+      bPaint();
+      bRaf = requestAnimationFrame(bTick);
+    };
+    const bKick = () => {
+      if (reduce) { bx = bTarget; bPaint(); return; }
+      if (!bRaf) { bLast = performance.now(); bRaf = requestAnimationFrame(bTick); }
+    };
+    const bClamp = (v) => Math.max(0, Math.min(bMax, v));
+    browseMeasure = (reset) => {
+      bMax = Math.max(0, browseRow.scrollWidth - browseTrack.clientWidth + 16);
+      browseTrack.classList.toggle('tl-browse-track--center', bMax <= 2);
+      if (reset || bMax <= 2) { bx = 0; bTarget = 0; }
+      bTarget = bClamp(bTarget);
+      bx = bClamp(bx);
+      const frac = browseRow.scrollWidth > 0 ? browseTrack.clientWidth / browseRow.scrollWidth : 1;
+      browseThumb.style.width = Math.max(8, Math.min(100, frac * 100)).toFixed(2) + '%';
+      bPaint();
+    };
+    browseTrack.addEventListener('wheel', (event) => {
+      if (bMax <= 2) return;
+      event.preventDefault();
+      event.stopPropagation();
+      const delta = Math.abs(event.deltaY) > Math.abs(event.deltaX) ? event.deltaY : event.deltaX;
+      bTarget = bClamp(bTarget + delta * 1.7);
+      bKick();
+    }, { passive: false });
+    let dragStartX = 0;
+    let dragStartTarget = 0;
+    let dragging = false;
+    browseThumb.addEventListener('pointerdown', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      dragging = true;
+      dragStartX = event.clientX;
+      dragStartTarget = bTarget;
+      browseBar.classList.add('is-dragging');
+      browseThumb.setPointerCapture(event.pointerId);
+    });
+    const endThumbDrag = () => { dragging = false; browseBar.classList.remove('is-dragging'); };
+    browseThumb.addEventListener('pointermove', (event) => {
+      if (!dragging) return;
+      if (event.pointerType !== 'touch' && event.buttons === 0) { endThumbDrag(); return; }
+      const span = browseBar.clientWidth - browseThumb.clientWidth;
+      if (span <= 0) return;
+      bTarget = bClamp(dragStartTarget + (event.clientX - dragStartX) / span * bMax);
+      bKick();
+    });
+    browseThumb.addEventListener('pointerup', endThumbDrag);
+    browseThumb.addEventListener('pointercancel', endThumbDrag);
+    browseBar.addEventListener('pointerdown', (event) => {
+      if (event.target === browseThumb || dragging) return;
+      const rect = browseBar.getBoundingClientRect();
+      bTarget = bClamp(((event.clientX - rect.left) / rect.width) * bMax - browseTrack.clientWidth / 4);
+      bKick();
+    });
+    browseRow.addEventListener('focusin', (event) => {
+      const card = event.target.closest('.tl-browse-card');
+      if (!card) return;
+      const left = card.offsetLeft;
+      const right = left + card.offsetWidth;
+      if (left < bTarget + 20) bTarget = bClamp(left - 20);
+      else if (right > bTarget + browseTrack.clientWidth - 20) bTarget = bClamp(right - browseTrack.clientWidth + 20);
+      bKick();
+    });
+    let touchGliding = false;
+    let touchMoved = false;
+    let touchStartX = 0;
+    let touchStartTarget = 0;
+    browseTrack.addEventListener('pointerdown', (event) => {
+      if (event.pointerType !== 'touch' || event.target.closest('[data-browse-bar]')) return;
+      touchGliding = true;
+      touchMoved = false;
+      touchStartX = event.clientX;
+      touchStartTarget = bTarget;
+      browseTrack.setPointerCapture(event.pointerId);
+    });
+    browseTrack.addEventListener('pointermove', (event) => {
+      if (!touchGliding) return;
+      const delta = touchStartX - event.clientX;
+      if (Math.abs(delta) > 4) touchMoved = true;
+      if (!touchMoved) return;
+      event.preventDefault();
+      bTarget = bClamp(touchStartTarget + delta);
+      bKick();
+    });
+    const endTouchGlide = () => {
+      touchGliding = false;
+      window.setTimeout(() => { touchMoved = false; }, 0);
+    };
+    browseTrack.addEventListener('pointerup', endTouchGlide);
+    browseTrack.addEventListener('pointercancel', endTouchGlide);
+    browseRow.addEventListener('click', (event) => {
+      if (!touchMoved) return;
+      event.preventDefault();
+      event.stopPropagation();
+    }, true);
+    window.addEventListener('resize', () => { if (browsing) browseMeasure(false); }, { passive: true, signal: tlSig });
+  }
+  const closeBrowse = () => {
+    if (!browsing) return;
+    browsing = false;
+    clearTimeout(retargetTimer);
+    if (browsePanel) browsePanel.classList.remove('retargeting');
+    if (monitor) monitor.classList.remove('browsing');
+    window.setTimeout(() => { if (browsePanel && !browsing) browsePanel.hidden = true; }, 520);
+    if (monImg && monImg.tabIndex >= 0) monImg.focus({ preventScroll: true });
+  };
+  const setActive = (idx) => {
+    const prev = board.querySelector('.clip.is-active');
+    if (prev) prev.classList.remove('is-active');
+    const el = board.querySelector('.clip[data-idx="' + idx + '"]');
+    if (el) el.classList.add('is-active');
+    return el;
+  };
+  const setPinned = (idx) => {
+    const prev = board.querySelector('.clip.is-pinned');
+    if (prev) { prev.classList.remove('is-pinned'); prev.setAttribute('aria-pressed', 'false'); }
+    pinnedIdx = idx;
+    if (idx !== -1) {
+      const el = board.querySelector('.clip[data-idx="' + idx + '"]');
+      if (el) { el.classList.add('is-pinned'); el.setAttribute('aria-pressed', 'true'); }
+    }
+  };
+  const applyMonitor = (idx) => {
+    const entry = credits[idx];
+    const mark = MONITOR_MARKS[entry.name];
+    monImg.src = mark || entry.avatar;
+    monImg.classList.toggle('is-lockup', !!mark);
+    monName.hidden = !!mark && MARK_SPELLS_NAME.has(entry.name);
+    monName.textContent = entry.name;
+    if (monCh) monCh.textContent = fmtSubs(Number(entry.subs) || 0) + ' subscribers';
+    const el = board.querySelector('.clip[data-idx="' + idx + '"]');
+    const glow = el ? el.style.getPropertyValue('--c') : '';
+    if (monitor && glow) monitor.style.setProperty('--mon-glow', glow.trim());
+    const vids = vidsFor(entry);
+    if (monitor) monitor.classList.toggle('has-vids', vids.length > 0);
+    if (vids.length) {
+      monImg.setAttribute('role', 'button');
+      monImg.setAttribute('tabindex', '0');
+      monImg.setAttribute('aria-label', 'View ' + vids.length + ' edits for ' + entry.name);
+    } else {
+      monImg.removeAttribute('role');
+      monImg.setAttribute('tabindex', '-1');
+      monImg.removeAttribute('aria-label');
+    }
+    if (browsing) {
+      if (!vids.length) {
+        closeBrowse();
+      } else if (browsePanel && !reduce) {
+        // switching channels while the video browser is open: dissolve out, rebuild, stagger back in
+        browsePanel.classList.add('retargeting');
+        clearTimeout(retargetTimer);
+        retargetTimer = window.setTimeout(() => {
+          buildBrowse(entry);
+          requestAnimationFrame(() => browsePanel.classList.remove('retargeting'));
+        }, 190);
+      } else {
+        buildBrowse(entry);
+      }
+    }
+  };
+  const cutTo = (idx) => {
+    if (idx === current || !credits[idx]) return;
+    current = idx;
+    setActive(idx);
+    if (reduce) { applyMonitor(idx); return; }
+    stage.classList.add('cut');
+    clearTimeout(cutTimer);
+    cutTimer = setTimeout(() => { applyMonitor(idx); stage.classList.remove('cut'); }, 120);
+  };
+  const cancelIntent = () => { intentIdx = -1; clearTimeout(intentTimer); };
+  const intend = (idx) => {
+    if (idx === current) { cancelIntent(); return; }
+    if (idx === intentIdx) return;
+    intentIdx = idx;
+    clearTimeout(intentTimer);
+    intentTimer = setTimeout(() => { cutTo(idx); intentIdx = -1; }, 70);
+  };
+  let ph = 0;
+  let phTarget = 30;
+  let glideRaf = 0;
+  let fieldRect = null;
+  const tcFor = (pct) => {
+    const secs = pct / 100 * 60;
+    return '00:00:' + String(Math.floor(secs)).padStart(2, '0') + ':' + String(Math.floor((secs % 1) * 25)).padStart(2, '0');
+  };
+  const tcMain = board.querySelector('[data-tc-main]');
+  const tcFrames = board.querySelector('[data-tc-frames]');
+  const paint = () => {
+    playhead.style.left = ph.toFixed(3) + '%';
+    const t = tcFor(ph);
+    if (tcMain && tcFrames) {
+      tcMain.textContent = t.slice(0, 8);
+      tcFrames.textContent = t.slice(8);
+    } else if (tc) {
+      tc.textContent = t;
+    }
+  };
+  const glide = () => {
+    ph += (phTarget - ph) * 0.17;
+    if (Math.abs(phTarget - ph) < 0.05) { ph = phTarget; paint(); glideRaf = 0; return; }
+    paint();
+    glideRaf = requestAnimationFrame(glide);
+  };
+  const seek = (pct, instant) => {
+    phTarget = Math.min(100, Math.max(0, pct));
+    if (instant || reduce) { ph = phTarget; if (glideRaf) { cancelAnimationFrame(glideRaf); glideRaf = 0; } paint(); return; }
+    if (!glideRaf) glideRaf = requestAnimationFrame(glide);
+  };
+  const magnet = (pct) => {
+    let best = pct;
+    let dist = 0.55;
+    for (const sp of snaps) {
+      const d = Math.abs(sp - pct);
+      if (d < dist) { dist = d; best = sp; }
+    }
+    return best;
+  };
+  const refreshRect = () => { fieldRect = field.getBoundingClientRect(); };
+  const seekToClip = (clip) => {
+    if (!fieldRect) refreshRect();
+    const b = clip.getBoundingClientRect();
+    seek((b.left + b.width / 2 - fieldRect.left) / fieldRect.width * 100);
+  };
+  const interrupt = () => {
+    if (!performing) return;
+    performing = false;
+    if (performRaf) { cancelAnimationFrame(performRaf); performRaf = 0; }
+  };
+  body.addEventListener('pointerenter', () => { refreshRect(); interrupt(); });
+  body.addEventListener('scroll', () => { fieldRect = null; }, { passive: true });
+  if (monitor) {
+    monitor.addEventListener('pointerenter', interrupt);
+    monitor.addEventListener('pointerdown', interrupt, { passive: true });
+  }
+  if (timeline) timeline.addEventListener('focusin', interrupt);
+  window.addEventListener('resize', () => { fieldRect = null; }, { passive: true, signal: tlSig });
+  window.addEventListener('scroll', () => { fieldRect = null; }, { passive: true, signal: tlSig });
+  body.addEventListener('pointermove', (event) => {
+    if (event.pointerType === 'touch') return;
+    interrupt();
+    if (pinnedIdx !== -1) return;
+    if (!fieldRect) refreshRect();
+    seek(magnet((event.clientX - fieldRect.left) / fieldRect.width * 100));
+    const clip = event.target.closest('.clip');
+    if (clip && !browsing) intend(Number(clip.dataset.idx)); else cancelIntent();
+  });
+  body.addEventListener('pointerleave', cancelIntent);
+  clips.forEach((clip) => {
+    const idx = Number(clip.dataset.idx);
+    clip.addEventListener('focus', () => {
+      interrupt();
+      cutTo(idx);
+      if (clip.matches(':focus-visible')) seekToClip(clip);
+    });
+    clip.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      clip.click();
+    });
+    clip.addEventListener('click', (event) => {
+      if (pinnedIdx === idx) { setPinned(-1); return; }
+      if (!fieldRect) refreshRect();
+      if (event.detail === 0) seekToClip(clip);
+      else seek(magnet((event.clientX - fieldRect.left) / fieldRect.width * 100));
+      setPinned(idx);
+      cutTo(idx);
     });
   });
-  io.observe(board);
-  window.addEventListener('resize', () => { if (raf) size(); }, { passive: true });
+  monImg.addEventListener('click', () => { if (browsing) closeBrowse(); else openBrowse(); });
+  const monCard = board.querySelector('[data-mon-card]');
+  if (monCard) monCard.addEventListener('click', (event) => {
+    if (event.target === monImg) return;
+    if (browsing) closeBrowse(); else openBrowse();
+  });
+  monImg.addEventListener('keydown', (event) => {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    event.preventDefault();
+    if (browsing) closeBrowse(); else openBrowse();
+  });
+  board.addEventListener('click', (event) => {
+    if (event.target.closest('[data-browse-close]')) closeBrowse();
+  }, { signal: tlSig });
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    if (browsing) { closeBrowse(); return; }
+    if (pinnedIdx !== -1) setPinned(-1);
+  }, { signal: tlSig });
+  board.addEventListener('keydown', (event) => {
+    if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return;
+    if (event.target.closest('[data-browse]') || event.target === monImg) return;
+    const from = event.target.closest('.clip') || board.querySelector('.clip[data-idx="' + current + '"]');
+    if (!from) return;
+    const dir = event.key === 'ArrowRight' ? 1 : -1;
+    let next = dir === 1 ? from.nextElementSibling : from.previousElementSibling;
+    if (!next) {
+      const laneEls = Array.from(board.querySelectorAll('.tl-lane'));
+      const li = laneEls.indexOf(from.parentElement);
+      const targetLane = laneEls[li + dir];
+      if (targetLane) next = dir === 1 ? targetLane.firstElementChild : targetLane.lastElementChild;
+    }
+    if (!next || !next.classList || !next.classList.contains('clip')) return;
+    event.preventDefault();
+    const nextIdx = Number(next.dataset.idx);
+    next.focus();
+    if (pinnedIdx !== -1) setPinned(nextIdx);
+  }, { signal: tlSig });
+  const playIntro = () => {
+    performing = true;
+    const D = 4600;
+    if (!fieldRect) refreshRect();
+    const home = clips.find((c) => c.dataset.idx === '0');
+    let rest = 30;
+    if (home && fieldRect && fieldRect.width) {
+      const hb = home.getBoundingClientRect();
+      rest = Math.min(96, Math.max(12, (hb.right - fieldRect.left) / fieldRect.width * 100));
+    }
+    const CUES = [{ at: 0.02, idx: 0 }, { at: 0.22, idx: 1 }, { at: 0.4, idx: 2 }, { at: 0.58, idx: 3 }, { at: 0.76, idx: 4 }, { at: 0.94, idx: 0 }];
+    let cue = 0;
+    const t0 = performance.now();
+    const step = (now) => {
+      if (!performing) return;
+      const p = Math.min(1, (now - t0) / D);
+      ph = p * rest;
+      phTarget = ph;
+      paint();
+      while (cue < CUES.length && p >= CUES[cue].at) { cutTo(CUES[cue].idx); cue += 1; }
+      if (p < 1) { performRaf = requestAnimationFrame(step); return; }
+      performing = false;
+      performRaf = 0;
+    };
+    performRaf = requestAnimationFrame(step);
+  };
+  setActive(0);
+  applyMonitor(0);
+  if (window.__tlIO) window.__tlIO.disconnect();
+  if (reduce) {
+    requestAnimationFrame(() => {
+      const home = clips.find((c) => c.dataset.idx === '0');
+      if (!fieldRect) refreshRect();
+      if (home && fieldRect && fieldRect.width) {
+        const hb = home.getBoundingClientRect();
+        seek((hb.left + hb.width / 2 - fieldRect.left) / fieldRect.width * 100, true);
+      } else {
+        seek(30, true);
+      }
+    });
+    return;
+  }
+  seek(0, true);
+  const io = new IntersectionObserver((entries) => {
+    if (!entries[0].isIntersecting) return;
+    io.disconnect();
+    playIntro();
+  }, { threshold: 0.35 });
+  onReveal(() => io.observe(byId('credits')));
+  window.__tlIO = io;
 }
 
 function setupWorkReveal() {
-  const targets = document.querySelectorAll('.work-head, .work-rail, .credits-head, .credits-board, .about-head, .about-scene, .contact-head, .contact-links');
+  // Entrances answer to the loader: nothing reveals until the curtain lifts (body.in), so a mid-page
+  // reload can never play a section entrance underneath the preloader.
+  onReveal(() => {
+    const targets = document.querySelectorAll('.work-head, .work-rail, .credits-head, .credits-board, .about-head, .about-figure, .about-scene, .contact-head, .contact-hero, .contact-utility, .footer-cta-inner');
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) {
+      targets.forEach((el) => el.classList.add('in-view'));
+      return;
+    }
+    if (!window.__workRevealIO) {
+      window.__workRevealIO = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('in-view');
+          window.__workRevealIO.unobserve(entry.target);
+        });
+      }, { rootMargin: '0px 0px -4%', threshold: 0.04 });
+    }
+    targets.forEach((el) => {
+      if (!el.classList.contains('in-view')) window.__workRevealIO.observe(el);
+    });
+  });
+}
+
+function setupMotionBudget() {
+  const regions = [document.querySelector('.work')].filter(Boolean);
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduce || !('IntersectionObserver' in window)) {
-    targets.forEach((el) => el.classList.add('in-view'));
+    regions.forEach((region) => region.classList.add('motion-active'));
     return;
   }
-  if (!window.__workRevealIO) {
-    window.__workRevealIO = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('in-view');
-        window.__workRevealIO.unobserve(entry.target);
-      });
-    }, { rootMargin: '0px 0px -4%', threshold: 0.04 });
-  }
-  targets.forEach((el) => {
-    if (!el.classList.contains('in-view')) window.__workRevealIO.observe(el);
-  });
+  const motionIO = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => entry.target.classList.toggle('motion-active', entry.isIntersecting));
+  }, { rootMargin: '20% 0px', threshold: 0 });
+  regions.forEach((region) => motionIO.observe(region));
 }
 
 function renderWorkWall() {
@@ -435,10 +1170,11 @@ function renderWorkWall() {
     const cards = (set) => items.map((work) => {
       const portrait = work.format === 'portrait' || PORTRAIT_VIDEO_IDS.has(work.id);
       const thumb = portrait ? `https://i.ytimg.com/vi/${encodeURIComponent(work.id)}/oar2.jpg` : work.thumb;
-      return `<a class="rail-card rail-card--${portrait ? 'portrait' : 'landscape'}" href="${projectHref(work)}" aria-label="View ${escapeHtml(work.title)}"${set ? ' tabindex="-1"' : ''}>
-        <img src="${escapeHtml(thumb)}" alt="" loading="lazy" onerror="this.onerror=null;this.src='${escapeHtml(work.thumbFallback || work.thumb)}'" />
-        <span class="rail-card-shade" aria-hidden="true"></span>
-        <span class="rail-card-title">${escapeHtml(work.title)}</span>
+      return `<a class="rail-card rail-card--${portrait ? 'portrait' : 'landscape'}" href="${projectHref(work)}" aria-label="View ${escapeHtml(work.title)}" data-project-transition data-project-title="${escapeHtml(work.title)}" data-project-format="${portrait ? 'portrait' : 'landscape'}" data-project-thumb="${escapeHtml(thumb)}" data-project-fallback="${escapeHtml(work.thumbFallback || work.thumb)}"${set ? ' tabindex="-1"' : ''}>
+        <img src="${escapeHtml(thumb)}" alt="" loading="lazy" onerror="handleRemoteImageError(this,'${escapeHtml(work.thumbFallback || work.thumb)}')" />
+        <span class="rail-card-copy">
+          <span class="rail-card-title">${escapeHtml(work.title)}</span>
+        </span>
       </a>`;
     }).join('');
     return `<div class="work-rail work-rail--${railIndex ? 'b' : 'a'}"><div class="rail-track">
@@ -449,10 +1185,16 @@ function renderWorkWall() {
     const track = rail.querySelector('.rail-track');
     if (!track) return;
     const setRate = (rate) => track.getAnimations().forEach((anim) => anim.updatePlaybackRate(rate));
-    rail.addEventListener('pointerenter', () => setRate(0.35));
-    rail.addEventListener('pointerleave', () => setRate(1));
-    rail.addEventListener('focusin', () => setRate(0.35));
-    rail.addEventListener('focusout', () => setRate(1));
+    let hovered = false;
+    let focusWithin = false;
+    const syncRate = () => setRate(hovered || focusWithin ? 0.35 : 1);
+    rail.addEventListener('pointerenter', () => { hovered = true; syncRate(); });
+    rail.addEventListener('pointerleave', () => { hovered = false; syncRate(); });
+    rail.addEventListener('focusin', () => { focusWithin = true; syncRate(); });
+    rail.addEventListener('focusout', (event) => {
+      focusWithin = rail.contains(event.relatedTarget);
+      syncRate();
+    });
   });
   setupWorkReveal();
 }
@@ -465,7 +1207,7 @@ function renderMenuMedia() {
     const format = mediaFormat(work);
     const thumb = format === 'portrait' ? `https://i.ytimg.com/vi/${encodeURIComponent(work.id)}/oar2.jpg` : work.thumb;
     const fallback = work.thumb || work.thumbFallback || thumb;
-    return `<figure class="menu-media-card menu-media-card--${format}"><img src="${escapeHtml(thumb)}" alt="" loading="lazy" onerror="this.onerror=null;this.src='${escapeHtml(fallback)}'" /></figure>`;
+    return `<figure class="menu-media-card menu-media-card--${format}"><img src="${escapeHtml(thumb)}" alt="" loading="lazy" onerror="handleRemoteImageError(this,'${escapeHtml(fallback)}')" /></figure>`;
   };
   const board = menuWorks.map(card).join('');
   const units = menuWorks.reduce((total, work) => total + (mediaFormat(work) === 'portrait' ? 1 : 3), 0);
@@ -476,6 +1218,7 @@ function renderMenuMedia() {
 
 async function hydrateWorks() {
   const fetchJson = async (path) => {
+    if (location.protocol === 'file:') return null;
     const response = await fetch(path, { cache: 'no-store' });
     if (!response.ok) throw new Error(`Unable to load ${path}`);
     return response.json();
@@ -488,8 +1231,8 @@ async function hydrateWorks() {
   ]);
   credits = Array.isArray(creditData?.credits) && creditData.credits.length ? creditData.credits : FALLBACK_CREDITS;
   works = Array.isArray(workData?.featured) && workData.featured.length ? workData.featured : FALLBACK_WORKS;
-  railWorks = Array.isArray(railData?.videos) && railData.videos.length ? railData.videos : works;
-  const volume = Array.isArray(menuData?.videos) ? menuData.videos : [];
+  railWorks = Array.isArray(railData?.videos) && railData.videos.length ? railData.videos : FALLBACK_RAIL_WORKS;
+  const volume = Array.isArray(menuData?.videos) && menuData.videos.length ? menuData.videos : FALLBACK_MENU_WORKS;
   const seen = new Set();
   menuWorks = [];
   const addMenuWork = (work) => {
@@ -502,46 +1245,84 @@ async function hydrateWorks() {
     addMenuWork(works[index]);
     addMenuWork(volume[index]);
   }
+  renderCredits();
   renderWorkWall();
   renderMenuMedia();
-  renderCredits();
+}
+
+function onReveal(fn) {
+  if (document.body.classList.contains('in')) { fn(); return; }
+  let done = false;
+  const timer = setInterval(() => {
+    if (document.body.classList.contains('in')) run();
+  }, 250);
+  const run = () => {
+    if (done) return;
+    done = true;
+    clearInterval(timer);
+    fn();
+  };
+  window.addEventListener('prsa:reveal', run, { once: true });
 }
 
 function initChrome() {
   const preloader = byId('preloader');
   const heroImage = document.querySelector('.hero-ensemble-base');
   const reduceIntro = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // The master loader plays on EVERY load (the once-per-session gate was removed July 27 on Typhon's order).
+  const fullIntro = !reduceIntro;
   const reveal = () => {
     if (document.body.classList.contains('in')) return;
     const revealLanding = () => {
       document.body.classList.add('in');
       document.body.classList.remove('lock');
+      window.dispatchEvent(new Event('prsa:reveal'));
+      if (window.__prsaIntroFailsafe) {
+        clearTimeout(window.__prsaIntroFailsafe);
+        window.__prsaIntroFailsafe = 0;
+      }
     };
     if (preloader) {
       preloader.classList.add('ready');
       setTimeout(() => {
         preloader.classList.add('done');
         revealLanding();
-      }, reduceIntro ? 0 : 240);
-      setTimeout(() => preloader.classList.add('gone'), reduceIntro ? 40 : 1420);
+      }, fullIntro ? 240 : 0);
+      setTimeout(() => preloader.classList.add('gone'), fullIntro ? 1420 : 40);
     } else {
       revealLanding();
     }
   };
-  const minimumIntro = new Promise((resolve) => setTimeout(resolve, reduceIntro ? 0 : 620));
+  const minimumIntro = new Promise((resolve) => setTimeout(resolve, fullIntro ? 620 : 0));
   const fontsReady = document.fonts && document.fonts.ready ? document.fonts.ready.catch(() => {}) : Promise.resolve();
   const heroReady = heroImage && heroImage.decode ? heroImage.decode().catch(() => {}) : Promise.resolve();
   const contentReady = Promise.all([minimumIntro, fontsReady, heroReady]);
   Promise.race([
     contentReady,
-    new Promise((resolve) => setTimeout(resolve, reduceIntro ? 60 : 3200))
+    new Promise((resolve) => setTimeout(resolve, fullIntro ? 3200 : 1000))
   ]).then(() => requestAnimationFrame(() => requestAnimationFrame(reveal)));
 
   const nav = byId('nav');
   const heroEl = byId('hero');
+  const themeColor = document.querySelector('meta[name="theme-color"]');
+  const aboutBand = byId('about');
+  let tlPanel = null;
   const onScroll = () => {
+    // Band-aware theming: the nav midline decides. Dark bands = the hero cover, the About interlude, and the
+    // credits instrument panel; flipping anywhere else paints the dark wordmark over a dark surface.
+    const navMid = window.scrollY + 44;
+    const inHeroBand = navMid < (heroEl ? heroEl.offsetHeight : window.innerHeight);
+    const inAboutBand = aboutBand && navMid >= aboutBand.offsetTop && navMid < aboutBand.offsetTop + aboutBand.offsetHeight;
+    if (!tlPanel || !tlPanel.isConnected) tlPanel = document.querySelector('#credits .tl');
+    let inTlBand = false;
+    if (tlPanel) {
+      const tlRect = tlPanel.getBoundingClientRect();
+      inTlBand = tlRect.top <= 44 && tlRect.bottom > 44;
+    }
+    const inLightWorld = !inHeroBand && !inAboutBand && !inTlBand;
     nav.classList.toggle('scrolled', window.scrollY > 16);
-    nav.classList.toggle('nav-light', window.scrollY > (heroEl ? heroEl.offsetHeight : window.innerHeight) - 90);
+    nav.classList.toggle('nav-light', inLightWorld);
+    if (themeColor) themeColor.content = inLightWorld ? '#f5f5f5' : '#060709';
   };
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
@@ -549,11 +1330,43 @@ function initChrome() {
   const mnav = byId('mnav');
   const menuBtn = byId('menuBtn');
   const menuClose = byId('mClose');
+  const menuLinks = Array.from(mnav.querySelectorAll('.mlinks a[href^="#"]'));
+  const menuSections = menuLinks.map((link) => ({ link, target: document.querySelector(link.getAttribute('href')) })).filter((item) => item.target);
+  let currentLocationLink = null;
+  const updateMenuLocation = () => {
+    const marker = window.scrollY + Math.min(window.innerHeight * 0.34, 260);
+    let active = null;
+    let activeTop = -Infinity;
+    menuSections.forEach((item) => {
+      const top = item.target.offsetTop;
+      if (top <= marker && top > activeTop) {
+        active = item;
+        activeTop = top;
+      }
+    });
+    const nextLink = active?.link || null;
+    if (nextLink === currentLocationLink) return;
+    currentLocationLink = nextLink;
+    menuLinks.forEach((link) => {
+      if (nextLink === link) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+  };
+  updateMenuLocation();
+  let locationFrame = 0;
+  window.addEventListener('scroll', () => {
+    if (locationFrame) return;
+    locationFrame = requestAnimationFrame(() => {
+      locationFrame = 0;
+      updateMenuLocation();
+    });
+  }, { passive: true });
   const pageRegions = [nav, document.querySelector('main'), document.querySelector('footer')].filter(Boolean);
   let menuScrollY = 0;
   let restoringMenuScroll = false;
   let menuExitTimer = 0;
   const openMenu = () => {
+    updateMenuLocation();
     clearTimeout(menuExitTimer);
     mnav.classList.remove('exiting');
     menuScrollY = window.scrollY;
@@ -567,6 +1380,8 @@ function initChrome() {
     setTimeout(() => menuClose.focus({ preventScroll: true }), 40);
   };
   const closeMenu = (restoreFocus = false) => {
+    const focusWasInside = mnav.contains(document.activeElement);
+    if (focusWasInside) document.activeElement.blur();
     mnav.classList.remove('open');
     mnav.setAttribute('aria-hidden', 'true');
     mnav.setAttribute('inert', '');
@@ -599,13 +1414,16 @@ function initChrome() {
         exitMenu(false);
         return;
       }
-      const targetY = href === '#top' ? 0 : target.getBoundingClientRect().top + window.scrollY - 70;
+      const targetY = href === '#top' ? 0 : target.getBoundingClientRect().top + window.scrollY;
       menuScrollY = targetY;
       window.scrollTo({ top: targetY, left: 0, behavior: 'instant' });
       if (window.location.hash !== href) history.pushState(null, '', href);
       exitMenu(false, () => {
         if (window.__lenisInstance) window.__lenisInstance.scrollTo(targetY, { immediate: true });
-        target.querySelectorAll('.work-head, .work-rail, .credits-head, .credits-board, .about-head, .about-scene, .contact-head, .contact-links').forEach((el) => el.classList.add('in-view'));
+        target.querySelectorAll('.work-head, .work-rail, .credits-head, .credits-board, .about-head, .about-figure, .about-scene, .contact-head, .contact-hero, .contact-utility').forEach((el) => el.classList.add('in-view'));
+        const focusTarget = target.querySelector('h1,h2') || target.querySelector('.kicker') || target;
+        if (!focusTarget.hasAttribute('tabindex')) focusTarget.setAttribute('tabindex', '-1');
+        focusTarget.focus({ preventScroll: true });
       });
     });
   });
@@ -624,39 +1442,75 @@ function initChrome() {
   document.addEventListener('keydown', (event) => {
     if (!mnav.classList.contains('open')) return;
     if (event.key === 'Escape') exitMenu(true);
+    else if (event.key === 'Tab') {
+      const focusable = Array.from(mnav.querySelectorAll('a[href],button:not([disabled])')).filter((element) => element.offsetParent !== null);
+      if (!focusable.length) {
+        event.preventDefault();
+        return;
+      }
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus({ preventScroll: true });
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus({ preventScroll: true });
+      }
+    }
     else if (menuScrollKeys.has(event.key)) event.preventDefault();
   });
 
-  const hudClock = byId('hudClock');
-  if (hudClock) {
-    const two = (n) => String(n).padStart(2, '0');
-    const tickClock = () => {
-      const now = new Date();
-      const offset = -now.getTimezoneOffset() / 60;
-      hudClock.textContent = two(now.getHours()) + ':' + two(now.getMinutes()) + ':' + two(now.getSeconds()) + ' UTC' + (offset >= 0 ? '+' : '') + offset;
+  const copyButton = document.querySelector('[data-copy-email]');
+  if (copyButton) {
+    const copyLabel = copyButton.querySelector('[data-copy-label]');
+    const copySymbol = copyButton.querySelector('[data-copy-symbol]');
+    const copyStatus = byId('copyStatus');
+    let copyReset = 0;
+    const fallbackCopy = (value) => {
+      const field = document.createElement('textarea');
+      field.value = value;
+      field.setAttribute('readonly', '');
+      field.style.position = 'fixed';
+      field.style.opacity = '0';
+      document.body.appendChild(field);
+      field.select();
+      const copied = document.execCommand('copy');
+      field.remove();
+      return copied;
     };
-    tickClock();
-    setInterval(tickClock, 1000);
-  }
-  const hudPos = byId('hudPos');
-  if (hudPos) {
-    let posFrame = 0;
-    window.addEventListener('pointermove', (event) => {
-      if (posFrame) return;
-      posFrame = requestAnimationFrame(() => {
-        posFrame = 0;
-        hudPos.textContent = String(Math.round(event.clientX)).padStart(4, '0') + ' X · ' + String(Math.round(event.clientY)).padStart(4, '0') + ' Y';
-      });
-    }, { passive: true });
+    copyButton.addEventListener('click', async () => {
+      const address = copyButton.dataset.copyEmail || '';
+      let copied = false;
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(address);
+          copied = true;
+        } else {
+          copied = fallbackCopy(address);
+        }
+      } catch (error) {
+        copied = fallbackCopy(address);
+      }
+      clearTimeout(copyReset);
+      copyButton.classList.toggle('is-copied', copied);
+      if (copyLabel) copyLabel.textContent = copied ? 'Address copied' : 'Copy unavailable';
+      if (copySymbol) copySymbol.textContent = copied ? '✓' : '×';
+      if (copyStatus) copyStatus.textContent = copied ? address + ' copied to clipboard.' : 'Copy unavailable. Use the email link instead.';
+      copyReset = setTimeout(() => {
+        copyButton.classList.remove('is-copied');
+        if (copyLabel) copyLabel.textContent = 'Copy email';
+        if (copySymbol) copySymbol.textContent = '+';
+      }, 2200);
+    });
   }
 
   byId('yr').textContent = new Date().getFullYear();
-  document.addEventListener('copy', (event) => event.preventDefault());
-  document.addEventListener('dragstart', (event) => event.preventDefault());
 }
 
 function initMotion() {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
   const startLenis = () => {
     if (!window.Lenis || reduce) return;
     const lenis = new Lenis({ duration: 1.1 });
@@ -664,12 +1518,12 @@ function initMotion() {
     document.documentElement.classList.add('lenis-on');
     const raf = (t) => { lenis.raf(t); requestAnimationFrame(raf); };
     requestAnimationFrame(raf);
-    document.querySelectorAll('a[href^="#"]:not([data-mclose])').forEach((link) => {
+    document.querySelectorAll('a[href^="#"]:not([data-mclose]):not(.skip-link)').forEach((link) => {
       link.addEventListener('click', (e) => {
         const id = link.getAttribute('href');
         if (id.length > 1 && document.querySelector(id)) {
           e.preventDefault();
-          lenis.scrollTo(id, { offset: -70 });
+          lenis.scrollTo(id, { offset: 0 });
         }
       });
     });
@@ -679,7 +1533,9 @@ function initMotion() {
   if (!reduce) {
     const GLYPHS = 'XO#%&/<>*+';
     document.querySelectorAll('.mlinks a').forEach((link) => {
-      const original = link.textContent;
+      const label = link.querySelector('.mlabel');
+      if (!label) return;
+      const original = label.textContent;
       let timer = 0;
       link.addEventListener('pointerenter', () => {
         if (timer) return;
@@ -688,11 +1544,11 @@ function initMotion() {
         timer = setInterval(() => {
           frame += 1;
           const solved = Math.ceil((frame / total) * original.length);
-          link.textContent = original.slice(0, solved) + original.slice(solved).split('').map((ch) => ch === ' ' ? ' ' : GLYPHS[(Math.random() * GLYPHS.length) | 0]).join('');
+          label.textContent = original.slice(0, solved) + original.slice(solved).split('').map((ch) => ch === ' ' ? ' ' : GLYPHS[(Math.random() * GLYPHS.length) | 0]).join('');
           if (frame >= total) {
             clearInterval(timer);
             timer = 0;
-            link.textContent = original;
+            label.textContent = original;
           }
         }, 28);
       });
@@ -716,7 +1572,7 @@ function initMotion() {
 
   const shell = byId('heroShell');
   const hero = byId('hero');
-  if (!reduce && hero) {
+  if (!reduce && finePointer && hero) {
     let focusFrame = 0;
     const moveFocus = (event) => {
       if (focusFrame) cancelAnimationFrame(focusFrame);
@@ -732,6 +1588,25 @@ function initMotion() {
     hero.addEventListener('pointerleave', () => {
       hero.style.setProperty('--grade-x', '72%');
       hero.style.setProperty('--grade-y', '43%');
+    });
+  }
+  const aboutScene = document.querySelector('[data-about-scene]');
+  if (!reduce && finePointer && aboutScene) {
+    let aboutFrame = 0;
+    aboutScene.addEventListener('pointermove', (event) => {
+      if (aboutFrame) return;
+      aboutFrame = requestAnimationFrame(() => {
+        aboutFrame = 0;
+        const rect = aboutScene.getBoundingClientRect();
+        const x = ((event.clientX - rect.left) / rect.width - 0.5) * -16;
+        const y = ((event.clientY - rect.top) / rect.height - 0.5) * -12;
+        aboutScene.style.setProperty('--about-x', x.toFixed(2) + 'px');
+        aboutScene.style.setProperty('--about-y', y.toFixed(2) + 'px');
+      });
+    }, { passive: true });
+    aboutScene.addEventListener('pointerleave', () => {
+      aboutScene.style.setProperty('--about-x', '0px');
+      aboutScene.style.setProperty('--about-y', '0px');
     });
   }
   if (reduce || !shell) return;
@@ -768,9 +1643,16 @@ function initMotion() {
   requestAnimationFrame(kick);
 }
 
-document.querySelectorAll('.hero-title > span').forEach(splitWords);
+(() => {
+  let heroCi = 0;
+  document.querySelectorAll('.hero-title > span').forEach((line) => { heroCi = splitChars(line, heroCi); });
+  const heroDeck = document.querySelector('.hero-deck');
+  if (heroDeck) splitChars(heroDeck, 0);
+})();
+document.querySelectorAll('.work-title, .credits-statement, #aboutTitle, .contact-statement, .footer-statement').forEach(prepareStatement);
 initChrome();
 initMotion();
+setupMotionBudget();
 hydrateWorks();
 </script>
 </body>
