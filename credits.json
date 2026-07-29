@@ -1,40 +1,210 @@
 {
-  "note": "Credits board data, ordered by subs (real numbers from Gregor, July 2026 — all real). subs in MILLIONS; bubble size + the combined headline are computed logarithmically. emblem = mark floats free with no bubble. logo = badge art rendered crisp. Positions live in CREDIT_LAYOUT in index.html.",
-  "credits": [
-    {"name": "MrBeast", "avatar": "assets/channels/mrbeast-logo.png", "subs": 506, "emblem": true},
-    {"name": "Stokes Twins", "avatar": "assets/channels/stoketwins-logo.jpg", "subs": 141},
-    {"name": "Ben Azelart", "avatar": "assets/channels/benazelart-logo.jpg", "subs": 50.9},
-    {"name": "SSSniperWolf", "avatar": "assets/channels/sniperwolf-logo.jpg", "subs": 35},
-    {"name": "Preston", "avatar": "assets/channels/preston-logo.webp", "subs": 32.2},
-    {"name": "Sidemen", "avatar": "assets/channels/sidemen-wordmark.png", "subs": 23.3, "emblem": true, "invert": true},
-    {"name": "FutCrunch", "avatar": "assets/channels/futcrunch-logo.jpg", "subs": 20.8},
-    {"name": "Unspeakable", "avatar": "assets/channels/unspeakable-logo.jpg", "subs": 19.9},
-    {"name": "LawByMike", "avatar": "assets/channels/lawbymike-new-logo.jpg", "subs": 19.3},
-    {"name": "KSI", "avatar": "assets/channels/ksi-logo.jpg", "subs": 18.5, "logo": true},
-    {"name": "Landen Purifoy", "avatar": "assets/channels/landen-logo.jpg", "subs": 15.8},
-    {"name": "John Nellis", "avatar": "assets/channels/johnnellis-logo.jpg", "subs": 14.8},
-    {"name": "Eystreem", "avatar": "assets/channels/eystreem.jpg", "subs": 13.7},
-    {"name": "AMP", "avatar": "assets/channels/ampworld-logo.jpg", "subs": 12.8, "logo": true},
-    {"name": "Browney", "avatar": "assets/channels/browney-logo.jpg", "subs": 12.1},
-    {"name": "Kat", "avatar": "assets/channels/kat-logo.jpg", "subs": 11.8},
-    {"name": "Cash", "avatar": "assets/channels/cash-logo.jpg", "subs": 11.3},
-    {"name": "Miniminter", "avatar": "assets/channels/miniminter-logo.png", "subs": 10.6, "logo": true},
-    {"name": "SypherPK", "avatar": "assets/channels/SypherPK-logo.png", "subs": 10.6, "logo": true},
-    {"name": "Jesse James West", "avatar": "assets/channels/jessejameswest-logo.jpg", "subs": 9.77},
-    {"name": "Lana's Life", "avatar": "assets/channels/lanarae-logo.jpg", "subs": 9.54},
-    {"name": "Bionic", "avatar": "assets/channels/bionic-logo.jpg", "subs": 8.73},
-    {"name": "Carter Kench", "avatar": "assets/channels/karterkench-logo.jpg", "subs": 6.5},
-    {"name": "BriannaPlayz", "avatar": "assets/channels/briannaplayz-logo.jpg", "subs": 6.37},
-    {"name": "SV2", "avatar": "assets/channels/sv2-logo.jpg", "subs": 5.78},
-    {"name": "Cash & Maverick", "avatar": "assets/channels/cashnmaverik-logo.jpg", "subs": 5.34},
-    {"name": "TBJZL", "avatar": "assets/channels/tbjzl-logo.jpg", "subs": 5.13, "logo": true},
-    {"name": "Leah Ashe", "avatar": "assets/channels/leahashe-logo.jpg", "subs": 5.1},
-    {"name": "Drew Dirksen", "avatar": "assets/channels/drewdirksen-logo.jpg", "subs": 4.6},
-    {"name": "LoverFella", "avatar": "assets/channels/loverfella-logo.png", "subs": 3.13, "emblem": true},
-    {"name": "RussoPlays", "avatar": "assets/channels/russoplayz-logo.jpg", "subs": 2.86},
-    {"name": "CouRage Gaming", "avatar": "assets/channels/couragegaming-logo.jpg", "subs": 2.86, "logo": true},
-    {"name": "What's Inside", "avatar": "assets/channels/whatsinside-logo.png", "subs": 2.75, "emblem": true},
-    {"name": "NoLuvMar", "avatar": "assets/channels/noluvmar-logo.jpg", "subs": 2.74},
-    {"name": "AJ Shabeel", "avatar": "assets/channels/ajshabeel-logo.jpg", "subs": 2.13}
-  ]
+ "note": "Credits wall data, ordered by subscribers (real numbers from Gregor, July 2026 — all real). subs is stored in MILLIONS and drives the computed combined headline only. Purpose-built figure and lockup assets keep the roster treatment consistent.",
+ "credits": [
+  {
+   "name": "MrBeast",
+   "avatar": "assets/wordmarks/mrbeast-lockup-color.png",
+   "subs": 509
+  },
+  {
+   "name": "Stokes Twins",
+   "avatar": "assets/wordmarks/stoketwins-fig.png",
+   "subs": 142
+  },
+  {
+   "name": "Ben Azelart",
+   "avatar": "assets/wordmarks/benazelart-fig.png",
+   "subs": 50.9
+  },
+  {
+   "name": "SSSniperWolf",
+   "avatar": "assets/wordmarks/sniperwolf-fig.png",
+   "subs": 35
+  },
+  {
+   "name": "Preston",
+   "avatar": "assets/wordmarks/preston-fig.png",
+   "subs": 32.2
+  },
+  {
+   "name": "Sidemen",
+   "avatar": "assets/wordmarks/sidemen-row.png",
+   "subs": 23.3
+  },
+  {
+   "name": "FutCrunch",
+   "avatar": "assets/wordmarks/futcrunch-fig.png",
+   "subs": 21.8
+  },
+  {
+   "name": "Unspeakable",
+   "avatar": "assets/wordmarks/unspeakable-fig.png",
+   "subs": 19.9
+  },
+  {
+   "name": "LawByMike",
+   "avatar": "assets/wordmarks/lawbymike-fig.png",
+   "subs": 19.3
+  },
+  {
+   "name": "KSI",
+   "avatar": "assets/wordmarks/ksi-row.png",
+   "subs": 18.6
+  },
+  {
+   "name": "Landen Purifoy",
+   "avatar": "assets/wordmarks/landen-fig.png",
+   "subs": 15.9
+  },
+  {
+   "name": "Lachlan",
+   "avatar": "assets/channels/lachlan-logo.jpg",
+   "subs": 15.3
+  },
+  {
+   "name": "John Nellis",
+   "avatar": "assets/wordmarks/johnnellis-fig.png",
+   "subs": 15.3
+  },
+  {
+   "name": "Eystreem",
+   "avatar": "assets/wordmarks/eystreem-fig.png",
+   "subs": 13.8
+  },
+  {
+   "name": "AMP",
+   "avatar": "assets/wordmarks/ampworld-fig.png",
+   "subs": 12.8
+  },
+  {
+   "name": "Browney",
+   "avatar": "assets/wordmarks/browney-fig.png",
+   "subs": 12.2
+  },
+  {
+   "name": "Kat",
+   "avatar": "assets/wordmarks/kat-fig.png",
+   "subs": 12
+  },
+  {
+   "name": "Cash",
+   "avatar": "assets/wordmarks/cash-fig.png",
+   "subs": 11.3
+  },
+  {
+   "name": "Carter Sharer",
+   "avatar": "assets/channels/cartersharer-logo.jpg",
+   "subs": 11.2
+  },
+  {
+   "name": "Miniminter",
+   "avatar": "assets/wordmarks/miniminter-row.png",
+   "subs": 10.6
+  },
+  {
+   "name": "SypherPK",
+   "avatar": "assets/wordmarks/sypherpk-fig.png",
+   "subs": 10.6
+  },
+  {
+   "name": "Jesse James West",
+   "avatar": "assets/wordmarks/jessejameswest-fig.png",
+   "subs": 9.8
+  },
+  {
+   "name": "Lana's Life",
+   "avatar": "assets/wordmarks/lanarae-fig.png",
+   "subs": 9.6
+  },
+  {
+   "name": "Bionic",
+   "avatar": "assets/wordmarks/bionic-fig.png",
+   "subs": 8.8
+  },
+  {
+   "name": "Carter Kench",
+   "avatar": "assets/wordmarks/karterkench-fig.png",
+   "subs": 6.5
+  },
+  {
+   "name": "BriannaPlayz",
+   "avatar": "assets/wordmarks/briannaplayz-fig.png",
+   "subs": 6.4
+  },
+  {
+   "name": "SV2",
+   "avatar": "assets/wordmarks/sv2-fig.png",
+   "subs": 5.9
+  },
+  {
+   "name": "Cash & Maverick",
+   "avatar": "assets/wordmarks/cashnmaverik-fig.png",
+   "subs": 5.3
+  },
+  {
+   "name": "TBJZL",
+   "avatar": "assets/wordmarks/tbjzl-row.png",
+   "subs": 5.1
+  },
+  {
+   "name": "Leah Ashe",
+   "avatar": "assets/wordmarks/leahashe-fig.png",
+   "subs": 5.1
+  },
+  {
+   "name": "Drew Dirksen",
+   "avatar": "assets/wordmarks/drewdirksen-fig.png",
+   "subs": 4.6
+  },
+  {
+   "name": "LoverFella",
+   "avatar": "assets/wordmarks/loverfella-row.png",
+   "subs": 3.1
+  },
+  {
+   "name": "RussoPlays",
+   "avatar": "assets/wordmarks/russoplayz-fig.png",
+   "subs": 2.9
+  },
+  {
+   "name": "CouRage Gaming",
+   "avatar": "assets/wordmarks/couragegaming-row.png",
+   "subs": 2.9
+  },
+  {
+   "name": "What's Inside",
+   "avatar": "assets/wordmarks/whatsinside-row.png",
+   "subs": 2.8
+  },
+  {
+   "name": "NoLuvMar",
+   "avatar": "assets/wordmarks/noluvmar-fig.png",
+   "subs": 2.7
+  },
+  {
+   "name": "Senne Jackson",
+   "avatar": "assets/channels/sennejackson-logo.jpg",
+   "subs": 2.6
+  },
+  {
+   "name": "AJ Shabeel",
+   "avatar": "assets/wordmarks/ajshabeel-fig.png",
+   "subs": 2.1
+  },
+  {
+   "name": "Kenji",
+   "avatar": "assets/channels/kenji-logo.jpg",
+   "subs": 1.2
+  },
+  {
+   "name": "AveryB",
+   "avatar": "assets/channels/averyb-logo.jpg",
+   "subs": 1.2
+  },
+  {
+   "name": "JACK TV",
+   "avatar": "assets/channels/jacktv-logo.jpg",
+   "subs": 1.2
+  }
+ ]
 }
