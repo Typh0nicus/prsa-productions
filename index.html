@@ -42,7 +42,7 @@
 </script>
 <script>document.documentElement.classList.add('js')</script>
 <link rel="stylesheet" href="assets/fonts.css" />
-  <link rel="stylesheet" href="styles.css?v=remaster-163" />
+  <link rel="stylesheet" href="styles.css?v=remaster-164" />
 <script src="assets/project-transition.js?v=2" defer></script>
 <noscript><style>#preloader{display:none!important}body.lock{overflow:auto!important}</style></noscript>
 </head>
@@ -734,8 +734,11 @@ function initWorkPlayer() {
     iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
     iframe.referrerPolicy = 'strict-origin-when-cross-origin';
     iframe.allowFullscreen = true;
+    iframe.tabIndex = -1;
     iframe.addEventListener('load', () => {
-      if (player.open) stage.classList.add('is-ready');
+      if (!player.open) return;
+      iframe.removeAttribute('tabindex');
+      stage.classList.add('is-ready');
     }, { once: true });
     frame.replaceChildren(iframe);
 
@@ -763,6 +766,7 @@ function initWorkPlayer() {
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || location.protocol === 'file:') return;
     if (openPlayer(link)) event.preventDefault();
   });
+  source.addEventListener('click', () => closePlayer(false, true));
   player.addEventListener('click', (event) => {
     if (event.target === player || event.target.closest('[data-work-player-close]')) closePlayer(true);
   });
