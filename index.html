@@ -42,7 +42,7 @@
 </script>
 <script>document.documentElement.classList.add('js')</script>
 <link rel="stylesheet" href="assets/fonts.css" />
-  <link rel="stylesheet" href="styles.css?v=remaster-164" />
+  <link rel="stylesheet" href="styles.css?v=remaster-166" />
 <script src="assets/project-transition.js?v=2" defer></script>
 <noscript><style>#preloader{display:none!important}body.lock{overflow:auto!important}</style></noscript>
 </head>
@@ -132,18 +132,20 @@ window.__prsaIntroFailsafe = window.setTimeout(function () {
     </button>
   </header>
   <div class="work-player-shell" data-lenis-prevent>
-    <div class="work-player-stage" data-work-player-stage>
-      <img class="work-player-poster" data-work-player-poster alt="" />
-      <span class="work-player-loading" aria-hidden="true"><i></i></span>
-      <div class="work-player-frame" data-work-player-frame></div>
-    </div>
-    <div class="work-player-meta">
-      <div class="work-player-copy">
-        <span>+ (Selected work)</span>
-        <h2 id="workPlayerTitle">Selected work</h2>
+    <article class="work-player-window">
+      <div class="work-player-stage" data-work-player-stage>
+        <img class="work-player-poster" data-work-player-poster alt="" />
+        <span class="work-player-loading" aria-hidden="true"><i></i></span>
+        <div class="work-player-frame" data-work-player-frame></div>
       </div>
-      <a class="work-player-source" data-work-player-youtube href="https://youtube.com/" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
-    </div>
+      <div class="work-player-meta">
+        <div class="work-player-copy">
+          <span>+ (Selected work)</span>
+          <h2 id="workPlayerTitle">Selected work</h2>
+        </div>
+        <a class="work-player-source" data-work-player-youtube href="https://youtube.com/" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+      </div>
+    </article>
   </div>
   <span class="visually-hidden" data-work-player-status aria-live="polite"></span>
 </dialog>
@@ -177,7 +179,7 @@ window.__prsaIntroFailsafe = window.setTimeout(function () {
   <section class="credits" id="credits" aria-labelledby="creditsStatement">
     <div class="wrap credits-head">
       <span class="kicker">+ (Credits)</span>
-      <h2 class="credits-statement" id="creditsStatement">Editing credits across 41 channels with <strong>1.1B+</strong> subscribers combined.</h2>
+      <h2 class="credits-statement" id="creditsStatement">Editing credits across <span class="hl-ink">41 clients</span> with <strong>1.1B+</strong> subscribers combined.</h2>
     </div>
     <div class="wrap credits-board" id="creditsBoard"></div>
   </section>
@@ -360,6 +362,7 @@ function prepareStatement(el) {
   el.classList.add('statement-split');
 }
 const PORTRAIT_VIDEO_IDS = new Set(['gar4U3n-ILY', 'yy-Nt0dRhNI', 'Q1g8PYEFcHc', 'KaUuPNYHFNg', 'vQz3T9Vot1Q', '9DPzZIbp9Ck']);
+const isPortraitVideo = (work) => Boolean(work && (work.format === 'portrait' || PORTRAIT_VIDEO_IDS.has(work.id)));
 
 const FALLBACK_CREDITS = [
   {name:"MrBeast",avatar:"assets/wordmarks/mrbeast-lockup-color.png",subs:509},
@@ -449,7 +452,7 @@ function renderCredits() {
     const label = total >= 1000
       ? (Math.floor(total / 100) / 10).toFixed(1).replace(/\.0$/, '') + 'B+'
       : Math.floor(total / 10) * 10 + 'M+';
-    statement.innerHTML = 'Editing credits across <span class="hl-blue">' + credits.length + ' channels</span> with <strong>' + label + '</strong> subscribers combined.';
+    statement.innerHTML = 'Editing credits across <span class="hl-ink">' + credits.length + ' clients</span> with <strong>' + label + '</strong> subscribers combined.';
     prepareStatement(statement);
   }
   const CHANNEL_PLATES = {
@@ -646,6 +649,7 @@ function initWorkPlayer() {
   const stage = player.querySelector('[data-work-player-stage]');
   const frame = player.querySelector('[data-work-player-frame]');
   const poster = player.querySelector('[data-work-player-poster]');
+  const playerWindow = player.querySelector('.work-player-window');
   const title = byId('workPlayerTitle');
   const source = player.querySelector('[data-work-player-youtube]');
   const closeButton = player.querySelector('button[data-work-player-close]');
@@ -654,8 +658,32 @@ function initWorkPlayer() {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   let returnFocus = null;
   let closeTimer = 0;
+  let closeTransitionEnd = null;
   let priorTheme = '';
+  let lockedScrollY = 0;
+  let priorScrollLock = '';
 
+  const clearCloseWait = () => {
+    clearTimeout(closeTimer);
+    closeTimer = 0;
+    if (closeTransitionEnd && playerWindow) playerWindow.removeEventListener('transitionend', closeTransitionEnd);
+    closeTransitionEnd = null;
+  };
+  const transitionTime = (el) => {
+    if (!el) return 0;
+    const style = getComputedStyle(el);
+    const toMs = (value) => value.trim().endsWith('ms') ? parseFloat(value) : parseFloat(value) * 1000;
+    const durations = style.transitionDuration.split(',').map(toMs);
+    const delays = style.transitionDelay.split(',').map(toMs);
+    return durations.reduce((max, duration, i) => Math.max(max, duration + (delays[i] ?? delays.at(-1) ?? 0)), 0);
+  };
+  const canRestoreFocus = (el) => {
+    if (!el?.isConnected || el.closest('[aria-hidden="true"]')) return false;
+    const rect = el.getBoundingClientRect();
+    return rect.width > 0 && rect.height > 0 && rect.bottom > 0 && rect.right > 0
+      && rect.top < innerHeight && rect.left < innerWidth;
+  };
+  const canReceiveFocus = (el) => !!el?.isConnected && !el.closest('[aria-hidden="true"]');
   const syncRailRates = () => {
     wall.querySelectorAll('.work-rail').forEach((rail) => {
       const track = rail.querySelector('.rail-track');
@@ -666,8 +694,7 @@ function initWorkPlayer() {
   };
 
   const restorePlayer = (restoreFocus) => {
-    clearTimeout(closeTimer);
-    closeTimer = 0;
+    clearCloseWait();
     if (player.open) player.close();
     player.classList.remove('is-open', 'is-closing', 'work-player--portrait');
     stage.classList.remove('is-ready', 'poster-unavailable');
@@ -675,13 +702,27 @@ function initWorkPlayer() {
     poster.removeAttribute('src');
     poster.hidden = false;
     document.body.classList.remove('work-player-open');
-    if (window.__lenisInstance) window.__lenisInstance.start();
-    if (themeColor && priorTheme) themeColor.content = priorTheme;
+    document.documentElement.classList.remove('work-player-open');
+    if (priorScrollLock) document.body.style.setProperty('--work-player-scroll-y', priorScrollLock);
+    else document.body.style.removeProperty('--work-player-scroll-y');
+    if (themeColor) themeColor.content = priorTheme;
     if (status) status.textContent = '';
-    const focusTarget = returnFocus;
+    const focusTarget = canReceiveFocus(returnFocus) ? returnFocus : byId('workTitle');
     returnFocus = null;
+    const lenis = window.__lenisInstance;
+    if (lenis) lenis.resize();
+    window.scrollTo(0, lockedScrollY);
+    if (lenis) lenis.scrollTo(lockedScrollY, { immediate: true, force: true });
     if (restoreFocus && focusTarget?.focus) focusTarget.focus({ preventScroll: true });
-    requestAnimationFrame(syncRailRates);
+    requestAnimationFrame(() => {
+      if (lenis) {
+        lenis.resize();
+        lenis.scrollTo(lockedScrollY, { immediate: true, force: true });
+        lenis.start();
+      }
+      window.scrollTo(0, lockedScrollY);
+      syncRailRates();
+    });
   };
 
   const closePlayer = (restoreFocus = true, immediate = false) => {
@@ -695,20 +736,32 @@ function initWorkPlayer() {
       restorePlayer(restoreFocus);
       return;
     }
-    closeTimer = window.setTimeout(() => restorePlayer(restoreFocus), 320);
+    clearCloseWait();
+    const finish = () => {
+      if (!player.classList.contains('is-closing')) return;
+      restorePlayer(restoreFocus);
+    };
+    closeTransitionEnd = (event) => {
+      if (event.target !== playerWindow || event.propertyName !== 'transform') return;
+      finish();
+    };
+    playerWindow?.addEventListener('transitionend', closeTransitionEnd);
+    closeTimer = window.setTimeout(finish, transitionTime(playerWindow) + 80);
   };
 
   const openPlayer = (link) => {
     const id = link.dataset.videoId || '';
     if (!/^[\w-]{11}$/.test(id) || typeof player.showModal !== 'function') return false;
-    clearTimeout(closeTimer);
+    clearCloseWait();
 
     const workTitle = link.dataset.workTitle || 'Selected work';
     const format = link.dataset.workFormat === 'portrait' ? 'portrait' : 'landscape';
-    const canonical = Array.from(wall.querySelectorAll('.rail-set:not([aria-hidden]) .rail-card'))
-      .find((card) => card.dataset.videoId === id);
-    returnFocus = canonical || link;
+    const canonical = Array.from(wall.querySelectorAll('.rail-set:not([aria-hidden="true"]) .rail-card'))
+      .find((card) => card.dataset.videoId === id && canRestoreFocus(card));
+    returnFocus = canRestoreFocus(link) && !link.closest('[aria-hidden="true"]') ? link : canonical;
     priorTheme = themeColor?.content || '';
+    lockedScrollY = window.scrollY;
+    priorScrollLock = document.body.style.getPropertyValue('--work-player-scroll-y');
 
     title.textContent = workTitle;
     source.href = link.href;
@@ -736,17 +789,26 @@ function initWorkPlayer() {
     iframe.allowFullscreen = true;
     iframe.tabIndex = -1;
     iframe.addEventListener('load', () => {
-      if (!player.open) return;
+      if (!player.open || !player.classList.contains('is-open') || !frame.contains(iframe)) return;
       iframe.removeAttribute('tabindex');
       stage.classList.add('is-ready');
     }, { once: true });
     frame.replaceChildren(iframe);
 
+    try {
+      player.showModal();
+    } catch {
+      frame.replaceChildren();
+      poster.removeAttribute('src');
+      returnFocus = null;
+      return false;
+    }
+    document.body.style.setProperty('--work-player-scroll-y', lockedScrollY + 'px');
     document.body.classList.add('work-player-open');
+    document.documentElement.classList.add('work-player-open');
     if (window.__lenisInstance) window.__lenisInstance.stop();
-    if (themeColor) themeColor.content = '#060709';
+    if (themeColor) themeColor.content = '#F5F5F5';
     if (status) status.textContent = 'Playing ' + workTitle;
-    player.showModal();
     requestAnimationFrame(() => {
       player.classList.add('is-open');
       closeButton?.focus({ preventScroll: true });
@@ -768,7 +830,7 @@ function initWorkPlayer() {
   });
   source.addEventListener('click', () => closePlayer(false, true));
   player.addEventListener('click', (event) => {
-    if (event.target === player || event.target.closest('[data-work-player-close]')) closePlayer(true);
+    if (event.target.closest('[data-work-player-close]') || !event.target.closest('.work-player-window')) closePlayer(true);
   });
   player.addEventListener('keydown', (event) => {
     if (event.key !== 'Escape') return;
@@ -808,6 +870,43 @@ function initTimeline() {
   const MARK_SPELLS_NAME = new Set(['MrBeast', 'Sidemen', 'KSI', 'TBJZL']);
   const fmtSubs = (v) => v >= 1000 ? ((v / 1000).toFixed(1).replace(/\.0$/, '') + 'B') : v >= 10 ? Math.round(v) + 'M' : (Number(v).toFixed(1).replace(/\.0$/, '') + 'M');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const monitorSource = (entry) => entry ? (MONITOR_MARKS[entry.name] || entry.avatar) : '';
+  const monitorAssetReady = new Map();
+  const ensureMonitorSource = (src) => {
+    if (!src) return Promise.resolve(false);
+    if (monitorAssetReady.has(src)) return monitorAssetReady.get(src);
+    const ready = new Promise((resolve) => {
+      const image = new Image();
+      image.decoding = 'async';
+      let settled = false;
+      let decoding = false;
+      const finish = (loaded) => {
+        if (settled) return;
+        settled = true;
+        resolve(loaded);
+      };
+      const decode = () => {
+        if (decoding) return;
+        decoding = true;
+        if (typeof image.decode === 'function') image.decode().then(() => finish(true)).catch(() => finish(image.naturalWidth > 0));
+        else finish(image.naturalWidth > 0);
+      };
+      image.addEventListener('load', decode, { once: true });
+      image.addEventListener('error', () => finish(false), { once: true });
+      image.src = src;
+      if (image.complete) decode();
+    });
+    monitorAssetReady.set(src, ready);
+    return ready;
+  };
+  const ensureMonitorAsset = async (entry) => {
+    const preferred = monitorSource(entry);
+    if (await ensureMonitorSource(preferred)) return preferred;
+    const fallback = entry?.avatar || '';
+    if (fallback && fallback !== preferred) await ensureMonitorSource(fallback);
+    return fallback || preferred;
+  };
+  credits.forEach((entry) => { ensureMonitorAsset(entry); });
   let snaps = [];
   const measureSnaps = () => {
     const fr = field.getBoundingClientRect();
@@ -822,6 +921,7 @@ function initTimeline() {
   window.addEventListener('resize', measureSnaps, { passive: true, signal: tlSig });
   let current = 0;
   let cutTimer = 0;
+  let cutToken = 0;
   let intentTimer = 0;
   let intentIdx = -1;
   let performing = false;
@@ -838,9 +938,21 @@ function initTimeline() {
   const vidsFor = (entry) => {
     if (!entry) return [];
     const list = (typeof works !== 'undefined' && Array.isArray(works)) ? works : [];
+    const railById = new Map(((typeof railWorks !== 'undefined' && Array.isArray(railWorks)) ? railWorks : []).map((w) => [w.id, w]));
     const feats = list.filter((w) => w.channel === entry.name).map((w) => ({ id: w.id, title: w.title, thumb: w.thumb, thumbFallback: w.thumbFallback, views: w.views, format: w.format, cased: true }));
     const featIds = new Set(feats.map((v) => v.id));
-    const extras = (window.PRSA_VIDEOS || []).filter((v) => v.channel === entry.name && !featIds.has(v.id)).map((v) => ({ id: v.id, title: v.title, thumb: v.thumb, thumbFallback: 'https://i.ytimg.com/vi/' + v.id + '/hqdefault.jpg', views: v.views, cased: false }));
+    const extras = (window.PRSA_VIDEOS || []).filter((v) => v.channel === entry.name && !featIds.has(v.id)).map((v) => {
+      const rail = railById.get(v.id);
+      return {
+        id: v.id,
+        title: v.title,
+        thumb: rail?.thumb || v.thumb,
+        thumbFallback: rail?.thumbFallback || ('https://i.ytimg.com/vi/' + v.id + '/hqdefault.jpg'),
+        views: v.views,
+        format: rail?.format || (PORTRAIT_VIDEO_IDS.has(v.id) ? 'portrait' : 'landscape'),
+        cased: false,
+      };
+    });
     return feats.concat(extras);
   };
   const buildBrowse = (entry) => {
@@ -848,8 +960,8 @@ function initTimeline() {
     const vids = vidsFor(entry);
     browseLabel.textContent = entry.name + ' \u00b7 ' + vids.length + (vids.length === 1 ? ' video' : ' videos');
     browseRow.innerHTML = vids.map((w, i) => {
-      const portrait = w.format === 'portrait';
-      const cardSrc = portrait ? 'https://i.ytimg.com/vi/' + encodeURIComponent(w.id) + '/oar2.jpg' : w.thumb;
+      const portrait = isPortraitVideo(w);
+      const cardSrc = w.thumb;
       const media = '<span class="tl-browse-thumb"><img src="' + escapeHtml(cardSrc) + '" alt="" loading="lazy" decoding="async" onerror="handleRemoteImageError(this,this.closest(\'a\').dataset.projectFallback)" /></span>';
       const text = '<span class="tl-browse-title">' + escapeHtml(w.title) + '</span><span class="tl-browse-meta">' + (w.views ? escapeHtml(fmtViews(w.views)) + ' views' : 'YouTube') + (portrait ? ' · Short' : '') + '</span>';
       const cls = 'tl-browse-card' + (portrait ? ' tl-browse-card--portrait' : '');
@@ -1012,12 +1124,13 @@ function initTimeline() {
       if (el) { el.classList.add('is-pinned'); el.setAttribute('aria-pressed', 'true'); }
     }
   };
-  const applyMonitor = (idx) => {
+  const applyMonitor = (idx, preparedSrc) => {
     const entry = credits[idx];
     const mark = MONITOR_MARKS[entry.name];
-    monImg.src = mark || entry.avatar;
-    monImg.classList.toggle('is-lockup', !!mark);
-    monName.hidden = !!mark && MARK_SPELLS_NAME.has(entry.name);
+    const usesMark = !!mark && (!preparedSrc || preparedSrc === mark);
+    monImg.src = preparedSrc || mark || entry.avatar;
+    monImg.classList.toggle('is-lockup', usesMark);
+    monName.hidden = usesMark && MARK_SPELLS_NAME.has(entry.name);
     monName.textContent = entry.name;
     if (monCh) monCh.textContent = fmtSubs(Number(entry.subs) || 0) + ' subscribers';
     const el = board.querySelector('.clip[data-idx="' + idx + '"]');
@@ -1054,10 +1167,24 @@ function initTimeline() {
     if (idx === current || !credits[idx]) return;
     current = idx;
     setActive(idx);
-    if (reduce) { applyMonitor(idx); return; }
+    const token = ++cutToken;
+    const ready = ensureMonitorAsset(credits[idx]);
     stage.classList.add('cut');
     clearTimeout(cutTimer);
-    cutTimer = setTimeout(() => { applyMonitor(idx); stage.classList.remove('cut'); }, 120);
+    const commit = () => {
+      ready.then(async (src) => {
+        if (token !== cutToken || current !== idx) return;
+        monImg.src = src;
+        if (typeof monImg.decode === 'function') await monImg.decode().catch(() => {});
+        if (token !== cutToken || current !== idx) return;
+        applyMonitor(idx, src);
+        requestAnimationFrame(() => {
+          if (token === cutToken && current === idx) stage.classList.remove('cut');
+        });
+      });
+    };
+    if (reduce) commit();
+    else cutTimer = setTimeout(commit, 120);
   };
   const cancelIntent = () => { intentIdx = -1; clearTimeout(intentTimer); };
   const intend = (idx) => {
@@ -1294,7 +1421,7 @@ function renderWorkWall() {
   wall.innerHTML = rails.map((items, railIndex) => {
     if (!items.length) return '';
     const cards = (set) => items.map((work) => {
-      const portrait = work.format === 'portrait' || PORTRAIT_VIDEO_IDS.has(work.id);
+      const portrait = isPortraitVideo(work);
       const thumb = work.thumb || `https://i.ytimg.com/vi/${encodeURIComponent(work.id)}/maxresdefault.jpg`;
       const fallback = work.thumbFallback || `https://i.ytimg.com/vi/${encodeURIComponent(work.id)}/hqdefault.jpg`;
       const href = work.url || `https://youtu.be/${encodeURIComponent(work.id)}`;
@@ -1330,7 +1457,7 @@ function renderWorkWall() {
 function renderMenuMedia() {
   const host = byId('menuMedia');
   if (!host || !menuWorks.length) return;
-  const mediaFormat = (work) => work.format === 'portrait' || PORTRAIT_VIDEO_IDS.has(work.id) ? 'portrait' : 'landscape';
+  const mediaFormat = (work) => isPortraitVideo(work) ? 'portrait' : 'landscape';
   const card = (work) => {
     const format = mediaFormat(work);
     const thumb = format === 'portrait' ? `https://i.ytimg.com/vi/${encodeURIComponent(work.id)}/oar2.jpg` : work.thumb;
