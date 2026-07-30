@@ -26,11 +26,31 @@ await fs.rm(DIST, { recursive: true, force: true });
 await fs.mkdir(CLIENT, { recursive: true });
 await fs.mkdir(SERVER, { recursive: true });
 
-await Promise.all([
-  ...files.map((file) => fs.copyFile(path.join(ROOT, file), path.join(CLIENT, file))),
-  fs.cp(path.join(ROOT, 'assets'), path.join(CLIENT, 'assets'), { recursive: true }),
-  fs.cp(path.join(ROOT, 'data'), path.join(CLIENT, 'data'), { recursive: true }),
-]);
+await Promise.all(files.map((file) => fs.copyFile(path.join(ROOT, file), path.join(CLIENT, file))));
+await fs.cp(path.join(ROOT, 'data'), path.join(CLIENT, 'data'), { recursive: true });
+
+// Keep deployment archives lean by copying only assets referenced by the live
+// pages and datasets. Retired art stays available in source control.
+const referenceFiles = [
+  ...files,
+  'data/stats.json',
+  'data/videos.js',
+  'assets/fonts.css',
+];
+const assetPaths = new Set();
+for (const file of referenceFiles) {
+  const source = await fs.readFile(path.join(ROOT, file), 'utf8');
+  for (const match of source.matchAll(/assets\/[A-Za-z0-9_./-]+/g)) {
+    assetPaths.add(match[0]);
+  }
+}
+for (const asset of assetPaths) {
+  const source = path.join(ROOT, asset);
+  const target = path.join(CLIENT, asset);
+  await fs.mkdir(path.dirname(target), { recursive: true });
+  await fs.copyFile(source, target);
+}
+await fs.cp(path.join(ROOT, 'assets', 'fonts'), path.join(CLIENT, 'assets', 'fonts'), { recursive: true });
 
 const worker = `const worker = {
   async fetch(request, env) {
