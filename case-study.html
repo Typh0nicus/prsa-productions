@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://i.ytimg.com" crossorigin />
 <link rel="dns-prefetch" href="https://i.ytimg.com" />
 <link rel="stylesheet" href="assets/fonts.css" />
-<link rel="stylesheet" href="styles.css?v=remaster-158" />
+<link rel="stylesheet" href="styles.css?v=remaster-160" />
 <script src="assets/project-transition.js?v=2" defer></script>
 <script>try{if(sessionStorage.getItem('prsa-route')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('route-arrived')}}catch(e){}</script>
 </head>
@@ -129,8 +129,8 @@
     </div>
   </section>
 
-  <section class="poster-section">
-    <div class="wrap">
+  <section class="poster-section" id="posterSection">
+    <div class="cs-stage">
       <div class="video-shell" id="videoShell"></div>
       <div class="cs-actions">
         <a id="watchLink" href="#" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
@@ -141,15 +141,15 @@
 
 
   <section class="nextup">
-    <div class="wrap">
-      <a class="next-link" id="nextProject" href="#">
+    <a class="next-link" id="nextProject" href="#">
+      <span class="wrap next-inner">
         <span class="next-copy">
           <span class="kicker">+ (Next project)</span>
           <b id="nextTitle"></b>
         </span>
         <span class="next-preview" aria-hidden="true"><img id="nextThumb" src="" alt="" loading="lazy" decoding="async" /></span>
-      </a>
-    </div>
+      </span>
+    </a>
   </section>
 </main>
 
@@ -190,6 +190,18 @@ const CASE_AVATARS = {
   "KSI": "assets/wordmarks/ksi-row.png",
   "John Nellis": "assets/wordmarks/johnnellis-fig.png",
   "Miniminter": "assets/wordmarks/miniminter-row.png",
+};
+
+// Hand-curated (NOT pipeline-written): each belt channel's brand color, mirroring index.html CHANNEL_PLATES.
+// The screening room's key/counter lights read this via --case-glow; unknown channels fall back to site blue.
+const CHANNEL_GLOW = {
+  "Stokes Twins": "#E23B47",
+  "Ben Azelart": "#18AAC2",
+  "Sidemen": "#3A3F48",
+  "FutCrunch": "#1EAFDC",
+  "KSI": "#2E4FC4",
+  "John Nellis": "#C77A3C",
+  "Miniminter": "#E0A82C",
 };
 
 const byId = (id) => document.getElementById(id);
@@ -255,6 +267,7 @@ function renderCase() {
   const nextPortrait = next.format === 'portrait' || PORTRAIT_VIDEO_IDS.has(next.id);
   const nextThumb = caseThumb(next);
 
+  document.documentElement.style.setProperty('--case-glow', CHANNEL_GLOW[work.channel] || '#2F6BFF');
   document.title = work.title + ' — Prša Productions';
   const description = document.querySelector('meta[name="description"]');
   const projectDescription = work.title + ' — selected editing work by Prša Productions.';
@@ -453,6 +466,7 @@ function initCaseMenu() {
 }
 
 async function hydrateWorks() {
+  if (location.protocol === 'file:') { renderCase(); return; } // fetch() can't run on file:// - the pipeline-written fallback IS the data there
   try {
     const response = await fetch('works.json', { cache: 'no-store' });
     if (response.ok) {
@@ -469,9 +483,19 @@ async function hydrateWorks() {
 
 function initChrome() {
   const nav = byId('nav');
-  window.addEventListener('scroll', () => {
+  const stageBand = byId('posterSection');
+  // Band-aware wordmark (same midline law as the homepage): the ink wordmark flips white
+  // while the nav midline crosses the dark screening band.
+  const onScroll = () => {
     nav.classList.toggle('scrolled', window.scrollY > 16);
-  }, { passive: true });
+    if (stageBand) {
+      const rect = stageBand.getBoundingClientRect();
+      nav.classList.toggle('over-dark', rect.top <= 44 && rect.bottom > 44);
+    }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  onScroll();
 
   byId('yr').textContent = new Date().getFullYear();
 }
