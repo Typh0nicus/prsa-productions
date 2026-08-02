@@ -42,7 +42,7 @@
 </script>
 <script>document.documentElement.classList.add('js')</script>
 <link rel="stylesheet" href="assets/fonts.css" />
-<link rel="stylesheet" href="styles.css?v=remaster-170" />
+<link rel="stylesheet" href="styles.css?v=remaster-171" />
 <script src="assets/project-transition.js?v=2" defer></script>
 <noscript><style>#preloader{display:none!important}body.lock{overflow:auto!important}</style></noscript>
 </head>
@@ -179,7 +179,7 @@ window.__prsaIntroFailsafe = window.setTimeout(function () {
   <section class="credits" id="credits" aria-labelledby="creditsStatement">
     <div class="wrap credits-head">
       <span class="kicker">+ (Credits)</span>
-      <h2 class="credits-statement" id="creditsStatement">Editing credits across <span class="hl-ink">41 clients</span> with <strong>1.1B+</strong> subscribers combined.</h2>
+      <h2 class="credits-statement" id="creditsStatement">Editing credits across <span class="hl-ink"><i class="hl-count">41</i> clients</span> with <strong>1.1B+</strong> subscribers combined.</h2>
     </div>
     <div class="wrap credits-board" id="creditsBoard"></div>
   </section>
@@ -452,7 +452,7 @@ function renderCredits() {
     const label = total >= 1000
       ? (Math.floor(total / 100) / 10).toFixed(1).replace(/\.0$/, '') + 'B+'
       : Math.floor(total / 10) * 10 + 'M+';
-    statement.innerHTML = 'Editing credits across <span class="hl-ink">' + credits.length + ' clients</span> with <strong>' + label + '</strong> subscribers combined.';
+    statement.innerHTML = 'Editing credits across <span class="hl-ink"><i class="hl-count">' + credits.length + '</i> clients</span> with <strong>' + label + '</strong> subscribers combined.';
     prepareStatement(statement);
   }
   const CHANNEL_PLATES = {
@@ -1595,7 +1595,76 @@ function renderWorkWall() {
       syncRate();
     });
   });
+  initRailDrift();
   setupWorkReveal();
+}
+
+// MOBILE BELT (July 30, Typhon: "i like being able to manually move the belt but it also needs to be active
+// so we look like we have life"). On phones the rail is a real scroll container, so the desktop CSS marquee
+// can't drive it - a rAF nudges scrollLeft instead. Dragging takes over instantly and the drift resumes when
+// you let go, so the belt is never fighting your thumb. The aria-hidden duplicate set makes the loop seamless.
+function initRailDrift() {
+  if (window.__railDriftAbort) window.__railDriftAbort.abort();
+  const controller = new AbortController();
+  window.__railDriftAbort = controller;
+  const { signal } = controller;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!matchMedia('(max-width:1024px)').matches) return;
+
+  document.querySelectorAll('.work-rail').forEach((rail, index) => {
+    if (getComputedStyle(rail).overflowX !== 'auto') return;
+    const firstSet = rail.querySelector('.rail-set');
+    if (!firstSet) return;
+    const back = index % 2 === 1;           // second rail drifts the other way, mirroring the desktop pair
+    const SPEED = 22;                        // px per second - a slow tide, not a carousel
+    let paused = false;
+    let visible = true;
+    let resumeTimer = 0;
+    let last = 0;
+    let frame = 0;
+
+    const span = () => firstSet.getBoundingClientRect().width;
+    // scrollLeft is INTEGER-QUANTIZED: writing 0.35px per frame rounds straight back to 0 and the belt never
+    // moves. The true position is kept as a float here and only flushed to the element once it crosses a pixel.
+    let pos = back ? span() : 0;
+    if (back) rail.scrollLeft = pos;         // reverse rail starts inside the clone so it can travel backwards
+
+    const hold = () => {
+      paused = true;
+      clearTimeout(resumeTimer);
+    };
+    const release = () => {
+      clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(() => { paused = false; }, 1500);
+    };
+    ['pointerdown', 'touchstart', 'wheel'].forEach((type) =>
+      rail.addEventListener(type, hold, { passive: true, signal }));
+    ['pointerup', 'pointercancel', 'touchend', 'touchcancel'].forEach((type) =>
+      rail.addEventListener(type, release, { passive: true, signal }));
+
+    const tick = (now) => {
+      frame = requestAnimationFrame(tick);
+      const dt = last ? Math.min((now - last) / 1000, 0.05) : 0;
+      last = now;
+      if (paused || !visible || !dt) return;
+      const width = span();
+      if (width < 8) return;
+      // resync if the reader moved the belt themselves, so we drift on from where they left it
+      if (Math.abs(rail.scrollLeft - pos) > 2) pos = rail.scrollLeft;
+      pos += (back ? -SPEED : SPEED) * dt;
+      if (pos >= width) pos -= width;        // wrap across the duplicate set - invisible seam
+      if (pos <= 0) pos += width;
+      rail.scrollLeft = pos;
+    };
+    frame = requestAnimationFrame(tick);
+    signal.addEventListener('abort', () => { cancelAnimationFrame(frame); clearTimeout(resumeTimer); });
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => { visible = entries[0].isIntersecting; }, { threshold: 0 });
+      io.observe(rail);
+      signal.addEventListener('abort', () => io.disconnect());
+    }
+  });
 }
 
 function renderMenuMedia() {

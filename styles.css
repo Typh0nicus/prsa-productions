@@ -220,6 +220,9 @@ html.js .hero-deck .ch{transition:opacity .7s var(--ease-silk),filter .7s var(--
 html.js body:not(.in) .hero-deck .ch{opacity:0;filter:blur(7px)}
 .work-title strong,.work-title .w-strong{font-weight:600;color:var(--blue)}
 .credits-statement .hl-ink{color:var(--ink);font-weight:600}
+/* The COUNT carries the blue; the word "clients" stays ink (Typhon, July 30). The whole .hl-ink stays ONE atomic
+   splitWords unit - the inner <i> rides along, so the phrase never splits into seamed per-word fragments. */
+.credits-statement .hl-count{font-style:normal;color:var(--blue)}
 .credits-statement strong,.credits-statement .w-strong,.credits-statement .hl{display:inline-block;padding:.02em .1em .07em;background:var(--blue);color:#fff;font-weight:600;line-height:.92;-webkit-text-fill-color:#fff}
 .hero-title strong,.hero-title .w-strong{font-weight:600;color:#f4f5f6;background:linear-gradient(180deg,#ffffff 4%,#f7fafd 40%,#dde3ea 56%,#b3bdc9 70%,#e2e8ef 84%,#fdfeff 98%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 1px 0 rgba(255,255,255,.1),0 3px 9px rgba(0,0,0,.42)}
 .hero-deck{max-width:520px;margin-top:26px;color:rgba(242,243,245,.64);font-size:19px;font-weight:400;line-height:1.42;letter-spacing:-.022em;text-wrap:balance}
@@ -761,7 +764,7 @@ html.js body:not(.cs-ready) .poster-section{opacity:0;transform:translateY(30px)
   .work-player--portrait .work-player-copy{gap:8px}
   .work-player--portrait .work-player-copy h2{font-size:19px;line-height:1.16;-webkit-line-clamp:2}
   .about,.contact{padding:88px 0}
-  .about{min-height:0;padding:80px 0 0}
+  .about{min-height:88svh;padding:96px 0 0;justify-content:flex-end}
   .credits{padding:82px 0 96px}
   .credits-head{margin-bottom:34px}
   .credits-head .kicker{position:static;margin-bottom:20px}
@@ -776,20 +779,29 @@ html.js body:not(.cs-ready) .poster-section{opacity:0;transform:translateY(30px)
   .tl-lane{height:56px}
   .clip{height:42px;font-size:11.5px;padding:0 11px;border-radius:10px}
   .clip-pfp{width:21px;height:21px}
-  .about-head{margin-bottom:26px}
-  .about-scene{margin-top:0;padding-top:0}
+  /* MOBILE ABOUT = ONE CINEMATIC SCENE (July 30, Typhon: "the about can deffo be more peak"). The portrait goes
+     FULL-BLEED behind the copy and the statement anchors LOW-LEFT - the hero's own composition. The old stacked
+     "text block, then a 250px photo block with a hard bottom cut" read as two flat panels, not a room. */
+  .about-head{position:relative;z-index:2;margin-bottom:0}
+  .about-scene{margin-top:auto;padding-top:110px;padding-bottom:20px}
   .about-scene h2{font-size:clamp(34px,9vw,50px)}
-  .about-scene p{font-size:17px}
-  .about-figure{position:relative;inset:auto;order:3;width:100%;height:64vw;max-height:460px;margin-top:44px;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 14%);mask-image:linear-gradient(180deg,transparent 0,#000 14%)}
-  .about-figure img{object-position:50% 22%}
+  .about-scene p{width:min(100%,430px);margin-top:22px;font-size:17px}
+  .about-figure{position:absolute;inset:0;order:0;width:100%;height:100%;max-height:none;margin:0;-webkit-mask-image:none;mask-image:none}
+  .about-figure img{object-position:54% 16%}
+  /* Legibility scrim: heavy at the foot where the copy sits, lighter at the crown so his face stays open. */
+  .about-figure::after{background:linear-gradient(0deg,rgba(5,7,10,.95) 0%,rgba(5,7,10,.88) 24%,rgba(5,7,10,.48) 50%,rgba(5,7,10,.1) 74%,transparent 88%),linear-gradient(180deg,rgba(5,7,10,.82),rgba(5,7,10,.24) 20%,transparent 38%)}
   .contact-head{grid-template-columns:1fr;gap:22px}
   .contact-head .kicker{padding-top:0}
   .contact-statement{font-size:clamp(19px,4.6vw,24px)}
   .contact-hero{margin-top:30px}
   .contact-email{font-size:clamp(36px,9vw,58px)}
-  .contact-copy{width:max-content}
-  .contact-utility{margin-top:28px;padding-top:22px;flex-wrap:wrap;align-items:flex-start}
-  .contact-elsewhere-links{justify-content:flex-start;gap:4px 24px}
+  /* MOBILE CONTACT (July 30, Typhon: "feels weird with how stuff are placed"): the copy button and a right-aligned
+     2x2 social grid fought each other across a half-empty row. They now STACK - full-width control first, then the
+     links as one left-aligned wrapping line under it. One column, one reading order. */
+  .contact-utility{display:flex;flex-direction:column;align-items:stretch;margin-top:30px;padding-top:24px;gap:26px}
+  .contact-copy{width:100%;height:54px;justify-content:space-between;padding:0 20px}
+  .contact-elsewhere-links{display:flex;flex-wrap:wrap;justify-content:flex-start;gap:14px 26px}
+  .contact-elsewhere-links a{min-height:32px}
   .footer-cta{padding:64px 0 68px}
   .footer-cta-inner{grid-template-columns:1fr;gap:44px}
   .footer-kicker{padding-top:0}
@@ -859,12 +871,11 @@ html.js body:not(.cs-ready) .poster-section{opacity:0;transform:translateY(30px)
   .contact-statement{font-size:22px;line-height:1.2;letter-spacing:0}
   .work-head{margin-bottom:34px}
   .work-rails{gap:20px}
-  .work-rail{height:196px;overflow-x:auto;overflow-y:hidden;padding-inline:var(--pad);scroll-padding-inline:var(--pad);scroll-snap-type:x mandatory;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;-webkit-mask-image:none;mask-image:none;scrollbar-width:none}
+  .work-rail{height:196px;overflow-x:auto;overflow-y:hidden;padding-inline:var(--pad);scroll-padding-inline:var(--pad);overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%);scrollbar-width:none;scroll-behavior:auto}
   .work-rail::-webkit-scrollbar{display:none}
   .rail-track,.work-rail--b .rail-track{width:max-content;height:100%;animation:none!important;transform:none!important;will-change:auto}
   .rail-set{height:100%;gap:14px;padding-right:var(--pad)}
-  .rail-set[aria-hidden="true"]{display:none}
-  .rail-card{height:100%;border-radius:12px;scroll-snap-align:start;scroll-snap-stop:normal}
+  .rail-card{height:100%;border-radius:12px}
   .rail-card-copy{padding:46px 14px 12px}
 
   .work-player-top{left:max(var(--pad),env(safe-area-inset-left));right:max(var(--pad),env(safe-area-inset-right));height:calc(70px + env(safe-area-inset-top));padding-top:env(safe-area-inset-top)}
@@ -896,10 +907,10 @@ html.js body:not(.cs-ready) .poster-section{opacity:0;transform:translateY(30px)
   .tl-lane{height:58px}
   .clip{height:46px}
 
-  .about{padding:84px 0 0}
+  .about{min-height:86svh;padding:88px 0 0}
   .about-scene h2{font-size:42px;line-height:1.04;letter-spacing:0}
   .about-scene p{font-size:17px;letter-spacing:0}
-  .about-figure{height:min(64vw,300px);max-height:none;margin-top:36px}
+  .about-scene{padding-top:88px}
   .contact{padding:92px 0 88px}
   .contact-head{gap:18px}
   .contact-hero{margin-top:26px}
@@ -931,12 +942,11 @@ html.js body:not(.cs-ready) .poster-section{opacity:0;transform:translateY(30px)
 
 @media(pointer:coarse) and (min-width:821px) and (max-width:1024px){
   body{overflow-x:clip}
-  .work-rail{overflow-x:auto;overflow-y:hidden;padding-inline:var(--pad);scroll-padding-inline:var(--pad);scroll-snap-type:x mandatory;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;-webkit-mask-image:none;mask-image:none;scrollbar-width:none}
+  .work-rail{overflow-x:auto;overflow-y:hidden;padding-inline:var(--pad);scroll-padding-inline:var(--pad);overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%);scrollbar-width:none;scroll-behavior:auto}
   .work-rail::-webkit-scrollbar{display:none}
   .rail-track,.work-rail--b .rail-track{width:max-content;height:100%;animation:none!important;transform:none!important;will-change:auto}
   .rail-set{height:100%;padding-right:var(--pad)}
-  .rail-set[aria-hidden="true"]{display:none}
-  .rail-card{height:100%;scroll-snap-align:start}
+  .rail-card{height:100%}
   .tl-browse-close,.tl-browse-more{height:44px}
   .tl-body{cursor:grab;touch-action:auto;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%)}
   .tl-body::-webkit-scrollbar{display:none}
@@ -971,7 +981,8 @@ html.js body:not(.cs-ready) .poster-section{opacity:0;transform:translateY(30px)
   .tl-tick-label{display:none}
   .about-scene h2{font-size:38px}
   .contact-email{font-size:34px;line-height:1.05}
-  .contact-elsewhere-links{display:grid;grid-template-columns:repeat(2,max-content);justify-content:start;column-gap:30px}
+  /* All four fit one line at 360px+ - the 2x2 grid left a dead right half under the button. */
+  .contact-elsewhere-links{display:flex;flex-wrap:wrap;justify-content:flex-start;gap:12px 22px}
   footer:not(.site-footer) .foot{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;padding:0}
   footer:not(.site-footer) .foot>span{grid-column:1/-1}
   footer:not(.site-footer) .foot-socials{grid-column:1/-1;justify-self:start}
@@ -1049,12 +1060,11 @@ html.js body:not(.cs-ready) .poster-section{opacity:0;transform:translateY(30px)
   .hero-cta{width:160px;height:48px;margin-top:14px}
   .work{padding:64px 0 56px}
   .work-title,.credits-statement{font-size:30px;letter-spacing:0}
-  .work-rail{height:min(46dvh,190px);overflow-x:auto;overflow-y:hidden;padding-inline:var(--pad);scroll-padding-inline:var(--pad);scroll-snap-type:x mandatory;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;-webkit-mask-image:none;mask-image:none;scrollbar-width:none}
+  .work-rail{height:min(46dvh,190px);overflow-x:auto;overflow-y:hidden;padding-inline:var(--pad);scroll-padding-inline:var(--pad);overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%);scrollbar-width:none;scroll-behavior:auto}
   .work-rail::-webkit-scrollbar{display:none}
   .rail-track,.work-rail--b .rail-track{width:max-content;height:100%;animation:none!important;transform:none!important;will-change:auto}
   .rail-set{height:100%;padding-right:var(--pad)}
-  .rail-set[aria-hidden="true"]{display:none}
-  .rail-card{height:100%;scroll-snap-align:start}
+  .rail-card{height:100%}
   .credits{padding:64px 0 78px}
   .tl-monitor{height:218px}
   .tl-scroll{min-width:940px}
