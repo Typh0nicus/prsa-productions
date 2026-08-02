@@ -676,7 +676,7 @@ html.js body:not(.cs-ready) .poster-section{opacity:0;transform:translateY(30px)
   .hero-cta:hover,.hero-cta:focus-visible{transform:none}
   .mnav.open .mlinks a{animation:none;opacity:1;transform:none;filter:none}
   .menu-media-plane,.menu-media-track,.rail-track{transition:none;animation:none}
-  .rail-card,.rail-card img,.rail-card-copy,.contact-email::after,.contact-copy,.contact-copy::before,.contact-copy [data-copy-symbol],.contact-elsewhere-links a,.contact-elsewhere-links a::after,.footer-button,.footer-button::before,.footer-button::after,.footer-button>span:first-child,.cs-browser-track a,.cs-browser-thumb,.cs-browser-thumb img,.clip,.tl-monitor-stage,.foot-socials a::before{transition:none}
+  #nav.nav-tuck,.rail-card,.rail-card img,.rail-card-copy,.contact-email::after,.contact-copy,.contact-copy::before,.contact-copy [data-copy-symbol],.contact-elsewhere-links a,.contact-elsewhere-links a::after,.footer-button,.footer-button::before,.footer-button::after,.footer-button>span:first-child,.cs-browser-track a,.cs-browser-thumb,.cs-browser-thumb img,.clip,.tl-monitor-stage,.foot-socials a::before{transition:none}
   .rail-card:hover,.rail-card:focus-visible,.contact-copy:hover,.contact-copy:focus-visible,.footer-button:hover,.footer-button:focus-visible{transform:none}
   .footer-button::after{display:none}
   .footer-button:hover>span:first-child,.footer-button:focus-visible>span:first-child{transform:none}
@@ -870,10 +870,15 @@ html.js body:not(.cs-ready) .poster-section{opacity:0;transform:translateY(30px)
   .work-player-top{left:max(var(--pad),env(safe-area-inset-left));right:max(var(--pad),env(safe-area-inset-right));height:calc(70px + env(safe-area-inset-top));padding-top:env(safe-area-inset-top)}
   .work-player-shell{padding:calc(78px + env(safe-area-inset-top)) max(var(--pad),env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(var(--pad),env(safe-area-inset-left))}
 
-  .credits{padding:88px 0 112px;overflow:visible}
+  /* Scroll-away chrome: no slab, no halo - the wordmark simply leaves while you read downward. */
+  #nav{transition:opacity .34s var(--ease),transform .42s var(--ease-silk),background .35s var(--ease)}
+  body.in #nav.nav-tuck{opacity:0;transform:translateY(-118%);pointer-events:none}
+  body.in #nav.nav-tuck .menu-btn{pointer-events:none}
+
+  .credits{padding:88px 0 76px}
   .credits-head{margin-bottom:36px}
-  .tl{overflow:visible}
-  .tl-monitor{position:sticky;top:calc(70px + env(safe-area-inset-top));z-index:8;height:252px;box-shadow:0 18px 34px -26px rgba(0,0,0,.88)}
+  /* The monitor stays IN FLOW above the board (sticky covered lanes L1-L2 whole - the board must never be decapitated). */
+  .tl-monitor{height:252px}
   .tl-monitor-card{padding:16px 22px}
   .tl-browse{inset:10px 12px}
   .tl-browse-head{min-height:44px;gap:10px;margin-bottom:6px}
@@ -932,9 +937,6 @@ html.js body:not(.cs-ready) .poster-section{opacity:0;transform:translateY(30px)
   .rail-set{height:100%;padding-right:var(--pad)}
   .rail-set[aria-hidden="true"]{display:none}
   .rail-card{height:100%;scroll-snap-align:start}
-  .credits{overflow:visible}
-  .tl{overflow:visible}
-  .tl-monitor{position:sticky;top:calc(86px + env(safe-area-inset-top));z-index:8;box-shadow:0 18px 34px -26px rgba(0,0,0,.88)}
   .tl-browse-close,.tl-browse-more{height:44px}
   .tl-body{cursor:grab;touch-action:auto;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%)}
   .tl-body::-webkit-scrollbar{display:none}
@@ -1054,9 +1056,7 @@ html.js body:not(.cs-ready) .poster-section{opacity:0;transform:translateY(30px)
   .rail-set[aria-hidden="true"]{display:none}
   .rail-card{height:100%;scroll-snap-align:start}
   .credits{padding:64px 0 78px}
-  .credits{overflow:visible}
-  .tl{overflow:visible}
-  .tl-monitor{position:sticky;top:calc(58px + env(safe-area-inset-top));z-index:8;height:218px;box-shadow:0 18px 34px -26px rgba(0,0,0,.88)}
+  .tl-monitor{height:218px}
   .tl-scroll{min-width:940px}
   .tl-browse-close,.tl-browse-more{height:44px}
   .tl-body{cursor:grab;touch-action:auto;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%)}
