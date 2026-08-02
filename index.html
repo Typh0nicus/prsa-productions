@@ -443,6 +443,26 @@ function fmtViews(value) {
   });
 }
 
+// A clip's plate IS the channel's own brand colour - the colour their avatar/logo is actually built on
+// (Gregor, Aug 2: "brand color needs to be the BG color on each icon on timeline... aka yellow here" on
+// Lachlan). Every entry below is read off that channel's art in assets/channels; where the avatar is a plain
+// photograph with no designed colour (Kat, John Nellis, Drew Dirksen, Jesse James West, AveryB, JACK TV,
+// Browney, Carter Kench, Lana's Life) the plate stays a curated tone. Never guess a colour a channel
+// doesn't use, and keep every value distinct - two byte-identical plates read as one client.
+const CHANNEL_PLATES = {
+  'MrBeast': '#2453D6', 'Stokes Twins': '#E23B47', 'Ben Azelart': '#18AAC2', 'SSSniperWolf': '#E23A96', 'Preston': '#F5761C',
+  'Sidemen': '#3A3F48', 'FutCrunch': '#1EAFDC', 'Unspeakable': '#33B94F', 'LawByMike': '#2E7CE0', 'KSI': '#2E4FC4',
+  'Landen Purifoy': '#E9B510', 'John Nellis': '#C77A3C', 'Eystreem': '#E4701C', 'AMP': '#2AA3E8', 'Browney': '#3B87E0',
+  'Kat': '#D08A3E', 'Cash': '#D93A4C', 'Miniminter': '#E0A82C', 'SypherPK': '#E23048', 'Jesse James West': '#C0743E',
+  "Lana's Life": '#D046A6', 'Bionic': '#37C4F0', 'Carter Kench': '#C77A44', 'BriannaPlayz': '#D653A0', 'SV2': '#C4CE34',
+  'Cash & Maverick': '#2E63D6', 'TBJZL': '#CEBE2E', 'Leah Ashe': '#D64AB4', 'Drew Dirksen': '#C4894A', 'LoverFella': '#E0335A',
+  'RussoPlays': '#1F9BEA', 'CouRage Gaming': '#E0A62C', "What's Inside": '#22A6D8', 'NoLuvMar': '#D05E38', 'AJ Shabeel': '#E01E12',
+  'Carter Sharer': '#2CC63A', 'Senne Jackson': '#DC2437', 'Lachlan': '#E8C21A', 'Kenji': '#D2402A', 'AveryB': '#22B4D6', 'JACK TV': '#8E5AD0'
+};
+// the Work player lights its room from the same map - one source of truth for a channel's colour
+const channelOf = (videoId) => (window.PRSA_VIDEOS || []).find((v) => v.id === videoId)?.channel || '';
+const plateOf = (channel) => CHANNEL_PLATES[channel] || '';
+
 function renderCredits() {
   const board = byId('creditsBoard');
   if (!board || !credits.length) return;
@@ -455,22 +475,6 @@ function renderCredits() {
     statement.innerHTML = 'Editing credits across <span class="hl-ink"><i class="hl-count">' + credits.length + '</i> clients</span> with <strong>' + label + '</strong> subscribers combined.';
     prepareStatement(statement);
   }
-  // A clip's plate IS the channel's own brand colour - the colour their avatar/logo is actually built on
-  // (Gregor, Aug 2: "brand color needs to be the BG color on each icon on timeline... aka yellow here" on
-  // Lachlan). Every entry below is read off that channel's art in assets/channels; where the avatar is a plain
-  // photograph with no designed colour (Kat, John Nellis, Drew Dirksen, Jesse James West, AveryB, JACK TV,
-  // Browney, Carter Kench, Lana's Life) the plate stays a curated tone. Never guess a colour a channel
-  // doesn't use, and keep every value distinct - two byte-identical plates read as one client.
-  const CHANNEL_PLATES = {
-    'MrBeast': '#2453D6', 'Stokes Twins': '#E23B47', 'Ben Azelart': '#18AAC2', 'SSSniperWolf': '#E23A96', 'Preston': '#F5761C',
-    'Sidemen': '#3A3F48', 'FutCrunch': '#1EAFDC', 'Unspeakable': '#33B94F', 'LawByMike': '#2E7CE0', 'KSI': '#2E4FC4',
-    'Landen Purifoy': '#E9B510', 'John Nellis': '#C77A3C', 'Eystreem': '#E4701C', 'AMP': '#2AA3E8', 'Browney': '#3B87E0',
-    'Kat': '#D08A3E', 'Cash': '#D93A4C', 'Miniminter': '#E0A82C', 'SypherPK': '#E23048', 'Jesse James West': '#C0743E',
-    "Lana's Life": '#D046A6', 'Bionic': '#37C4F0', 'Carter Kench': '#C77A44', 'BriannaPlayz': '#D653A0', 'SV2': '#C4CE34',
-    'Cash & Maverick': '#2E63D6', 'TBJZL': '#CEBE2E', 'Leah Ashe': '#D64AB4', 'Drew Dirksen': '#C4894A', 'LoverFella': '#E0335A',
-    'RussoPlays': '#1F9BEA', 'CouRage Gaming': '#E0A62C', "What's Inside": '#22A6D8', 'NoLuvMar': '#D05E38', 'AJ Shabeel': '#E01E12',
-    'Carter Sharer': '#2CC63A', 'Senne Jackson': '#DC2437', 'Lachlan': '#E8C21A', 'Kenji': '#D2402A', 'AveryB': '#22B4D6', 'JACK TV': '#8E5AD0'
-  };
   const plateLuma = (hex) => {
     const h = String(hex).replace('#', '');
     const r = parseInt(h.slice(0, 2), 16) * 0.9 + 13 * 0.1;
@@ -784,6 +788,10 @@ function initWorkPlayer() {
 
     title.textContent = workTitle;
     source.href = link.href;
+    // RELIGHT THE ROOM IN THE CLIENT'S COLOUR - the credits monitor and the case pages already do this, and the
+    // player is the third place a single channel owns the frame. Unattributed videos fall back to the site blue.
+    const glow = plateOf(channelOf(id));
+    player.style.setProperty('--player-glow', glow || 'var(--blue)');
     player.classList.toggle('work-player--portrait', format === 'portrait');
     stage.classList.remove('is-ready', 'poster-unavailable');
     poster.hidden = false;
@@ -828,7 +836,7 @@ function initWorkPlayer() {
     document.body.classList.add('work-player-open');
     document.documentElement.classList.add('work-player-open');
     if (window.__lenisInstance) window.__lenisInstance.stop();
-    if (themeColor) themeColor.content = '#F5F5F5';
+    if (themeColor) themeColor.content = '#05070a';   // the player is a dark room, and the phone chrome follows it
     if (status) status.textContent = 'Playing ' + workTitle;
     requestAnimationFrame(() => {
       player.classList.add('is-open');
