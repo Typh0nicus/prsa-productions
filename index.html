@@ -455,15 +455,21 @@ function renderCredits() {
     statement.innerHTML = 'Editing credits across <span class="hl-ink"><i class="hl-count">' + credits.length + '</i> clients</span> with <strong>' + label + '</strong> subscribers combined.';
     prepareStatement(statement);
   }
+  // A clip's plate IS the channel's own brand colour - the colour their avatar/logo is actually built on
+  // (Gregor, Aug 2: "brand color needs to be the BG color on each icon on timeline... aka yellow here" on
+  // Lachlan). Every entry below is read off that channel's art in assets/channels; where the avatar is a plain
+  // photograph with no designed colour (Kat, John Nellis, Drew Dirksen, Jesse James West, AveryB, JACK TV,
+  // Browney, Carter Kench, Lana's Life) the plate stays a curated tone. Never guess a colour a channel
+  // doesn't use, and keep every value distinct - two byte-identical plates read as one client.
   const CHANNEL_PLATES = {
     'MrBeast': '#2453D6', 'Stokes Twins': '#E23B47', 'Ben Azelart': '#18AAC2', 'SSSniperWolf': '#E23A96', 'Preston': '#F5761C',
     'Sidemen': '#3A3F48', 'FutCrunch': '#1EAFDC', 'Unspeakable': '#33B94F', 'LawByMike': '#2E7CE0', 'KSI': '#2E4FC4',
-    'Landen Purifoy': '#E0B02E', 'John Nellis': '#C77A3C', 'Eystreem': '#2F74D6', 'AMP': '#2AA3E8', 'Browney': '#3B87E0',
-    'Kat': '#D08A3E', 'Cash': '#D0357A', 'Miniminter': '#E0A82C', 'SypherPK': '#E23048', 'Jesse James West': '#C0743E',
-    "Lana's Life": '#D046A6', 'Bionic': '#E06A26', 'Carter Kench': '#C77A44', 'BriannaPlayz': '#D653A0', 'SV2': '#C4CE34',
+    'Landen Purifoy': '#E9B510', 'John Nellis': '#C77A3C', 'Eystreem': '#E4701C', 'AMP': '#2AA3E8', 'Browney': '#3B87E0',
+    'Kat': '#D08A3E', 'Cash': '#D93A4C', 'Miniminter': '#E0A82C', 'SypherPK': '#E23048', 'Jesse James West': '#C0743E',
+    "Lana's Life": '#D046A6', 'Bionic': '#37C4F0', 'Carter Kench': '#C77A44', 'BriannaPlayz': '#D653A0', 'SV2': '#C4CE34',
     'Cash & Maverick': '#2E63D6', 'TBJZL': '#CEBE2E', 'Leah Ashe': '#D64AB4', 'Drew Dirksen': '#C4894A', 'LoverFella': '#E0335A',
-    'RussoPlays': '#E0742C', 'CouRage Gaming': '#E0A62C', "What's Inside": '#22A6D8', 'NoLuvMar': '#D05E38', 'AJ Shabeel': '#E23C28',
-    'Carter Sharer': '#E0472C', 'Senne Jackson': '#2E86E0', 'Lachlan': '#3FC441', 'Kenji': '#E0517A', 'AveryB': '#22B4D6', 'JACK TV': '#8E5AD0'
+    'RussoPlays': '#1F9BEA', 'CouRage Gaming': '#E0A62C', "What's Inside": '#22A6D8', 'NoLuvMar': '#D05E38', 'AJ Shabeel': '#E01E12',
+    'Carter Sharer': '#2CC63A', 'Senne Jackson': '#DC2437', 'Lachlan': '#E8C21A', 'Kenji': '#D2402A', 'AveryB': '#22B4D6', 'JACK TV': '#8E5AD0'
   };
   const plateLuma = (hex) => {
     const h = String(hex).replace('#', '');
@@ -686,14 +692,6 @@ function initWorkPlayer() {
       && rect.top < innerHeight && rect.left < innerWidth;
   };
   const canReceiveFocus = (el) => !!el?.isConnected && !el.closest('[aria-hidden="true"]');
-  const syncRailRates = () => {
-    wall.querySelectorAll('.work-rail').forEach((rail) => {
-      const track = rail.querySelector('.rail-track');
-      if (!track) return;
-      const slowed = rail.matches(':hover') || rail.contains(document.activeElement);
-      track.getAnimations().forEach((animation) => animation.updatePlaybackRate(slowed ? 0.35 : 1));
-    });
-  };
 
   const restorePlayer = (restoreFocus) => {
     clearCloseWait();
@@ -741,7 +739,6 @@ function initWorkPlayer() {
       window.scrollTo(0, restoreScrollY);
       lockedAnchor = null;
       lockedAnchorOffset = null;
-      syncRailRates();
     });
   };
 
@@ -1544,19 +1541,6 @@ function setupWorkReveal() {
   });
 }
 
-function setupMotionBudget() {
-  const regions = [document.querySelector('.work')].filter(Boolean);
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce || !('IntersectionObserver' in window)) {
-    regions.forEach((region) => region.classList.add('motion-active'));
-    return;
-  }
-  const motionIO = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => entry.target.classList.toggle('motion-active', entry.isIntersecting));
-  }, { rootMargin: '20% 0px', threshold: 0 });
-  regions.forEach((region) => motionIO.observe(region));
-}
-
 function renderWorkWall() {
   const wall = byId('workWall');
   if (!wall || !railWorks.length) return;
@@ -1576,48 +1560,39 @@ function renderWorkWall() {
         </span>
       </a>`;
     }).join('');
-    return `<div class="work-rail work-rail--${railIndex ? 'b' : 'a'}"><div class="rail-track">
+    return `<div class="work-rail work-rail--${railIndex ? 'b' : 'a'}" data-lenis-prevent-horizontal><div class="rail-track">
       <div class="rail-set">${cards(0)}</div><div class="rail-set" aria-hidden="true">${cards(1)}</div>
     </div></div>`;
   }).join('');
-  wall.querySelectorAll('.work-rail').forEach((rail) => {
-    const track = rail.querySelector('.rail-track');
-    if (!track) return;
-    const setRate = (rate) => track.getAnimations().forEach((anim) => anim.updatePlaybackRate(rate));
-    let hovered = false;
-    let focusWithin = false;
-    const syncRate = () => setRate(hovered || focusWithin ? 0.35 : 1);
-    rail.addEventListener('pointerenter', () => { hovered = true; syncRate(); });
-    rail.addEventListener('pointerleave', () => { hovered = false; syncRate(); });
-    rail.addEventListener('focusin', () => { focusWithin = true; syncRate(); });
-    rail.addEventListener('focusout', (event) => {
-      focusWithin = rail.contains(event.relatedTarget);
-      syncRate();
-    });
-  });
   initRailDrift();
   setupWorkReveal();
 }
 
-// MOBILE BELT (July 30, Typhon: "i like being able to manually move the belt but it also needs to be active
-// so we look like we have life"). On phones the rail is a real scroll container, so the desktop CSS marquee
-// can't drive it - a rAF nudges scrollLeft instead. Dragging takes over instantly and the drift resumes when
-// you let go, so the belt is never fighting your thumb. The aria-hidden duplicate set makes the loop seamless.
+// THE BELT (July 30 on phones, Typhon: "i like being able to manually move the belt but it also needs to be
+// active so we look like we have life"; extended to every pointer Aug 2 after Gregor's "not working on pc" -
+// "when you hover over it, it stops moving, and u move in"). The rail is a scroll container at all widths and
+// this rAF drives it; the old desktop CSS marquee was removed because a keyframed transform cannot be grabbed.
+// Hovering with a mouse STOPS the belt dead (not a slow-down - Gregor asked for a full stop) and the pointer
+// takes over: drag it, wheel it, flick it. Touch keeps the drift-then-resume behaviour so the belt never fights
+// a thumb. The aria-hidden duplicate set makes the loop seamless in both directions.
 function initRailDrift() {
   if (window.__railDriftAbort) window.__railDriftAbort.abort();
   const controller = new AbortController();
   window.__railDriftAbort = controller;
   const { signal } = controller;
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (!matchMedia('(max-width:1024px)').matches) return;
+  const hoverStops = matchMedia('(hover:hover)').matches;
 
   document.querySelectorAll('.work-rail').forEach((rail, index) => {
     if (getComputedStyle(rail).overflowX !== 'auto') return;
     const firstSet = rail.querySelector('.rail-set');
     if (!firstSet) return;
-    const back = index % 2 === 1;           // second rail drifts the other way, mirroring the desktop pair
-    const SPEED = 22;                        // px per second - a slow tide, not a carousel
-    let paused = false;
+    const back = index % 2 === 1;           // second rail drifts the other way, mirroring the original pair
+    // one loop of the set in ~110s (128s on the reverse rail) - the cadence the CSS marquee ran at, now
+    // measured from the real set width so phones and 1440s drift at the same visual pace, not the same px/s
+    const CYCLE = back ? 128 : 110;
+    let dragging = false;
+    let hovered = false;
     let visible = true;
     let resumeTimer = 0;
     let last = 0;
@@ -1627,33 +1602,86 @@ function initRailDrift() {
     // scrollLeft is INTEGER-QUANTIZED: writing 0.35px per frame rounds straight back to 0 and the belt never
     // moves. The true position is kept as a float here and only flushed to the element once it crosses a pixel.
     let pos = back ? span() : 0;
+    let held = false;
     if (back) rail.scrollLeft = pos;         // reverse rail starts inside the clone so it can travel backwards
 
+    const wrap = (value, width) => {
+      if (width < 8) return value;
+      if (value >= width) return value - width;
+      if (value <= 0) return value + width;
+      return value;
+    };
     const hold = () => {
-      paused = true;
+      held = true;
       clearTimeout(resumeTimer);
     };
     const release = () => {
       clearTimeout(resumeTimer);
-      resumeTimer = setTimeout(() => { paused = false; }, 1500);
+      resumeTimer = setTimeout(() => { held = false; }, 1500);
     };
     ['pointerdown', 'touchstart', 'wheel'].forEach((type) =>
       rail.addEventListener(type, hold, { passive: true, signal }));
     ['pointerup', 'pointercancel', 'touchend', 'touchcancel'].forEach((type) =>
       rail.addEventListener(type, release, { passive: true, signal }));
+    rail.addEventListener('pointerenter', (event) => { if (event.pointerType === 'mouse') hovered = true; }, { signal });
+    rail.addEventListener('pointerleave', (event) => { if (event.pointerType === 'mouse') hovered = false; }, { signal });
+
+    // GRAB-TO-MOVE (mouse/pen only - touch already has native inertial scrolling and must keep it). The card is
+    // an <a> to the player, so a drag past the slop threshold swallows the click that follows it.
+    const SLOP = 6;                          // px of travel before a press counts as a drag rather than a click
+    let dragId = 0;
+    let dragX = 0;
+    let dragged = 0;
+    // the cards are links wrapping images, so the browser's own drag-and-drop fires ~20px into a grab and
+    // pointercancels the belt out from under the cursor - the belt would judder and stop
+    rail.addEventListener('dragstart', (event) => event.preventDefault(), { signal });
+    rail.addEventListener('pointerdown', (event) => {
+      if (event.pointerType === 'touch' || event.button !== 0) return;
+      dragging = true;
+      dragId = event.pointerId;
+      dragX = event.clientX;
+      dragged = 0;
+      pos = rail.scrollLeft;
+      rail.classList.add('is-dragging');
+    }, { signal });
+    rail.addEventListener('pointermove', (event) => {
+      if (!dragging || event.pointerId !== dragId) return;
+      const dx = event.clientX - dragX;
+      dragX = event.clientX;
+      dragged += Math.abs(dx);
+      // capture is claimed only once this is unmistakably a DRAG: while a pointer is captured the click that
+      // follows retargets to the capturing element, so capturing on pointerdown silently killed every card
+      // click into the player. Past the slop threshold the click is being swallowed anyway.
+      if (dragged > SLOP && !rail.hasPointerCapture?.(dragId)) rail.setPointerCapture(dragId);
+      pos = wrap(pos - dx, span());
+      rail.scrollLeft = pos;
+    }, { signal });
+    const endDrag = (event) => {
+      if (!dragging || (event && event.pointerId !== dragId)) return;
+      dragging = false;
+      rail.classList.remove('is-dragging');
+      if (rail.hasPointerCapture?.(dragId)) rail.releasePointerCapture(dragId);
+    };
+    ['pointerup', 'pointercancel'].forEach((type) => rail.addEventListener(type, endDrag, { signal }));
+    rail.addEventListener('click', (event) => {
+      if (dragged <= SLOP) return;
+      event.preventDefault();
+      event.stopPropagation();
+      dragged = 0;
+    }, { capture: true, signal });
 
     const tick = (now) => {
       frame = requestAnimationFrame(tick);
       const dt = last ? Math.min((now - last) / 1000, 0.05) : 0;
       last = now;
-      if (paused || !visible || !dt) return;
+      const parked = dragging || held || (hoverStops && hovered) || rail.contains(document.activeElement)
+        || document.body.classList.contains('work-player-open');
+      if (parked || !visible || !dt) return;
       const width = span();
       if (width < 8) return;
       // resync if the reader moved the belt themselves, so we drift on from where they left it
       if (Math.abs(rail.scrollLeft - pos) > 2) pos = rail.scrollLeft;
-      pos += (back ? -SPEED : SPEED) * dt;
-      if (pos >= width) pos -= width;        // wrap across the duplicate set - invisible seam
-      if (pos <= 0) pos += width;
+      pos = wrap(pos + (back ? -1 : 1) * (width / CYCLE) * dt, width);
       rail.scrollLeft = pos;
     };
     frame = requestAnimationFrame(tick);
@@ -2155,7 +2183,6 @@ function initMotion() {
 document.querySelectorAll('.work-title, .credits-statement, #aboutTitle, .contact-statement, .footer-statement').forEach(prepareStatement);
 initChrome();
 initMotion();
-setupMotionBudget();
 onReveal(initWorkPlayer);
 hydrateWorks();
 </script>
