@@ -385,28 +385,36 @@ html.js .tl-monitor.browsing .tl-browse-card{opacity:1;transform:none;transition
 .tl-browse-meta{color:rgba(255,255,255,.4);font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
 body:not(.cs-body){-webkit-user-select:none;user-select:none}
 .contact-email{-webkit-user-select:text;user-select:text}
-.work-player{position:fixed;inset:0;width:100%;max-width:none;height:100%;max-height:none;margin:0;padding:0;border:0;overflow:hidden;background:var(--field);color:var(--ink);opacity:0;visibility:hidden;transition:opacity .28s var(--ease),visibility 0s linear .62s}
+/* THE SCREENING ROOM (Aug 2) - the player used to be a dark card marooned on the white field, which read like a
+   document viewer; a video belongs in a dark room. Same grammar as the case-page player and the credits monitor:
+   a key light top-left and a counter light lower-right, both mixed from the CLIENT'S own colour (`--player-glow`,
+   set per video in openPlayer from CHANNEL_PLATES). The light world is untouched - a modal is chrome, not a
+   section, so this does not open the door to more dark rooms on the page itself. */
+.work-player{position:fixed;inset:0;left:0;width:100vw;max-width:none;height:100%;max-height:none;margin:0;padding:0;border:0;overflow:hidden;--player-glow:var(--blue);background:#05070a;color:#fff;opacity:0;visibility:hidden;transition:opacity .28s var(--ease),visibility 0s linear .62s}
 .work-player[open]{display:block}
 .work-player::backdrop{background:transparent}
 .work-player.is-open{opacity:1;visibility:visible;transition:opacity .28s var(--ease),visibility 0s linear 0s}
 .work-player.is-closing{pointer-events:none}
-.work-player-field{position:absolute;inset:0;z-index:0;background:var(--field)}
+.work-player-field{position:absolute;inset:0;z-index:0;background:linear-gradient(168deg,#0a0d13,#05070a 64%)}
+.work-player-field::before,.work-player-field::after{content:"";position:absolute;inset:0;pointer-events:none;transition:background .5s var(--ease)}
+.work-player-field::before{background:radial-gradient(76% 62% at 16% 4%,color-mix(in srgb,var(--player-glow) 17%,transparent),transparent 68%)}
+.work-player-field::after{background:radial-gradient(64% 58% at 88% 98%,color-mix(in srgb,var(--player-glow) 13%,transparent),transparent 66%);filter:hue-rotate(26deg)}
 .work-player-top{position:absolute;z-index:4;top:0;left:max(var(--pad),env(safe-area-inset-left));right:max(var(--pad),env(safe-area-inset-right));height:86px;display:flex;align-items:center;justify-content:space-between;pointer-events:none}
-.work-player-wordmark{width:auto;height:39px;filter:invert(1)}
-.work-player-close{position:relative;isolation:isolate;width:52px;height:52px;border:1px solid rgba(255,255,255,.16);outline:0;overflow:hidden;background:rgba(26,26,26,.88);-webkit-backdrop-filter:blur(28px) saturate(1.18);backdrop-filter:blur(28px) saturate(1.18);color:#fff;pointer-events:auto;clip-path:polygon(9px 0,calc(100% - 9px) 0,100% 9px,100% calc(100% - 9px),calc(100% - 9px) 100%,9px 100%,0 calc(100% - 9px),0 9px);box-shadow:0 12px 30px -10px rgba(15,17,21,.42),inset 0 1px 0 rgba(255,255,255,.08),inset -3px 2px 8px rgba(47,107,255,.13);transition:background .24s var(--ease),border-color .24s var(--ease),transform .28s var(--ease-spring),box-shadow .28s var(--ease)}
+.work-player-wordmark{width:auto;height:39px;opacity:.9}
+.work-player-close{position:relative;isolation:isolate;width:52px;height:52px;border:1px solid rgba(255,255,255,.14);outline:0;overflow:hidden;background:rgba(255,255,255,.055);-webkit-backdrop-filter:blur(28px) saturate(1.18);backdrop-filter:blur(28px) saturate(1.18);color:#fff;pointer-events:auto;clip-path:polygon(9px 0,calc(100% - 9px) 0,100% 9px,100% calc(100% - 9px),calc(100% - 9px) 100%,9px 100%,0 calc(100% - 9px),0 9px);box-shadow:0 12px 30px -10px rgba(15,17,21,.42),inset 0 1px 0 rgba(255,255,255,.08),inset -3px 2px 8px rgba(47,107,255,.13);transition:background .24s var(--ease),border-color .24s var(--ease),transform .28s var(--ease-spring),box-shadow .28s var(--ease)}
 .work-player-close::before{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(118deg,transparent 35%,rgba(47,107,255,.22),transparent 68%);opacity:0;transition:opacity .3s var(--ease)}
 .work-player-close::after{content:"";position:absolute;top:0;left:24%;width:52%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.72),transparent);opacity:.7;pointer-events:none}
 .work-player-close span{position:absolute;inset:0;transition:transform .32s var(--ease-spring)}
 .work-player-close i{position:absolute;left:16px;top:25px;width:20px;height:1.5px;background:currentColor;border-radius:1px}
 .work-player-close i:first-child{transform:rotate(45deg)}
 .work-player-close i:last-child{transform:rotate(-45deg)}
-.work-player-close:hover,.work-player-close:focus-visible{border-color:rgba(255,255,255,.28);background:#111318;transform:scale(.98);box-shadow:0 15px 34px -10px rgba(0,0,0,.58),inset 0 1px 0 rgba(255,255,255,.12),inset -3px 2px 9px rgba(47,107,255,.22)}
+.work-player-close:hover,.work-player-close:focus-visible{border-color:rgba(255,255,255,.34);background:rgba(255,255,255,.11);transform:scale(.98);box-shadow:0 15px 34px -10px rgba(0,0,0,.58),inset 0 1px 0 rgba(255,255,255,.12),inset -3px 2px 9px rgba(47,107,255,.22)}
 .work-player-close:hover::before,.work-player-close:focus-visible::before{opacity:1}
 .work-player-close:hover span,.work-player-close:focus-visible span{transform:rotate(90deg)}
 .work-player-close:focus-visible{outline:2px solid rgba(47,107,255,.78);outline-offset:4px}
 .work-player-shell{position:relative;z-index:2;width:100%;height:100vh;height:100dvh;padding:clamp(94px,10vh,112px) max(var(--pad),env(safe-area-inset-right)) max(18px,env(safe-area-inset-bottom)) max(var(--pad),env(safe-area-inset-left));display:flex;align-items:center;justify-content:center;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none}
 .work-player-shell::-webkit-scrollbar{display:none}
-.work-player-window{--player-width:min(100%,1560px,calc((100vh - 222px) * 1.7778));--player-width:min(100%,1560px,calc((100dvh - 222px) * 1.7778));position:relative;width:var(--player-width);max-width:100%;margin:auto;display:flex;flex-direction:column;flex:0 0 auto;overflow:hidden;border:1px solid rgba(6,8,12,.18);border-radius:12px;background:linear-gradient(165deg,#0a0d13,#05070a 68%);box-shadow:0 34px 80px -36px rgba(15,18,24,.52),0 12px 32px -18px rgba(15,18,24,.34),inset 0 1px 0 rgba(255,255,255,.09);opacity:0;filter:blur(6px);transform:translateY(22px) scale(.985);transition:opacity .42s .02s var(--ease),filter .52s .02s var(--ease-silk),transform .58s .02s var(--ease-silk)}
+.work-player-window{--player-width:min(100%,1560px,calc((100vh - 222px) * 1.7778));--player-width:min(100%,1560px,calc((100dvh - 222px) * 1.7778));position:relative;width:var(--player-width);max-width:100%;margin:auto;display:flex;flex-direction:column;flex:0 0 auto;overflow:hidden;border:1px solid rgba(255,255,255,.1);border-radius:12px;background:linear-gradient(165deg,#0e1219,#070a0f 70%);box-shadow:0 46px 110px -40px rgba(0,0,0,.9),0 16px 44px -26px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.03),inset 0 1px 0 rgba(255,255,255,.07);opacity:0;filter:blur(6px);transform:translateY(22px) scale(.985);transition:opacity .42s .02s var(--ease),filter .52s .02s var(--ease-silk),transform .58s .02s var(--ease-silk)}
 .work-player-window::after{content:"";position:absolute;z-index:6;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(255,255,255,.045);pointer-events:none}
 .work-player.is-open .work-player-window{opacity:1;filter:none;transform:none}
 .work-player-stage{position:relative;width:100%;aspect-ratio:16/9;flex:0 0 auto;overflow:hidden;background:#020305}
@@ -422,7 +430,7 @@ body:not(.cs-body){-webkit-user-select:none;user-select:none}
 .work-player-loading i{position:absolute;top:0;left:-28%;width:28%;height:100%;background:linear-gradient(90deg,transparent,var(--blue),rgba(255,255,255,.9),transparent);box-shadow:0 0 12px rgba(47,107,255,.55);animation:workPlayerLoad 1.25s var(--ease) infinite}
 .work-player-stage.is-ready .work-player-loading{opacity:0}
 @keyframes workPlayerLoad{to{transform:translateX(460%)}}
-.work-player-meta{width:100%;min-height:88px;padding:17px 22px 19px;display:flex;align-items:flex-end;justify-content:space-between;gap:28px;border-top:1px solid rgba(255,255,255,.09);background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012));color:#fff}
+.work-player-meta{width:100%;min-height:84px;padding:16px 22px;display:flex;align-items:center;justify-content:space-between;gap:28px;border-top:1px solid rgba(255,255,255,.09);background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012));color:#fff}
 .work-player-copy{min-width:0;display:flex;flex-direction:column;gap:8px}
 .work-player-copy>span{color:rgba(255,255,255,.48);font-size:10px;font-weight:600;line-height:1;letter-spacing:.12em;text-transform:uppercase}
 .work-player-copy h2{overflow:hidden;max-width:min(960px,72vw);color:#fff;font-family:var(--font);font-size:clamp(18px,1.8vw,27px);font-weight:500;line-height:1.16;letter-spacing:-.032em;text-transform:none;text-overflow:ellipsis;white-space:nowrap}
@@ -433,11 +441,14 @@ body:not(.cs-body){-webkit-user-select:none;user-select:none}
 .work-player-source:focus-visible{outline:2px solid rgba(47,107,255,.58);outline-offset:5px}
 .work-player--portrait .work-player-window{--portrait-stage:min(440px,42vw,calc((100vh - 128px) * .5625));--portrait-stage:min(440px,42vw,calc((100dvh - 128px) * .5625));--portrait-dock:clamp(300px,28vw,410px);width:min(100%,calc(var(--portrait-stage) + var(--portrait-dock)));display:grid;grid-template-columns:var(--portrait-stage) minmax(0,1fr)}
 .work-player--portrait .work-player-stage{aspect-ratio:9/16}
-.work-player--portrait .work-player-meta{min-height:0;padding:clamp(25px,3vw,40px);flex-direction:column;align-items:stretch;justify-content:space-between;gap:28px;border-top:0;border-left:1px solid rgba(255,255,255,.09)}
+.work-player--portrait .work-player-meta{min-height:0;padding:clamp(25px,3vw,40px);flex-direction:column;align-items:stretch;justify-content:center;gap:24px;border-top:0;border-left:1px solid rgba(255,255,255,.09)}
 .work-player--portrait .work-player-copy{gap:12px}
 .work-player--portrait .work-player-copy h2{max-width:100%;font-size:clamp(24px,2.3vw,34px);line-height:1.08;white-space:normal;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical}
 .work-player--portrait .work-player-source{align-self:flex-start}
-html.work-player-open{overflow:hidden;overscroll-behavior:none}
+/* release the reserved gutter with the scrollbar: `scrollbar-gutter:stable` keeps painting a strip of the page
+   canvas OUTSIDE the dialog's box, which was invisible while the player was light and is a seam of daylight
+   down the right edge of a dark room. */
+html.work-player-open{overflow:hidden;overscroll-behavior:none;scrollbar-gutter:auto}
 body.work-player-open{position:fixed;top:calc(var(--work-player-scroll-y,0px) * -1);left:0;right:0;width:100%;overflow:hidden;overscroll-behavior:none}
 .tl-body{position:relative;z-index:1;overflow-x:auto;overscroll-behavior-x:contain;cursor:crosshair;background:rgba(3,5,8,.2);scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.2) transparent}
 .tl-body::-webkit-scrollbar{height:5px}
@@ -762,13 +773,13 @@ html.js body:not(.cs-ready) .poster-section{opacity:0;transform:translateY(30px)
   .work-player-wordmark{height:27px}
   .work-player-close{width:48px;height:48px}
   .work-player-close i{left:14px;top:23px}
-  .work-player-shell{padding:78px max(var(--pad),env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(var(--pad),env(safe-area-inset-left))}
+  .work-player-shell{padding:78px max(20px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(20px,env(safe-area-inset-left))}
   .work-player-window{--player-width:min(100%,calc((100vh - 210px) * 1.7778));--player-width:min(100%,calc((100dvh - 210px) * 1.7778));border-radius:10px}
-  .work-player-meta{min-height:104px;padding:15px 17px 17px;align-items:flex-start}
+  .work-player-meta{min-height:0;padding:14px 16px 15px;align-items:flex-start}
   .work-player-copy h2{max-width:68vw;font-size:18px;line-height:1.22;white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
   .work-player-source{padding-top:7px;font-size:10px}
   .work-player--portrait .work-player-window{--portrait-stage:min(430px,100%,calc((100vh - 235px) * .5625));--portrait-stage:min(430px,100%,calc((100dvh - 235px) * .5625));width:var(--portrait-stage);display:flex}
-  .work-player--portrait .work-player-meta{min-height:112px;padding:16px 17px 18px;gap:12px;border-top:1px solid rgba(255,255,255,.09);border-left:0}
+  .work-player--portrait .work-player-meta{min-height:0;padding:15px 16px 16px;gap:10px;border-top:1px solid rgba(255,255,255,.09);border-left:0}
   .work-player--portrait .work-player-copy{gap:8px}
   .work-player--portrait .work-player-copy h2{font-size:19px;line-height:1.16;-webkit-line-clamp:2}
   .about,.contact{padding:88px 0}
@@ -806,7 +817,7 @@ html.js body:not(.cs-ready) .poster-section{opacity:0;transform:translateY(30px)
      2x2 social grid fought each other across a half-empty row. They now STACK - full-width control first, then the
      links as one left-aligned wrapping line under it. One column, one reading order. */
   .contact-utility{display:flex;flex-direction:column;align-items:stretch;margin-top:30px;padding-top:24px;gap:26px}
-  .contact-copy{width:100%;height:54px;justify-content:space-between;padding:0 20px}
+  .contact-copy{width:100%;height:54px;justify-content:center;gap:14px;padding:0 20px}
   .contact-elsewhere-links{display:flex;flex-wrap:wrap;justify-content:flex-start;gap:14px 26px}
   .contact-elsewhere-links a{min-height:32px}
   .footer-cta{padding:64px 0 68px}
@@ -973,7 +984,9 @@ html.js body:not(.cs-ready) .poster-section{opacity:0;transform:translateY(30px)
 
 @media(max-width:520px){
   h2{font-size:68px}
-  .work-player-meta{flex-direction:column;gap:8px}
+  .work-player-meta{flex-direction:column;align-items:flex-start;gap:10px}
+  .work-player-copy{gap:7px}
+  .work-player-source{min-height:36px;padding:4px 0}
   .work-player-copy h2{max-width:100%}
   .tl-monitor{height:248px}
   .tl-monitor-card{gap:7px}
