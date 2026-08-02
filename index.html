@@ -42,7 +42,7 @@
 </script>
 <script>document.documentElement.classList.add('js')</script>
 <link rel="stylesheet" href="assets/fonts.css" />
-  <link rel="stylesheet" href="styles.css?v=remaster-167" />
+<link rel="stylesheet" href="styles.css?v=remaster-169" />
 <script src="assets/project-transition.js?v=2" defer></script>
 <noscript><style>#preloader{display:none!important}body.lock{overflow:auto!important}</style></noscript>
 </head>
@@ -632,7 +632,7 @@ function renderCredits() {
   }).join('');
   board.innerHTML = '<div class="tl" role="group" aria-label="Editing timeline of channel credits">'
     + '<div class="tl-monitor"><span class="tl-monitor-tag">PGM &middot; PR&Scaron;A PRODUCTIONS</span><span class="tl-monitor-tc" data-tc><b data-tc-main>00:00:00</b><i data-tc-frames>:00</i></span>'
-    + '<div class="tl-monitor-stage"><div class="tl-monitor-identity"><div class="tl-monitor-card" data-mon-card><img data-mon-img class="is-lockup" src="assets/wordmarks/mrbeast-lockup-white.png" alt="" decoding="async" /><strong data-mon-name>MrBeast</strong><span class="tl-monitor-ch" data-mon-ch>509M subscribers</span><span class="tl-monitor-hint" data-mon-hint aria-hidden="true">View edits</span></div></div></div><div class="tl-browse" data-browse role="region" aria-labelledby="tlBrowseLabel" hidden><div class="tl-browse-head"><span id="tlBrowseLabel" data-browse-label></span><button type="button" class="tl-browse-close" data-browse-close aria-label="Close videos"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></button></div><div class="tl-browse-track" data-browse-track data-lenis-prevent><div class="tl-browse-row" data-browse-row></div><div class="tl-browse-bar" data-browse-bar><i data-browse-thumb></i></div></div></div></div>'
+    + '<div class="tl-monitor-stage"><div class="tl-monitor-identity"><div class="tl-monitor-card" data-mon-card><img data-mon-img class="is-lockup" src="assets/wordmarks/mrbeast-lockup-white.png" alt="" decoding="async" /><strong data-mon-name>MrBeast</strong><span class="tl-monitor-ch" data-mon-ch>509M subscribers</span><span class="tl-monitor-hint" data-mon-hint aria-hidden="true">View edits</span></div></div></div><div class="tl-browse" data-browse role="region" aria-labelledby="tlBrowseLabel" hidden aria-hidden="true" inert><div class="tl-browse-head"><span id="tlBrowseLabel" data-browse-label></span><button type="button" class="tl-browse-more" data-browse-more hidden>More</button><button type="button" class="tl-browse-close" data-browse-close aria-label="Close videos"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></button></div><div class="tl-browse-track" data-browse-track data-lenis-prevent><div class="tl-browse-row" data-browse-row></div><div class="tl-browse-bar" data-browse-bar><i data-browse-thumb></i></div></div></div></div>'
     + '<div class="tl-body" data-lenis-prevent-horizontal><div class="tl-scroll"><div class="tl-rail"><span class="tl-corner"></span><div class="tl-ruler">' + ticks.join('') + '</div></div>'
     + tracks
     + '<div class="tl-field"><i class="tl-playhead"></i></div></div></div></div>';
@@ -661,6 +661,8 @@ function initWorkPlayer() {
   let closeTransitionEnd = null;
   let priorTheme = '';
   let lockedScrollY = 0;
+  let lockedAnchor = null;
+  let lockedAnchorOffset = null;
   let priorScrollLock = '';
 
   const clearCloseWait = () => {
@@ -711,16 +713,34 @@ function initWorkPlayer() {
     returnFocus = null;
     const lenis = window.__lenisInstance;
     if (lenis) lenis.resize();
-    window.scrollTo(0, lockedScrollY);
-    if (lenis) lenis.scrollTo(lockedScrollY, { immediate: true, force: true });
+    const resolveRestoreY = () => {
+      const maxScroll = Math.max(0, document.documentElement.scrollHeight - innerHeight);
+      if (lockedAnchor?.isConnected && lockedAnchorOffset !== null) {
+        const rect = lockedAnchor.getBoundingClientRect();
+        if (rect.width || rect.height) {
+          const navBottom = document.querySelector('#nav')?.getBoundingClientRect().bottom || 0;
+          const maxOffset = Math.max(12, innerHeight - rect.height - 18);
+          const minOffset = Math.min(maxOffset, Math.max(12, navBottom + 12));
+          const anchorOffset = Math.max(minOffset, Math.min(maxOffset, lockedAnchorOffset));
+          return Math.max(0, Math.min(maxScroll, window.scrollY + rect.top - anchorOffset));
+        }
+      }
+      return Math.max(0, Math.min(maxScroll, lockedScrollY));
+    };
+    let restoreScrollY = resolveRestoreY();
+    window.scrollTo(0, restoreScrollY);
+    if (lenis) lenis.scrollTo(restoreScrollY, { immediate: true, force: true });
     if (restoreFocus && focusTarget?.focus) focusTarget.focus({ preventScroll: true });
     requestAnimationFrame(() => {
+      restoreScrollY = resolveRestoreY();
       if (lenis) {
         lenis.resize();
-        lenis.scrollTo(lockedScrollY, { immediate: true, force: true });
+        lenis.scrollTo(restoreScrollY, { immediate: true, force: true });
         lenis.start();
       }
-      window.scrollTo(0, lockedScrollY);
+      window.scrollTo(0, restoreScrollY);
+      lockedAnchor = null;
+      lockedAnchorOffset = null;
       syncRailRates();
     });
   };
@@ -761,6 +781,8 @@ function initWorkPlayer() {
     returnFocus = canRestoreFocus(link) && !link.closest('[aria-hidden="true"]') ? link : canonical;
     priorTheme = themeColor?.content || '';
     lockedScrollY = window.scrollY;
+    lockedAnchor = returnFocus;
+    lockedAnchorOffset = lockedAnchor?.getBoundingClientRect().top ?? null;
     priorScrollLock = document.body.style.getPropertyValue('--work-player-scroll-y');
 
     title.textContent = workTitle;
@@ -801,6 +823,8 @@ function initWorkPlayer() {
       frame.replaceChildren();
       poster.removeAttribute('src');
       returnFocus = null;
+      lockedAnchor = null;
+      lockedAnchorOffset = null;
       return false;
     }
     document.body.style.setProperty('--work-player-scroll-y', lockedScrollY + 'px');
@@ -940,6 +964,7 @@ function initTimeline() {
   requestAnimationFrame(measureSnaps);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => requestAnimationFrame(measureSnaps));
   window.addEventListener('resize', measureSnaps, { passive: true, signal: tlSig });
+  window.addEventListener('prsa:geometry', measureSnaps, { passive: true, signal: tlSig });
   let current = 0;
   let cutTimer = 0;
   let cutToken = 0;
@@ -956,11 +981,19 @@ function initTimeline() {
   const browseBar = board.querySelector('[data-browse-bar]');
   const browseThumb = board.querySelector('[data-browse-thumb]');
   const browseLabel = board.querySelector('[data-browse-label]');
+  const browseMore = board.querySelector('[data-browse-more]');
   const nativeBrowseQuery = matchMedia('(max-width: 820px), (pointer: coarse)');
   const usesNativeBrowse = () => nativeBrowseQuery.matches;
   let browseItems = [];
   let browseRendered = 0;
   const BROWSE_BATCH = 24;
+  const syncBrowseMore = () => {
+    if (!browseMore) return;
+    const remaining = Math.max(0, browseItems.length - browseRendered);
+    const visible = usesNativeBrowse() && remaining > 0;
+    browseMore.hidden = !visible;
+    if (visible) browseMore.setAttribute('aria-label', 'Load ' + Math.min(BROWSE_BATCH, remaining) + ' more videos');
+  };
   const vidsFor = (entry) => {
     if (!entry) return [];
     const list = (typeof works !== 'undefined' && Array.isArray(works)) ? works : [];
@@ -993,11 +1026,12 @@ function initTimeline() {
     return '<a class="' + cls + '" style="--i:' + i + '" href="https://youtu.be/' + encodeURIComponent(w.id) + '" target="_blank" rel="noopener noreferrer" data-project-fallback="' + escapeHtml(w.thumbFallback || w.thumb) + '" aria-label="Watch ' + escapeHtml(w.title) + ' on YouTube">' + media + text + '</a>';
   };
   const appendBrowseBatch = () => {
-    if (!browseRow || browseRendered >= browseItems.length) return;
+    if (!browseRow || browseRendered >= browseItems.length) { syncBrowseMore(); return; }
     const end = usesNativeBrowse() ? Math.min(browseItems.length, browseRendered + BROWSE_BATCH) : browseItems.length;
     const markup = browseItems.slice(browseRendered, end).map((work, offset) => browseCardMarkup(work, browseRendered + offset)).join('');
     browseRow.insertAdjacentHTML('beforeend', markup);
     browseRendered = end;
+    syncBrowseMore();
   };
   const buildBrowse = (entry) => {
     if (!browseTrack || !browseRow || !browseLabel) return;
@@ -1015,7 +1049,11 @@ function initTimeline() {
     if (!entry || !vidsFor(entry).length) return;
     browsing = true;
     buildBrowse(entry);
-    if (browsePanel) browsePanel.hidden = false;
+    if (browsePanel) {
+      browsePanel.hidden = false;
+      browsePanel.removeAttribute('aria-hidden');
+      browsePanel.removeAttribute('inert');
+    }
     if (stage) {
       stage.setAttribute('aria-hidden', 'true');
       if ('inert' in stage) stage.inert = true;
@@ -1061,6 +1099,7 @@ function initTimeline() {
         if (reset) browseTrack.scrollLeft = 0;
         return;
       }
+      if (browseTrack.scrollLeft) browseTrack.scrollLeft = 0;
       bMax = Math.max(0, browseRow.scrollWidth - browseTrack.clientWidth + 16);
       browseTrack.classList.toggle('tl-browse-track--center', bMax <= 2);
       if (reset || bMax <= 2) { bx = 0; bTarget = 0; }
@@ -1171,19 +1210,39 @@ function initTimeline() {
       if (!usesNativeBrowse() || browseRendered >= browseItems.length) return;
       if (browseTrack.scrollLeft + browseTrack.clientWidth >= browseTrack.scrollWidth - browseTrack.clientWidth * 1.5) appendBrowseBatch();
     }, { passive: true, signal: tlSig });
-    window.addEventListener('resize', () => { if (browsing) browseMeasure(false); }, { passive: true, signal: tlSig });
+    const refreshBrowseGeometry = () => {
+      if (!browsing) return;
+      if (!usesNativeBrowse() && browseRendered < browseItems.length) appendBrowseBatch();
+      browseMeasure(false);
+    };
+    window.addEventListener('resize', refreshBrowseGeometry, { passive: true, signal: tlSig });
+    window.addEventListener('prsa:geometry', refreshBrowseGeometry, { passive: true, signal: tlSig });
+    nativeBrowseQuery.addEventListener?.('change', refreshBrowseGeometry, { signal: tlSig });
   }
+  browseMore?.addEventListener('click', () => {
+    const firstNew = browseRendered;
+    appendBrowseBatch();
+    requestAnimationFrame(() => {
+      browseMeasure?.(false);
+      const newCard = browseRow?.querySelectorAll('.tl-browse-card')[firstNew];
+      newCard?.focus({ preventScroll: true });
+    });
+  }, { signal: tlSig });
   const closeBrowse = () => {
     if (!browsing) return;
     browsing = false;
     clearTimeout(retargetTimer);
     if (browsePanel) browsePanel.classList.remove('retargeting');
     if (monitor) monitor.classList.remove('browsing');
+    if (browsePanel) {
+      browsePanel.setAttribute('aria-hidden', 'true');
+      browsePanel.setAttribute('inert', '');
+    }
     if (stage) {
       stage.removeAttribute('aria-hidden');
       if ('inert' in stage) stage.inert = false;
     }
-    window.setTimeout(() => { if (browsePanel && !browsing) browsePanel.hidden = true; }, 520);
+    window.setTimeout(() => { if (browsePanel && !browsing) browsePanel.hidden = true; }, reduce ? 0 : 520);
     const returnTarget = monImg && monImg.tabIndex >= 0
       ? monImg
       : board.querySelector('.clip[data-idx="' + current + '"]');
@@ -1381,6 +1440,7 @@ function initTimeline() {
   }, { signal: tlSig });
   document.addEventListener('keydown', (event) => {
     if (event.key !== 'Escape') return;
+    if (document.body.classList.contains('menu-open')) return;
     if (browsing) { closeBrowse(); return; }
     if (pinnedIdx !== -1) setPinned(-1);
   }, { signal: tlSig });
@@ -1783,7 +1843,10 @@ function initChrome() {
   });
   const menuScrollKeys = new Set(['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' ']);
   const preventMenuScroll = (event) => {
-    if (mnav.classList.contains('open')) event.preventDefault();
+    if (!mnav.classList.contains('open')) return;
+    const menuPanel = event.target instanceof Element ? event.target.closest('.menu-panel') : null;
+    if (event.type === 'touchmove' && menuPanel && menuPanel.scrollHeight > menuPanel.clientHeight + 1) return;
+    event.preventDefault();
   };
   window.addEventListener('wheel', preventMenuScroll, { passive: false, capture: true });
   window.addEventListener('touchmove', preventMenuScroll, { passive: false, capture: true });
