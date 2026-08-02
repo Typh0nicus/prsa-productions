@@ -1573,8 +1573,9 @@ function renderWorkWall() {
 // "when you hover over it, it stops moving, and u move in"). The rail is a scroll container at all widths and
 // this rAF drives it; the old desktop CSS marquee was removed because a keyframed transform cannot be grabbed.
 // Hovering with a mouse STOPS the belt dead (not a slow-down - Gregor asked for a full stop) and the pointer
-// takes over: drag it, wheel it, flick it. Touch keeps the drift-then-resume behaviour so the belt never fights
-// a thumb. The aria-hidden duplicate set makes the loop seamless in both directions.
+// takes over: drag it by hand or wheel it (there is no release-velocity inertia on mouse drags - the belt picks
+// its ambient pace back up when you let go; touch keeps the platform's own inertial scrolling). Touch also keeps
+// drift-then-resume so the belt never fights a thumb. The aria-hidden duplicate set makes the loop seamless.
 function initRailDrift() {
   if (window.__railDriftAbort) window.__railDriftAbort.abort();
   const controller = new AbortController();
@@ -1619,9 +1620,13 @@ function initRailDrift() {
       clearTimeout(resumeTimer);
       resumeTimer = setTimeout(() => { held = false; }, 1500);
     };
-    ['pointerdown', 'touchstart', 'wheel'].forEach((type) =>
+    ['pointerdown', 'touchstart'].forEach((type) =>
       rail.addEventListener(type, hold, { passive: true, signal }));
-    ['pointerup', 'pointercancel', 'touchend', 'touchcancel'].forEach((type) =>
+    // a wheel/trackpad gesture has no release event of its own, so it holds AND arms the countdown in the same
+    // breath - each new notch re-arms it and the belt picks up 1.5s after the last one. Putting `wheel` in the
+    // hold list alone parks the rail forever the first time anyone scrolls across it.
+    rail.addEventListener('wheel', () => { hold(); release(); }, { passive: true, signal });
+    ['touchend', 'touchcancel'].forEach((type) =>
       rail.addEventListener(type, release, { passive: true, signal }));
     rail.addEventListener('pointerenter', (event) => { if (event.pointerType === 'mouse') hovered = true; }, { signal });
     rail.addEventListener('pointerleave', (event) => { if (event.pointerType === 'mouse') hovered = false; }, { signal });
@@ -1662,7 +1667,11 @@ function initRailDrift() {
       rail.classList.remove('is-dragging');
       if (rail.hasPointerCapture?.(dragId)) rail.releasePointerCapture(dragId);
     };
-    ['pointerup', 'pointercancel'].forEach((type) => rail.addEventListener(type, endDrag, { signal }));
+    // the release listens on the WINDOW, not the rail: under the slop threshold no capture has been claimed, so
+    // a press that ends anywhere else - drag straight up off the rail and let go - never reaches a rail-bound
+    // listener, and `dragging`/`held` would stay set with the belt parked and the grabbing cursor stuck on.
+    ['pointerup', 'pointercancel'].forEach((type) =>
+      window.addEventListener(type, (event) => { endDrag(event); release(); }, { signal }));
     rail.addEventListener('click', (event) => {
       if (dragged <= SLOP) return;
       event.preventDefault();
@@ -1670,11 +1679,19 @@ function initRailDrift() {
       dragged = 0;
     }, { capture: true, signal });
 
+    // Only KEYBOARD focus parks the belt - someone arrowing/tabbing along the cards must not have the floor
+    // slide under them. Plain `rail.contains(activeElement)` parked it for mouse focus too, and clicking a card
+    // leaves that card focused: watch a video, close the player, and the rail never moved again.
+    const keyboardFocusInside = () => {
+      const active = document.activeElement;
+      if (!active || !rail.contains(active)) return false;
+      try { return active.matches(':focus-visible'); } catch { return true; }
+    };
     const tick = (now) => {
       frame = requestAnimationFrame(tick);
       const dt = last ? Math.min((now - last) / 1000, 0.05) : 0;
       last = now;
-      const parked = dragging || held || (hoverStops && hovered) || rail.contains(document.activeElement)
+      const parked = dragging || held || (hoverStops && hovered) || keyboardFocusInside()
         || document.body.classList.contains('work-player-open');
       if (parked || !visible || !dt) return;
       const width = span();
