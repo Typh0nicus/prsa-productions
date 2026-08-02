@@ -11,7 +11,7 @@
   "comments": "696.17K",
   "tracked_videos": 374
  },
- "note": "Featured = top 16 of 374 tracked videos, sorted by real view count. 'role' is Gregor's own contribution note on YTJobs where given; blank means credited as video editor without a specific note.",
+ "note": "Featured = 12 curated landscape projects retained for the legacy case pages. 'role' is Gregor's own contribution note on YTJobs where given; blank means credited as video editor without a specific note. The homepage rails are curated independently in work-videos.json.",
  "featured": [
   {
    "rank": 1,

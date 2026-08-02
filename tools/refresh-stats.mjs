@@ -1,7 +1,7 @@
 // Refresh ALL site statistics + the full attributed video dataset from YTJobs (source of truth).
 // Usage: node tools/refresh-stats.mjs
 // Updates: credits.json (subs), works.json (views/likes/channel), data/videos.js (full library),
-// index.html (statement total + FALLBACK_CREDITS + fallback channel/format patches), data/stats.json.
+// index.html (statement total + FALLBACK_CREDITS + FALLBACK_RAIL_WORKS + fallback channel/format patches), data/stats.json.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -147,6 +147,8 @@ const run = async () => {
   // ---- works.json featured: views/likes + channel from the full dataset ----
   const worksPath = path.join(ROOT, 'works.json');
   const worksDoc = JSON.parse(fs.readFileSync(worksPath, 'utf8'));
+  const railPath = path.join(ROOT, 'work-videos.json');
+  const railDoc = JSON.parse(fs.readFileSync(railPath, 'utf8'));
   const apiVidByYtId = new Map(allVideos.map((v) => [ytIdOf(v), v]).filter(([k]) => k));
   const attributions = [];
   for (const work of worksDoc.featured || []) {
@@ -175,6 +177,22 @@ const run = async () => {
   if (fbStart !== -1 && fbEnd !== -1) {
     const lines = creditsDoc.credits.map((e) => `  {name:${JSON.stringify(e.name)},avatar:${JSON.stringify(e.avatar)},subs:${e.subs}},`).join('\n');
     html = html.slice(0, fbStart) + 'const FALLBACK_CREDITS = [\n' + lines + '\n' + html.slice(fbEnd);
+  }
+  const railStart = html.indexOf('const FALLBACK_RAIL_WORKS = [');
+  const railEnd = html.indexOf('];', railStart);
+  if (railStart !== -1 && railEnd !== -1) {
+    const railLines = (railDoc.videos || []).map((w) => {
+      const parts = [
+        `id:${JSON.stringify(w.id)}`,
+        `title:${JSON.stringify(w.title)}`,
+        `url:${JSON.stringify(w.url)}`,
+        `thumb:${JSON.stringify(w.thumb)}`,
+        `thumbFallback:${JSON.stringify(w.thumbFallback || '')}`,
+        `format:${JSON.stringify(w.format || 'landscape')}`,
+      ];
+      return '  {' + parts.join(',') + '},';
+    }).join('\n');
+    html = html.slice(0, railStart) + 'const FALLBACK_RAIL_WORKS = [\n' + railLines + '\n' + html.slice(railEnd);
   }
   for (const work of worksDoc.featured || []) {
     const re = new RegExp(`(\\{rank:${work.rank},id:'${work.id}'[^}]*?)(,channel:"[^"]*")?\\}`);
@@ -238,7 +256,7 @@ const run = async () => {
   console.log('manual additions:', added.join(' | ') || 'none');
   console.log('subs updated:', updated.join(' | ') || 'no changes');
   console.log('credits without YTJobs channel (kept):', unmatched.join(', ') || 'none');
-  console.log('featured attributed:', attributions.length + '/16');
+  console.log('featured attributed:', attributions.length + '/' + (worksDoc.featured || []).length);
   const perCh = {};
   for (const v of videosOut) perCh[v.channel] = (perCh[v.channel] || 0) + 1;
   console.log('per-channel counts:', Object.entries(perCh).sort((a, b) => b[1] - a[1]).slice(0, 12).map(([k, n]) => k + ':' + n).join(' '));

@@ -1,5 +1,6 @@
 artifacts/
 references/
+dist/
 work-preview.html
 Thumbs.db
 desktop.ini

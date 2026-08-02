@@ -42,7 +42,7 @@
 </script>
 <script>document.documentElement.classList.add('js')</script>
 <link rel="stylesheet" href="assets/fonts.css" />
-  <link rel="stylesheet" href="styles.css?v=remaster-160" />
+  <link rel="stylesheet" href="styles.css?v=remaster-166" />
 <script src="assets/project-transition.js?v=2" defer></script>
 <noscript><style>#preloader{display:none!important}body.lock{overflow:auto!important}</style></noscript>
 </head>
@@ -123,16 +123,32 @@ window.__prsaIntroFailsafe = window.setTimeout(function () {
   </div>
 </div>
 
-<div class="vlib" id="vlib" role="dialog" aria-modal="true" aria-label="Video library" hidden>
-  <div class="wrap vlib-inner">
-    <div class="vlib-head">
-      <h2 class="vlib-title">Video library</h2>
-      <button class="vlib-close" type="button" aria-label="Close library" data-vlib-close>&times;</button>
-    </div>
-    <div class="vlib-filters" data-vlib-filters aria-label="Filter by channel"></div>
-    <div class="vlib-grid" data-vlib-grid></div>
+<dialog class="work-player" id="workPlayer" aria-labelledby="workPlayerTitle">
+  <div class="work-player-field" data-work-player-close aria-hidden="true"></div>
+  <header class="work-player-top">
+    <img class="work-player-wordmark" src="assets/brand/prsa-productions-wordmark.png" alt="" />
+    <button class="work-player-close" type="button" aria-label="Close video" data-work-player-close>
+      <span aria-hidden="true"><i></i><i></i></span>
+    </button>
+  </header>
+  <div class="work-player-shell" data-lenis-prevent>
+    <article class="work-player-window">
+      <div class="work-player-stage" data-work-player-stage>
+        <img class="work-player-poster" data-work-player-poster alt="" />
+        <span class="work-player-loading" aria-hidden="true"><i></i></span>
+        <div class="work-player-frame" data-work-player-frame></div>
+      </div>
+      <div class="work-player-meta">
+        <div class="work-player-copy">
+          <span>+ (Selected work)</span>
+          <h2 id="workPlayerTitle">Selected work</h2>
+        </div>
+        <a class="work-player-source" data-work-player-youtube href="https://youtube.com/" target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+      </div>
+    </article>
   </div>
-</div>
+  <span class="visually-hidden" data-work-player-status aria-live="polite"></span>
+</dialog>
 
 <main id="top">
   <header class="hero" id="hero">
@@ -163,7 +179,7 @@ window.__prsaIntroFailsafe = window.setTimeout(function () {
   <section class="credits" id="credits" aria-labelledby="creditsStatement">
     <div class="wrap credits-head">
       <span class="kicker">+ (Credits)</span>
-      <h2 class="credits-statement" id="creditsStatement">Editing credits across 41 channels with <strong>1.1B+</strong> subscribers combined.</h2>
+      <h2 class="credits-statement" id="creditsStatement">Editing credits across <span class="hl-ink">41 clients</span> with <strong>1.1B+</strong> subscribers combined.</h2>
     </div>
     <div class="wrap credits-board" id="creditsBoard"></div>
   </section>
@@ -246,8 +262,24 @@ const FALLBACK_WORKS = [
   {rank:12,id:'DKdWRROo9_U',title:"GUESS THE ATHLETE!",url:'https://youtu.be/DKdWRROo9_U',thumb:'https://i.ytimg.com/vi/DKdWRROo9_U/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/DKdWRROo9_U/hqdefault.jpg',views:'1.51M',likes:'43.24K',role:null,channel:"Miniminter"},
 ];
 
-const FALLBACK_RAIL_IDS = ['FVm-hMh4Q9A','6EtuOTq5TmM','oUee1Bv0sFE','q1DwSS3O8k4','9Ib1rni1SCc','k6tPeMMUn6A','FHF1CNBdBmI','S_KiWI6dNK4','qNfFC-v1jfY','s-XhQ2Ong14','vToG6mOkYh8','DKdWRROo9_U'];
-const FALLBACK_RAIL_WORKS = FALLBACK_RAIL_IDS.map((id) => FALLBACK_WORKS.find((work) => work.id === id)).filter(Boolean);
+const FALLBACK_RAIL_WORKS = [
+  {id:"gar4U3n-ILY",title:"Guess What Age Punched You",url:"https://youtu.be/gar4U3n-ILY",thumb:"assets/work-thumbnails/gar4U3n-ILY.jpg",thumbFallback:"https://i.ytimg.com/vi/gar4U3n-ILY/oardefault.jpg",format:"portrait"},
+  {id:"FVm-hMh4Q9A",title:"I Tested BANNED School Products!",url:"https://youtu.be/FVm-hMh4Q9A",thumb:"assets/work-thumbnails/FVm-hMh4Q9A.jpg",thumbFallback:"https://i.ytimg.com/vi/FVm-hMh4Q9A/maxresdefault.jpg",format:"landscape"},
+  {id:"6EtuOTq5TmM",title:"Clean The Sports Car, Keep It!",url:"https://youtu.be/6EtuOTq5TmM",thumb:"assets/work-thumbnails/6EtuOTq5TmM.jpg",thumbFallback:"https://i.ytimg.com/vi/6EtuOTq5TmM/maxresdefault.jpg",format:"landscape"},
+  {id:"yy-Nt0dRhNI",title:"Winner Picks Our Honeymoon",url:"https://youtu.be/yy-Nt0dRhNI",thumb:"assets/work-thumbnails/yy-Nt0dRhNI.jpg",thumbFallback:"https://i.ytimg.com/vi/yy-Nt0dRhNI/oardefault.jpg",format:"portrait"},
+  {id:"oUee1Bv0sFE",title:"I Murdered KPop Demon Hunters..",url:"https://youtu.be/oUee1Bv0sFE",thumb:"assets/work-thumbnails/oUee1Bv0sFE.jpg",thumbFallback:"https://i.ytimg.com/vi/oUee1Bv0sFE/maxresdefault.jpg",format:"landscape"},
+  {id:"q1DwSS3O8k4",title:"KPop Demon Hunters Are MISSING..",url:"https://youtu.be/q1DwSS3O8k4",thumb:"assets/work-thumbnails/q1DwSS3O8k4.jpg",thumbFallback:"https://i.ytimg.com/vi/q1DwSS3O8k4/maxresdefault.jpg",format:"landscape"},
+  {id:"Q1g8PYEFcHc",title:"Can We Beat the World's Strongest Man?",url:"https://youtu.be/Q1g8PYEFcHc",thumb:"assets/work-thumbnails/Q1g8PYEFcHc.jpg",thumbFallback:"https://i.ytimg.com/vi/Q1g8PYEFcHc/oardefault.jpg",format:"portrait"},
+  {id:"9Ib1rni1SCc",title:"3 YouTubers Were Murdered..",url:"https://youtu.be/9Ib1rni1SCc",thumb:"assets/work-thumbnails/9Ib1rni1SCc.jpg",thumbFallback:"https://i.ytimg.com/vi/9Ib1rni1SCc/maxresdefault.jpg",format:"landscape"},
+  {id:"KaUuPNYHFNg",title:"I Built a School in Mexico",url:"https://youtu.be/KaUuPNYHFNg",thumb:"assets/work-thumbnails/KaUuPNYHFNg.jpg",thumbFallback:"https://i.ytimg.com/vi/KaUuPNYHFNg/oardefault.jpg",format:"portrait"},
+  {id:"k6tPeMMUn6A",title:"SIDEMEN GUESS THE FOOTBALLER ft Erling Haaland",url:"https://youtu.be/k6tPeMMUn6A",thumb:"assets/work-thumbnails/k6tPeMMUn6A.jpg",thumbFallback:"https://i.ytimg.com/vi/k6tPeMMUn6A/maxresdefault.jpg",format:"landscape"},
+  {id:"vQz3T9Vot1Q",title:"Testing Real Life Video Game Weapons!",url:"https://youtu.be/vQz3T9Vot1Q",thumb:"assets/work-thumbnails/vQz3T9Vot1Q.jpg",thumbFallback:"https://i.ytimg.com/vi/vQz3T9Vot1Q/oar2.jpg",format:"portrait"},
+  {id:"S_KiWI6dNK4",title:"GUESS THE LANGUAGE (ft. Mrwhosetheboss & Callux)",url:"https://youtu.be/S_KiWI6dNK4",thumb:"assets/work-thumbnails/S_KiWI6dNK4.jpg",thumbFallback:"https://i.ytimg.com/vi/S_KiWI6dNK4/maxresdefault.jpg",format:"landscape"},
+  {id:"WU05jZnUiYs",title:"7 Days Escaping Cardboard Prison!",url:"https://youtu.be/WU05jZnUiYs",thumb:"assets/work-thumbnails/WU05jZnUiYs.jpg",thumbFallback:"https://i.ytimg.com/vi/WU05jZnUiYs/maxresdefault.jpg",format:"landscape"},
+  {id:"FHF1CNBdBmI",title:"Kids World Cup Tournament",url:"https://youtu.be/FHF1CNBdBmI",thumb:"assets/work-thumbnails/FHF1CNBdBmI.jpg",thumbFallback:"https://i.ytimg.com/vi/FHF1CNBdBmI/maxresdefault.jpg",format:"landscape"},
+  {id:"9DPzZIbp9Ck",title:"Which plane will fly the furthest?",url:"https://youtu.be/9DPzZIbp9Ck",thumb:"assets/work-thumbnails/9DPzZIbp9Ck.jpg",thumbFallback:"https://i.ytimg.com/vi/9DPzZIbp9Ck/oardefault.jpg",format:"portrait"},
+  {id:"qNfFC-v1jfY",title:"Guess The World Cup Footballer",url:"https://youtu.be/qNfFC-v1jfY",thumb:"assets/work-thumbnails/qNfFC-v1jfY.jpg",thumbFallback:"https://i.ytimg.com/vi/qNfFC-v1jfY/maxresdefault.jpg",format:"landscape"},
+];
 const FALLBACK_MENU_WORKS = [
   {id:'-ibmJHt0aKM',title:'$5 vs $50,000 MYSTERY BOX!',thumb:'https://i.ytimg.com/vi/-ibmJHt0aKM/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/-ibmJHt0aKM/hqdefault.jpg',format:'landscape'},
   {id:'Oiouepix6OQ',title:'I Met 9 People Who Shouldn\'t Exist!',thumb:'https://i.ytimg.com/vi/Oiouepix6OQ/maxresdefault.jpg',thumbFallback:'https://i.ytimg.com/vi/Oiouepix6OQ/hqdefault.jpg',format:'landscape'},
@@ -329,8 +361,8 @@ function prepareStatement(el) {
   splitWords(el);
   el.classList.add('statement-split');
 }
-const projectHref = (work) => 'case-study.html?id=' + encodeURIComponent(work.id);
 const PORTRAIT_VIDEO_IDS = new Set(['gar4U3n-ILY', 'yy-Nt0dRhNI', 'Q1g8PYEFcHc', 'KaUuPNYHFNg', 'vQz3T9Vot1Q', '9DPzZIbp9Ck']);
+const isPortraitVideo = (work) => Boolean(work && (work.format === 'portrait' || PORTRAIT_VIDEO_IDS.has(work.id)));
 
 const FALLBACK_CREDITS = [
   {name:"MrBeast",avatar:"assets/wordmarks/mrbeast-lockup-color.png",subs:509},
@@ -420,7 +452,7 @@ function renderCredits() {
     const label = total >= 1000
       ? (Math.floor(total / 100) / 10).toFixed(1).replace(/\.0$/, '') + 'B+'
       : Math.floor(total / 10) * 10 + 'M+';
-    statement.innerHTML = 'Editing credits across <span class="hl-blue">' + credits.length + ' channels</span> with <strong>' + label + '</strong> subscribers combined.';
+    statement.innerHTML = 'Editing credits across <span class="hl-ink">' + credits.length + ' clients</span> with <strong>' + label + '</strong> subscribers combined.';
     prepareStatement(statement);
   }
   const CHANNEL_PLATES = {
@@ -608,56 +640,211 @@ function renderCredits() {
   setupWorkReveal();
 }
 
-let vlibFilter = null;
-let vlibReturnFocus = null;
+function initWorkPlayer() {
+  const player = byId('workPlayer');
+  const wall = byId('workWall');
+  if (!player || !wall || player.dataset.wired) return;
+  player.dataset.wired = '1';
 
-function renderVideoLibrary() {
-  const grid = document.querySelector('[data-vlib-grid]');
-  const filters = document.querySelector('[data-vlib-filters]');
-  if (!grid || !filters) return;
-  const list = (typeof works !== 'undefined' && Array.isArray(works)) ? works : [];
-  const channels = [...new Set(list.map((w) => w.channel).filter(Boolean))];
-  if (vlibFilter && !channels.includes(vlibFilter)) vlibFilter = null;
-  const chip = (label, count, value) => '<button type="button" class="vlib-chip' + ((value || null) === vlibFilter ? ' is-on' : '') + '" data-vlib-filter="' + escapeHtml(value || '') + '">' + escapeHtml(label) + ' &middot; ' + count + '</button>';
-  filters.innerHTML = chip('All', list.length, null) + channels.map((c) => chip(c, list.filter((w) => w.channel === c).length, c)).join('');
-  const items = vlibFilter ? list.filter((w) => w.channel === vlibFilter) : list;
-  grid.innerHTML = items.map((w, i) => '<a class="vlib-card" style="--i:' + i + '" href="case-study.html?id=' + encodeURIComponent(w.id) + '" data-project-transition data-project-title="' + escapeHtml(w.title) + '" data-project-format="' + (w.format === 'portrait' ? 'portrait' : 'landscape') + '" data-project-thumb="' + escapeHtml(w.thumb) + '" data-project-fallback="' + escapeHtml(w.thumbFallback || w.thumb) + '"><span class="vlib-thumb"><img src="' + escapeHtml(w.thumb) + '" alt="" loading="lazy" decoding="async" onerror="handleRemoteImageError(this,this.closest(\'a\').dataset.projectFallback)" />' + (w.format === 'portrait' ? '<i class="vlib-tag">Short</i>' : '') + '</span><span class="vlib-name">' + escapeHtml(w.title) + '</span><span class="vlib-meta">' + (w.channel ? escapeHtml(w.channel) + ' &middot; ' : '') + escapeHtml(fmtViews(w.views || '')) + (w.views ? ' views' : '') + '</span></a>').join('');
-}
+  const stage = player.querySelector('[data-work-player-stage]');
+  const frame = player.querySelector('[data-work-player-frame]');
+  const poster = player.querySelector('[data-work-player-poster]');
+  const playerWindow = player.querySelector('.work-player-window');
+  const title = byId('workPlayerTitle');
+  const source = player.querySelector('[data-work-player-youtube]');
+  const closeButton = player.querySelector('button[data-work-player-close]');
+  const status = player.querySelector('[data-work-player-status]');
+  const themeColor = document.querySelector('meta[name="theme-color"]');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let returnFocus = null;
+  let closeTimer = 0;
+  let closeTransitionEnd = null;
+  let priorTheme = '';
+  let lockedScrollY = 0;
+  let priorScrollLock = '';
 
-function openVideoLibrary(preferChannel) {
-  const vlib = byId('vlib');
-  if (!vlib) return;
-  const list = (typeof works !== 'undefined' && Array.isArray(works)) ? works : [];
-  vlibFilter = (preferChannel && list.some((w) => w.channel === preferChannel)) ? preferChannel : null;
-  renderVideoLibrary();
-  vlibReturnFocus = document.activeElement;
-  vlib.hidden = false;
-  document.body.classList.add('vlib-lock');
-  requestAnimationFrame(() => vlib.classList.add('open'));
-  const close = vlib.querySelector('[data-vlib-close]');
-  if (close) close.focus();
-}
+  const clearCloseWait = () => {
+    clearTimeout(closeTimer);
+    closeTimer = 0;
+    if (closeTransitionEnd && playerWindow) playerWindow.removeEventListener('transitionend', closeTransitionEnd);
+    closeTransitionEnd = null;
+  };
+  const transitionTime = (el) => {
+    if (!el) return 0;
+    const style = getComputedStyle(el);
+    const toMs = (value) => value.trim().endsWith('ms') ? parseFloat(value) : parseFloat(value) * 1000;
+    const durations = style.transitionDuration.split(',').map(toMs);
+    const delays = style.transitionDelay.split(',').map(toMs);
+    return durations.reduce((max, duration, i) => Math.max(max, duration + (delays[i] ?? delays.at(-1) ?? 0)), 0);
+  };
+  const canRestoreFocus = (el) => {
+    if (!el?.isConnected || el.closest('[aria-hidden="true"]')) return false;
+    const rect = el.getBoundingClientRect();
+    return rect.width > 0 && rect.height > 0 && rect.bottom > 0 && rect.right > 0
+      && rect.top < innerHeight && rect.left < innerWidth;
+  };
+  const canReceiveFocus = (el) => !!el?.isConnected && !el.closest('[aria-hidden="true"]');
+  const syncRailRates = () => {
+    wall.querySelectorAll('.work-rail').forEach((rail) => {
+      const track = rail.querySelector('.rail-track');
+      if (!track) return;
+      const slowed = rail.matches(':hover') || rail.contains(document.activeElement);
+      track.getAnimations().forEach((animation) => animation.updatePlaybackRate(slowed ? 0.35 : 1));
+    });
+  };
 
-function closeVideoLibrary() {
-  const vlib = byId('vlib');
-  if (!vlib || !vlib.classList.contains('open')) return;
-  vlib.classList.remove('open');
-  document.body.classList.remove('vlib-lock');
-  window.setTimeout(() => { vlib.hidden = true; }, 420);
-  if (vlibReturnFocus && vlibReturnFocus.focus) vlibReturnFocus.focus();
-}
+  const restorePlayer = (restoreFocus) => {
+    clearCloseWait();
+    if (player.open) player.close();
+    player.classList.remove('is-open', 'is-closing', 'work-player--portrait');
+    stage.classList.remove('is-ready', 'poster-unavailable');
+    frame.replaceChildren();
+    poster.removeAttribute('src');
+    poster.hidden = false;
+    document.body.classList.remove('work-player-open');
+    document.documentElement.classList.remove('work-player-open');
+    if (priorScrollLock) document.body.style.setProperty('--work-player-scroll-y', priorScrollLock);
+    else document.body.style.removeProperty('--work-player-scroll-y');
+    if (themeColor) themeColor.content = priorTheme;
+    if (status) status.textContent = '';
+    const focusTarget = canReceiveFocus(returnFocus) ? returnFocus : byId('workTitle');
+    returnFocus = null;
+    const lenis = window.__lenisInstance;
+    if (lenis) lenis.resize();
+    window.scrollTo(0, lockedScrollY);
+    if (lenis) lenis.scrollTo(lockedScrollY, { immediate: true, force: true });
+    if (restoreFocus && focusTarget?.focus) focusTarget.focus({ preventScroll: true });
+    requestAnimationFrame(() => {
+      if (lenis) {
+        lenis.resize();
+        lenis.scrollTo(lockedScrollY, { immediate: true, force: true });
+        lenis.start();
+      }
+      window.scrollTo(0, lockedScrollY);
+      syncRailRates();
+    });
+  };
 
-function initVideoLibrary() {
-  const vlib = byId('vlib');
-  if (!vlib || vlib.dataset.wired) return;
-  vlib.dataset.wired = '1';
-  vlib.addEventListener('click', (event) => {
-    if (event.target.closest('[data-vlib-close]')) { closeVideoLibrary(); return; }
-    const chipEl = event.target.closest('[data-vlib-filter]');
-    if (chipEl) { vlibFilter = chipEl.dataset.vlibFilter || null; renderVideoLibrary(); }
+  const closePlayer = (restoreFocus = true, immediate = false) => {
+    if (!player.open) return;
+    frame.replaceChildren();
+    stage.classList.remove('is-ready');
+    player.classList.remove('is-open');
+    player.classList.add('is-closing');
+    if (status) status.textContent = 'Video closed';
+    if (immediate || reduce) {
+      restorePlayer(restoreFocus);
+      return;
+    }
+    clearCloseWait();
+    const finish = () => {
+      if (!player.classList.contains('is-closing')) return;
+      restorePlayer(restoreFocus);
+    };
+    closeTransitionEnd = (event) => {
+      if (event.target !== playerWindow || event.propertyName !== 'transform') return;
+      finish();
+    };
+    playerWindow?.addEventListener('transitionend', closeTransitionEnd);
+    closeTimer = window.setTimeout(finish, transitionTime(playerWindow) + 80);
+  };
+
+  const openPlayer = (link) => {
+    const id = link.dataset.videoId || '';
+    if (!/^[\w-]{11}$/.test(id) || typeof player.showModal !== 'function') return false;
+    clearCloseWait();
+
+    const workTitle = link.dataset.workTitle || 'Selected work';
+    const format = link.dataset.workFormat === 'portrait' ? 'portrait' : 'landscape';
+    const canonical = Array.from(wall.querySelectorAll('.rail-set:not([aria-hidden="true"]) .rail-card'))
+      .find((card) => card.dataset.videoId === id && canRestoreFocus(card));
+    returnFocus = canRestoreFocus(link) && !link.closest('[aria-hidden="true"]') ? link : canonical;
+    priorTheme = themeColor?.content || '';
+    lockedScrollY = window.scrollY;
+    priorScrollLock = document.body.style.getPropertyValue('--work-player-scroll-y');
+
+    title.textContent = workTitle;
+    source.href = link.href;
+    player.classList.toggle('work-player--portrait', format === 'portrait');
+    stage.classList.remove('is-ready', 'poster-unavailable');
+    poster.hidden = false;
+    poster.dataset.fallbackTried = 'false';
+    poster.onerror = () => {
+      const fallback = link.dataset.workFallback || '';
+      if (fallback && poster.dataset.fallbackTried !== 'true') {
+        poster.dataset.fallbackTried = 'true';
+        poster.src = fallback;
+        return;
+      }
+      poster.hidden = true;
+      stage.classList.add('poster-unavailable');
+    };
+    poster.src = link.dataset.workThumb || link.querySelector('img')?.currentSrc || '';
+
+    const iframe = document.createElement('iframe');
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?autoplay=1&rel=0&playsinline=1';
+    iframe.title = workTitle;
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    iframe.allowFullscreen = true;
+    iframe.tabIndex = -1;
+    iframe.addEventListener('load', () => {
+      if (!player.open || !player.classList.contains('is-open') || !frame.contains(iframe)) return;
+      iframe.removeAttribute('tabindex');
+      stage.classList.add('is-ready');
+    }, { once: true });
+    frame.replaceChildren(iframe);
+
+    try {
+      player.showModal();
+    } catch {
+      frame.replaceChildren();
+      poster.removeAttribute('src');
+      returnFocus = null;
+      return false;
+    }
+    document.body.style.setProperty('--work-player-scroll-y', lockedScrollY + 'px');
+    document.body.classList.add('work-player-open');
+    document.documentElement.classList.add('work-player-open');
+    if (window.__lenisInstance) window.__lenisInstance.stop();
+    if (themeColor) themeColor.content = '#F5F5F5';
+    if (status) status.textContent = 'Playing ' + workTitle;
+    requestAnimationFrame(() => {
+      player.classList.add('is-open');
+      closeButton?.focus({ preventScroll: true });
+    });
+    return true;
+  };
+
+  wall.addEventListener('click', (event) => {
+    const link = event.target.closest('a[data-work-video]');
+    if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    if (location.protocol === 'file:') return;
+    if (openPlayer(link)) event.preventDefault();
   });
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && vlib.classList.contains('open')) closeVideoLibrary();
+  wall.addEventListener('keydown', (event) => {
+    const link = event.target.closest('a[data-work-video]');
+    if (!link || event.repeat || (event.key !== 'Enter' && event.key !== ' ')) return;
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || location.protocol === 'file:') return;
+    if (openPlayer(link)) event.preventDefault();
+  });
+  source.addEventListener('click', () => closePlayer(false, true));
+  player.addEventListener('click', (event) => {
+    if (event.target.closest('[data-work-player-close]') || !event.target.closest('.work-player-window')) closePlayer(true);
+  });
+  player.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    event.preventDefault();
+    event.stopPropagation();
+    closePlayer(true);
+  });
+  player.addEventListener('cancel', (event) => {
+    event.preventDefault();
+    closePlayer(true);
+  });
+  window.addEventListener('pagehide', () => closePlayer(false, true));
+  window.addEventListener('pageshow', () => {
+    if (player.open || document.body.classList.contains('work-player-open')) restorePlayer(false);
   });
 }
 
@@ -683,6 +870,43 @@ function initTimeline() {
   const MARK_SPELLS_NAME = new Set(['MrBeast', 'Sidemen', 'KSI', 'TBJZL']);
   const fmtSubs = (v) => v >= 1000 ? ((v / 1000).toFixed(1).replace(/\.0$/, '') + 'B') : v >= 10 ? Math.round(v) + 'M' : (Number(v).toFixed(1).replace(/\.0$/, '') + 'M');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const monitorSource = (entry) => entry ? (MONITOR_MARKS[entry.name] || entry.avatar) : '';
+  const monitorAssetReady = new Map();
+  const ensureMonitorSource = (src) => {
+    if (!src) return Promise.resolve(false);
+    if (monitorAssetReady.has(src)) return monitorAssetReady.get(src);
+    const ready = new Promise((resolve) => {
+      const image = new Image();
+      image.decoding = 'async';
+      let settled = false;
+      let decoding = false;
+      const finish = (loaded) => {
+        if (settled) return;
+        settled = true;
+        resolve(loaded);
+      };
+      const decode = () => {
+        if (decoding) return;
+        decoding = true;
+        if (typeof image.decode === 'function') image.decode().then(() => finish(true)).catch(() => finish(image.naturalWidth > 0));
+        else finish(image.naturalWidth > 0);
+      };
+      image.addEventListener('load', decode, { once: true });
+      image.addEventListener('error', () => finish(false), { once: true });
+      image.src = src;
+      if (image.complete) decode();
+    });
+    monitorAssetReady.set(src, ready);
+    return ready;
+  };
+  const ensureMonitorAsset = async (entry) => {
+    const preferred = monitorSource(entry);
+    if (await ensureMonitorSource(preferred)) return preferred;
+    const fallback = entry?.avatar || '';
+    if (fallback && fallback !== preferred) await ensureMonitorSource(fallback);
+    return fallback || preferred;
+  };
+  credits.forEach((entry) => { ensureMonitorAsset(entry); });
   let snaps = [];
   const measureSnaps = () => {
     const fr = field.getBoundingClientRect();
@@ -697,6 +921,7 @@ function initTimeline() {
   window.addEventListener('resize', measureSnaps, { passive: true, signal: tlSig });
   let current = 0;
   let cutTimer = 0;
+  let cutToken = 0;
   let intentTimer = 0;
   let intentIdx = -1;
   let performing = false;
@@ -713,9 +938,21 @@ function initTimeline() {
   const vidsFor = (entry) => {
     if (!entry) return [];
     const list = (typeof works !== 'undefined' && Array.isArray(works)) ? works : [];
+    const railById = new Map(((typeof railWorks !== 'undefined' && Array.isArray(railWorks)) ? railWorks : []).map((w) => [w.id, w]));
     const feats = list.filter((w) => w.channel === entry.name).map((w) => ({ id: w.id, title: w.title, thumb: w.thumb, thumbFallback: w.thumbFallback, views: w.views, format: w.format, cased: true }));
     const featIds = new Set(feats.map((v) => v.id));
-    const extras = (window.PRSA_VIDEOS || []).filter((v) => v.channel === entry.name && !featIds.has(v.id)).map((v) => ({ id: v.id, title: v.title, thumb: v.thumb, thumbFallback: 'https://i.ytimg.com/vi/' + v.id + '/hqdefault.jpg', views: v.views, cased: false }));
+    const extras = (window.PRSA_VIDEOS || []).filter((v) => v.channel === entry.name && !featIds.has(v.id)).map((v) => {
+      const rail = railById.get(v.id);
+      return {
+        id: v.id,
+        title: v.title,
+        thumb: rail?.thumb || v.thumb,
+        thumbFallback: rail?.thumbFallback || ('https://i.ytimg.com/vi/' + v.id + '/hqdefault.jpg'),
+        views: v.views,
+        format: rail?.format || (PORTRAIT_VIDEO_IDS.has(v.id) ? 'portrait' : 'landscape'),
+        cased: false,
+      };
+    });
     return feats.concat(extras);
   };
   const buildBrowse = (entry) => {
@@ -723,8 +960,8 @@ function initTimeline() {
     const vids = vidsFor(entry);
     browseLabel.textContent = entry.name + ' \u00b7 ' + vids.length + (vids.length === 1 ? ' video' : ' videos');
     browseRow.innerHTML = vids.map((w, i) => {
-      const portrait = w.format === 'portrait';
-      const cardSrc = portrait ? 'https://i.ytimg.com/vi/' + encodeURIComponent(w.id) + '/oar2.jpg' : w.thumb;
+      const portrait = isPortraitVideo(w);
+      const cardSrc = w.thumb;
       const media = '<span class="tl-browse-thumb"><img src="' + escapeHtml(cardSrc) + '" alt="" loading="lazy" decoding="async" onerror="handleRemoteImageError(this,this.closest(\'a\').dataset.projectFallback)" /></span>';
       const text = '<span class="tl-browse-title">' + escapeHtml(w.title) + '</span><span class="tl-browse-meta">' + (w.views ? escapeHtml(fmtViews(w.views)) + ' views' : 'YouTube') + (portrait ? ' · Short' : '') + '</span>';
       const cls = 'tl-browse-card' + (portrait ? ' tl-browse-card--portrait' : '');
@@ -887,12 +1124,13 @@ function initTimeline() {
       if (el) { el.classList.add('is-pinned'); el.setAttribute('aria-pressed', 'true'); }
     }
   };
-  const applyMonitor = (idx) => {
+  const applyMonitor = (idx, preparedSrc) => {
     const entry = credits[idx];
     const mark = MONITOR_MARKS[entry.name];
-    monImg.src = mark || entry.avatar;
-    monImg.classList.toggle('is-lockup', !!mark);
-    monName.hidden = !!mark && MARK_SPELLS_NAME.has(entry.name);
+    const usesMark = !!mark && (!preparedSrc || preparedSrc === mark);
+    monImg.src = preparedSrc || mark || entry.avatar;
+    monImg.classList.toggle('is-lockup', usesMark);
+    monName.hidden = usesMark && MARK_SPELLS_NAME.has(entry.name);
     monName.textContent = entry.name;
     if (monCh) monCh.textContent = fmtSubs(Number(entry.subs) || 0) + ' subscribers';
     const el = board.querySelector('.clip[data-idx="' + idx + '"]');
@@ -929,10 +1167,24 @@ function initTimeline() {
     if (idx === current || !credits[idx]) return;
     current = idx;
     setActive(idx);
-    if (reduce) { applyMonitor(idx); return; }
+    const token = ++cutToken;
+    const ready = ensureMonitorAsset(credits[idx]);
     stage.classList.add('cut');
     clearTimeout(cutTimer);
-    cutTimer = setTimeout(() => { applyMonitor(idx); stage.classList.remove('cut'); }, 120);
+    const commit = () => {
+      ready.then(async (src) => {
+        if (token !== cutToken || current !== idx) return;
+        monImg.src = src;
+        if (typeof monImg.decode === 'function') await monImg.decode().catch(() => {});
+        if (token !== cutToken || current !== idx) return;
+        applyMonitor(idx, src);
+        requestAnimationFrame(() => {
+          if (token === cutToken && current === idx) stage.classList.remove('cut');
+        });
+      });
+    };
+    if (reduce) commit();
+    else cutTimer = setTimeout(commit, 120);
   };
   const cancelIntent = () => { intentIdx = -1; clearTimeout(intentTimer); };
   const intend = (idx) => {
@@ -1169,10 +1421,12 @@ function renderWorkWall() {
   wall.innerHTML = rails.map((items, railIndex) => {
     if (!items.length) return '';
     const cards = (set) => items.map((work) => {
-      const portrait = work.format === 'portrait' || PORTRAIT_VIDEO_IDS.has(work.id);
-      const thumb = portrait ? `https://i.ytimg.com/vi/${encodeURIComponent(work.id)}/oar2.jpg` : work.thumb;
-      return `<a class="rail-card rail-card--${portrait ? 'portrait' : 'landscape'}" href="${projectHref(work)}" aria-label="View ${escapeHtml(work.title)}" data-project-transition data-project-title="${escapeHtml(work.title)}" data-project-format="${portrait ? 'portrait' : 'landscape'}" data-project-thumb="${escapeHtml(thumb)}" data-project-fallback="${escapeHtml(work.thumbFallback || work.thumb)}"${set ? ' tabindex="-1"' : ''}>
-        <img src="${escapeHtml(thumb)}" alt="" loading="lazy" onerror="handleRemoteImageError(this,'${escapeHtml(work.thumbFallback || work.thumb)}')" />
+      const portrait = isPortraitVideo(work);
+      const thumb = work.thumb || `https://i.ytimg.com/vi/${encodeURIComponent(work.id)}/maxresdefault.jpg`;
+      const fallback = work.thumbFallback || `https://i.ytimg.com/vi/${encodeURIComponent(work.id)}/hqdefault.jpg`;
+      const href = work.url || `https://youtu.be/${encodeURIComponent(work.id)}`;
+      return `<a class="rail-card rail-card--${portrait ? 'portrait' : 'landscape'}" href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer" aria-label="Play ${escapeHtml(work.title)}" data-work-video data-video-id="${escapeHtml(work.id)}" data-work-title="${escapeHtml(work.title)}" data-work-format="${portrait ? 'portrait' : 'landscape'}" data-work-thumb="${escapeHtml(thumb)}" data-work-fallback="${escapeHtml(fallback)}"${set ? ' tabindex="-1"' : ''}>
+        <img src="${escapeHtml(thumb)}" alt="" loading="lazy" decoding="async" onerror="handleRemoteImageError(this,'${escapeHtml(fallback)}')" />
         <span class="rail-card-copy">
           <span class="rail-card-title">${escapeHtml(work.title)}</span>
         </span>
@@ -1203,7 +1457,7 @@ function renderWorkWall() {
 function renderMenuMedia() {
   const host = byId('menuMedia');
   if (!host || !menuWorks.length) return;
-  const mediaFormat = (work) => work.format === 'portrait' || PORTRAIT_VIDEO_IDS.has(work.id) ? 'portrait' : 'landscape';
+  const mediaFormat = (work) => isPortraitVideo(work) ? 'portrait' : 'landscape';
   const card = (work) => {
     const format = mediaFormat(work);
     const thumb = format === 'portrait' ? `https://i.ytimg.com/vi/${encodeURIComponent(work.id)}/oar2.jpg` : work.thumb;
@@ -1654,6 +1908,7 @@ document.querySelectorAll('.work-title, .credits-statement, #aboutTitle, .contac
 initChrome();
 initMotion();
 setupMotionBudget();
+onReveal(initWorkPlayer);
 hydrateWorks();
 </script>
 </body>
