@@ -130,7 +130,9 @@ body.cs-body.menu-open:has(#mnav.exiting) #nav.over-dark .wordmark img{filter:no
 .menu-btn::after,.mclose::after{content:"";position:absolute;top:0;left:24%;width:52%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.66),transparent);opacity:.68;transition:opacity .16s var(--ease);pointer-events:none}
 .menu-btn:hover,.menu-btn:focus-visible,.mclose:hover,.mclose:focus-visible{border-color:rgba(255,255,255,.24);background:rgba(17,17,17,.96);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.1),inset -3px 2px 9px rgba(47,107,255,.2),0 14px 32px rgba(0,0,0,.34);transform:scale(.975)}
 .menu-btn:hover::after,.menu-btn:focus-visible::after,.mclose:hover::after,.mclose:focus-visible::after{opacity:1}
-.menu-btn:focus-visible,.mclose:focus-visible{box-shadow:0 0 0 2px rgba(47,107,255,.42),inset 0 1px 0 rgba(255,255,255,.1),0 14px 32px rgba(0,0,0,.34)}
+/* the chip is clip-path'd to a chamfer, which eats an outer ring completely (measured: 0 lit pixels) - the
+   focus indicator has to live INSIDE the shape */
+.menu-btn:focus-visible,.mclose:focus-visible{box-shadow:inset 0 0 0 2px rgba(47,107,255,.92),inset 0 1px 0 rgba(255,255,255,.1),0 14px 32px rgba(0,0,0,.34)}
 .menu-btn:active,.mclose:active{transform:scale(.96)}
 .menu-bars{display:flex;width:22px;flex-direction:column;align-items:flex-end;gap:5px}
 .menu-bars i{display:block;width:22px;height:1px;background:currentColor;transition:width .22s var(--ease-quart)}
@@ -297,7 +299,9 @@ html.js .work-rail.in-view,html.js .about-scene.in-view,html.js .contact-utility
 .rail-card.media-unavailable .rail-card-copy{z-index:2;background:none;color:var(--ink);opacity:1;transform:none}
 .rail-card-title{display:-webkit-box;overflow:hidden;max-width:440px;font-size:15px;font-weight:500;letter-spacing:-.02em;line-height:1.25;-webkit-box-orient:vertical;-webkit-line-clamp:2;text-shadow:0 1px 12px rgba(4,6,10,.45)}
 .rail-card:hover .rail-card-copy,.rail-card:focus-visible .rail-card-copy{opacity:1;transform:none}
-.rail-card:focus-visible{outline:2px solid rgba(47,107,255,.5);outline-offset:-6px}
+/* the offset must stay POSITIVE - an inset ring paints under the card's own full-bleed thumbnail and is
+   invisible on every card at every width (measured: 0 lit pixels at -6px, 1261 at +2px) */
+.rail-card:focus-visible{outline:2px solid rgba(47,107,255,.62);outline-offset:2px}
 
 .credits{position:relative;padding:118px 0 160px;overflow:hidden}
 .credits-head{position:relative;container-type:inline-size;margin-bottom:48px}
@@ -590,7 +594,7 @@ html.js .footer-cta-inner.in-view .footer-kicker{opacity:1;transform:none}
 .cs-heading{display:block}
 .cs-heading-copy{min-width:0;max-width:1180px}
 .cs-heading .kicker{margin-bottom:26px}
-.cs-hero h1{max-width:16ch;font-family:var(--font);font-size:clamp(52px,6.4vw,94px);font-weight:500;line-height:.96;letter-spacing:-.06em;text-transform:none;text-wrap:balance}
+.cs-hero h1{max-width:16ch;font-family:var(--font);font-size:clamp(52px,6.4vw,94px);font-weight:500;line-height:.96;letter-spacing:-.06em;text-transform:none;text-wrap:balance;overflow-wrap:anywhere}
 .cs-hero h1 .w-mask{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.12em;margin-bottom:-.12em}
 .cs-hero h1 .w{display:inline-block;transform:none;transition:transform .9s var(--ease-silk);transition-delay:calc(var(--wi) * 42ms + .06s)}
 html.js body:not(.cs-ready) .cs-hero h1 .w{transform:translateY(115%)}
@@ -843,6 +847,7 @@ html.js body:not(.cs-ready) .poster-section{opacity:0;transform:translateY(30px)
   .cs-hero{padding:72px 0 48px}
   .cs-heading .kicker{margin-bottom:20px}
   .cs-hero h1{font-size:clamp(44px,13vw,68px)}
+  .cs-fact strong{white-space:normal}   /* the cell has the height; ellipsising a one-word value wastes it */
   .cs-facts{padding-bottom:52px}
   .cs-facts-grid{grid-auto-flow:row;grid-template-columns:repeat(2,minmax(0,1fr))}
   .cs-scope-grid{grid-template-columns:1fr;gap:16px}
@@ -898,7 +903,8 @@ html.js body:not(.cs-ready) .poster-section{opacity:0;transform:translateY(30px)
   .work-player-top{left:max(var(--pad),env(safe-area-inset-left));right:max(var(--pad),env(safe-area-inset-right));height:calc(70px + env(safe-area-inset-top));padding-top:env(safe-area-inset-top)}
   .work-player-shell{padding:calc(78px + env(safe-area-inset-top)) max(var(--pad),env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(var(--pad),env(safe-area-inset-left))}
 
-  /* Scroll-away chrome: no slab, no halo - the wordmark simply leaves while you read downward. */
+  /* Scroll-away chrome: no slab, no halo - the wordmark simply leaves while you read downward.
+     Duplicated verbatim for landscape phones below - see the landscape block at the end of this file. */
   #nav{transition:opacity .34s var(--ease),transform .42s var(--ease-silk),background .35s var(--ease)}
   body.in #nav.nav-tuck{opacity:0;transform:translateY(-118%);pointer-events:none}
   body.in #nav.nav-tuck .menu-btn{pointer-events:none}
@@ -1112,4 +1118,15 @@ html.js body:not(.cs-ready) .poster-section{opacity:0;transform:translateY(30px)
   .next-link{padding:42px 0}
   .next-copy b{font-size:34px}
   footer:not(.site-footer){padding-bottom:calc(30px + env(safe-area-inset-bottom))}
+}
+
+/* LANDSCAPE PHONES GET THE SCROLL-AWAY CHROME TOO (Aug 2). The tuck was gated at max-width:820px, but a phone
+   held sideways is 844x390 - wider than the gate and shorter than anything - so the floating wordmark stayed
+   pinned and painted straight through the content it was meant to step aside for (measured at 844x390:
+   elementsFromPoint under the wordmark returns .contact-email, dark ink on dark ink). Same rule, landscape
+   metric. Keep this in sync with the tuckNav() gate in index.html. */
+@media(max-height:560px) and (orientation:landscape){
+  #nav{transition:opacity .34s var(--ease),transform .42s var(--ease-silk),background .35s var(--ease)}
+  body.in #nav.nav-tuck{opacity:0;transform:translateY(-118%);pointer-events:none}
+  body.in #nav.nav-tuck .menu-btn{pointer-events:none}
 }
