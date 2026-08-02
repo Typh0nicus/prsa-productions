@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <script>document.documentElement.classList.add('js');</script>
 <title>Project — Prša Productions</title>
 <meta name="theme-color" content="#f5f5f5" />
@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://i.ytimg.com" crossorigin />
 <link rel="dns-prefetch" href="https://i.ytimg.com" />
 <link rel="stylesheet" href="assets/fonts.css" />
-<link rel="stylesheet" href="styles.css?v=remaster-166" />
+<link rel="stylesheet" href="styles.css?v=remaster-167" />
 <script src="assets/project-transition.js?v=2" defer></script>
 <script>try{if(sessionStorage.getItem('prsa-route')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('route-arrived')}}catch(e){}</script>
 </head>
@@ -318,6 +318,8 @@ function renderCase() {
     event.preventDefault();
     shell.classList.add('is-playing');
     shell.innerHTML = `<div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(work.id)}?autoplay=1&rel=0&playsinline=1" title="${escapeHtml(work.title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`;
+    const iframe = shell.querySelector('iframe');
+    requestAnimationFrame(() => iframe?.focus({ preventScroll: true }));
   });
   byId('watchLink').href = work.url;
   byId('nextProject').href = projectHref(next);

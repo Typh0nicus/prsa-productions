@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>Prša Productions · Video Editing</title>
 <meta name="theme-color" content="#060709" />
 <meta name="color-scheme" content="light" />
@@ -42,7 +42,7 @@
 </script>
 <script>document.documentElement.classList.add('js')</script>
 <link rel="stylesheet" href="assets/fonts.css" />
-  <link rel="stylesheet" href="styles.css?v=remaster-166" />
+  <link rel="stylesheet" href="styles.css?v=remaster-167" />
 <script src="assets/project-transition.js?v=2" defer></script>
 <noscript><style>#preloader{display:none!important}body.lock{overflow:auto!important}</style></noscript>
 </head>
@@ -431,7 +431,7 @@ function handleRemoteImageError(image, fallback) {
     return;
   }
   image.hidden = true;
-  const host = image.closest('.rail-card, .menu-media-card, .credit-media');
+  const host = image.closest('.rail-card, .menu-media-card, .credit-media, .tl-browse-card');
   if (host) host.classList.add('media-unavailable');
 }
 
@@ -632,7 +632,7 @@ function renderCredits() {
   }).join('');
   board.innerHTML = '<div class="tl" role="group" aria-label="Editing timeline of channel credits">'
     + '<div class="tl-monitor"><span class="tl-monitor-tag">PGM &middot; PR&Scaron;A PRODUCTIONS</span><span class="tl-monitor-tc" data-tc><b data-tc-main>00:00:00</b><i data-tc-frames>:00</i></span>'
-    + '<div class="tl-monitor-stage"><div class="tl-monitor-identity"><div class="tl-monitor-card" data-mon-card><img data-mon-img class="is-lockup" src="assets/wordmarks/mrbeast-lockup-white.png" alt="" decoding="async" /><strong data-mon-name>MrBeast</strong><span class="tl-monitor-ch" data-mon-ch>509M subscribers</span><span class="tl-monitor-hint" data-mon-hint aria-hidden="true">View edits</span></div></div></div><div class="tl-browse" data-browse hidden><div class="tl-browse-head"><span data-browse-label></span><button type="button" class="tl-browse-close" data-browse-close aria-label="Close videos"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></button></div><div class="tl-browse-track" data-browse-track data-lenis-prevent><div class="tl-browse-row" data-browse-row></div><div class="tl-browse-bar" data-browse-bar><i data-browse-thumb></i></div></div></div></div>'
+    + '<div class="tl-monitor-stage"><div class="tl-monitor-identity"><div class="tl-monitor-card" data-mon-card><img data-mon-img class="is-lockup" src="assets/wordmarks/mrbeast-lockup-white.png" alt="" decoding="async" /><strong data-mon-name>MrBeast</strong><span class="tl-monitor-ch" data-mon-ch>509M subscribers</span><span class="tl-monitor-hint" data-mon-hint aria-hidden="true">View edits</span></div></div></div><div class="tl-browse" data-browse role="region" aria-labelledby="tlBrowseLabel" hidden><div class="tl-browse-head"><span id="tlBrowseLabel" data-browse-label></span><button type="button" class="tl-browse-close" data-browse-close aria-label="Close videos"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></button></div><div class="tl-browse-track" data-browse-track data-lenis-prevent><div class="tl-browse-row" data-browse-row></div><div class="tl-browse-bar" data-browse-bar><i data-browse-thumb></i></div></div></div></div>'
     + '<div class="tl-body" data-lenis-prevent-horizontal><div class="tl-scroll"><div class="tl-rail"><span class="tl-corner"></span><div class="tl-ruler">' + ticks.join('') + '</div></div>'
     + tracks
     + '<div class="tl-field"><i class="tl-playhead"></i></div></div></div></div>';
@@ -862,6 +862,7 @@ function initTimeline() {
   const monName = board.querySelector('[data-mon-name]');
   const monCh = board.querySelector('[data-mon-ch]');
   const stage = board.querySelector('.tl-monitor-stage');
+  const monCard = board.querySelector('[data-mon-card]');
   const tc = board.querySelector('[data-tc]');
   const field = board.querySelector('.tl-field');
   const playhead = board.querySelector('.tl-playhead');
@@ -906,7 +907,27 @@ function initTimeline() {
     if (fallback && fallback !== preferred) await ensureMonitorSource(fallback);
     return fallback || preferred;
   };
-  credits.forEach((entry) => { ensureMonitorAsset(entry); });
+  // Decode the current identity immediately. The remaining custom monitor marks are
+  // warmed only as Credits approaches; regular avatars stay genuinely on demand.
+  ensureMonitorAsset(credits[0]);
+  const prewarmMonitorMarks = () => {
+    const seen = new Set();
+    credits.filter((entry) => MONITOR_MARKS[entry.name]).slice(0, 8).forEach((entry) => {
+      const src = monitorSource(entry);
+      if (!seen.has(src)) { seen.add(src); ensureMonitorAsset(entry); }
+    });
+  };
+  if (window.__monitorPrewarmIO) window.__monitorPrewarmIO.disconnect();
+  if ('IntersectionObserver' in window) {
+    window.__monitorPrewarmIO = new IntersectionObserver((entries, observer) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      observer.disconnect();
+      prewarmMonitorMarks();
+    }, { rootMargin: '480px 0px', threshold: 0 });
+    window.__monitorPrewarmIO.observe(board);
+  } else {
+    prewarmMonitorMarks();
+  }
   let snaps = [];
   const measureSnaps = () => {
     const fr = field.getBoundingClientRect();
@@ -935,6 +956,11 @@ function initTimeline() {
   const browseBar = board.querySelector('[data-browse-bar]');
   const browseThumb = board.querySelector('[data-browse-thumb]');
   const browseLabel = board.querySelector('[data-browse-label]');
+  const nativeBrowseQuery = matchMedia('(max-width: 820px), (pointer: coarse)');
+  const usesNativeBrowse = () => nativeBrowseQuery.matches;
+  let browseItems = [];
+  let browseRendered = 0;
+  const BROWSE_BATCH = 24;
   const vidsFor = (entry) => {
     if (!entry) return [];
     const list = (typeof works !== 'undefined' && Array.isArray(works)) ? works : [];
@@ -955,21 +981,33 @@ function initTimeline() {
     });
     return feats.concat(extras);
   };
+  const browseCardMarkup = (w, i) => {
+    const portrait = isPortraitVideo(w);
+    const cardSrc = w.thumb;
+    const media = '<span class="tl-browse-thumb"><img src="' + escapeHtml(cardSrc) + '" alt="" loading="lazy" decoding="async" onerror="handleRemoteImageError(this,this.closest(\'a\').dataset.projectFallback)" /></span>';
+    const text = '<span class="tl-browse-title">' + escapeHtml(w.title) + '</span><span class="tl-browse-meta">' + (w.views ? escapeHtml(fmtViews(w.views)) + ' views' : 'YouTube') + (portrait ? ' · Short' : '') + '</span>';
+    const cls = 'tl-browse-card' + (portrait ? ' tl-browse-card--portrait' : '');
+    if (w.cased) {
+      return '<a class="' + cls + '" style="--i:' + i + '" href="case-study.html?id=' + encodeURIComponent(w.id) + '" data-project-transition data-project-title="' + escapeHtml(w.title) + '" data-project-format="' + (portrait ? 'portrait' : 'landscape') + '" data-project-thumb="' + escapeHtml(w.thumb) + '" data-project-fallback="' + escapeHtml(w.thumbFallback || w.thumb) + '">' + media + text + '</a>';
+    }
+    return '<a class="' + cls + '" style="--i:' + i + '" href="https://youtu.be/' + encodeURIComponent(w.id) + '" target="_blank" rel="noopener noreferrer" data-project-fallback="' + escapeHtml(w.thumbFallback || w.thumb) + '" aria-label="Watch ' + escapeHtml(w.title) + ' on YouTube">' + media + text + '</a>';
+  };
+  const appendBrowseBatch = () => {
+    if (!browseRow || browseRendered >= browseItems.length) return;
+    const end = usesNativeBrowse() ? Math.min(browseItems.length, browseRendered + BROWSE_BATCH) : browseItems.length;
+    const markup = browseItems.slice(browseRendered, end).map((work, offset) => browseCardMarkup(work, browseRendered + offset)).join('');
+    browseRow.insertAdjacentHTML('beforeend', markup);
+    browseRendered = end;
+  };
   const buildBrowse = (entry) => {
-    if (!browseTrack || !browseLabel) return;
-    const vids = vidsFor(entry);
-    browseLabel.textContent = entry.name + ' \u00b7 ' + vids.length + (vids.length === 1 ? ' video' : ' videos');
-    browseRow.innerHTML = vids.map((w, i) => {
-      const portrait = isPortraitVideo(w);
-      const cardSrc = w.thumb;
-      const media = '<span class="tl-browse-thumb"><img src="' + escapeHtml(cardSrc) + '" alt="" loading="lazy" decoding="async" onerror="handleRemoteImageError(this,this.closest(\'a\').dataset.projectFallback)" /></span>';
-      const text = '<span class="tl-browse-title">' + escapeHtml(w.title) + '</span><span class="tl-browse-meta">' + (w.views ? escapeHtml(fmtViews(w.views)) + ' views' : 'YouTube') + (portrait ? ' · Short' : '') + '</span>';
-      const cls = 'tl-browse-card' + (portrait ? ' tl-browse-card--portrait' : '');
-      if (w.cased) {
-        return '<a class="' + cls + '" style="--i:' + i + '" href="case-study.html?id=' + encodeURIComponent(w.id) + '" data-project-transition data-project-title="' + escapeHtml(w.title) + '" data-project-format="' + (portrait ? 'portrait' : 'landscape') + '" data-project-thumb="' + escapeHtml(w.thumb) + '" data-project-fallback="' + escapeHtml(w.thumbFallback || w.thumb) + '">' + media + text + '</a>';
-      }
-      return '<a class="' + cls + '" style="--i:' + i + '" href="https://youtu.be/' + encodeURIComponent(w.id) + '" target="_blank" rel="noopener noreferrer" data-project-fallback="' + escapeHtml(w.thumbFallback || w.thumb) + '" aria-label="Watch ' + escapeHtml(w.title) + ' on YouTube">' + media + text + '</a>';
-    }).join('');
+    if (!browseTrack || !browseRow || !browseLabel) return;
+    browseItems = vidsFor(entry);
+    browseRendered = 0;
+    browseLabel.textContent = entry.name + ' \u00b7 ' + browseItems.length + (browseItems.length === 1 ? ' video' : ' videos');
+    browseRow.innerHTML = '';
+    browseRow.style.removeProperty('transform');
+    browseTrack.scrollLeft = 0;
+    appendBrowseBatch();
     requestAnimationFrame(() => { if (typeof browseMeasure === 'function') browseMeasure(true); });
   };
   const openBrowse = () => {
@@ -978,6 +1016,10 @@ function initTimeline() {
     browsing = true;
     buildBrowse(entry);
     if (browsePanel) browsePanel.hidden = false;
+    if (stage) {
+      stage.setAttribute('aria-hidden', 'true');
+      if ('inert' in stage) stage.inert = true;
+    }
     requestAnimationFrame(() => { if (monitor) monitor.classList.add('browsing'); });
     const close = board.querySelector('[data-browse-close]');
     if (close) close.focus();
@@ -990,6 +1032,7 @@ function initTimeline() {
     let bRaf = 0;
     let bLast = 0;
     const bPaint = () => {
+      if (usesNativeBrowse()) return;
       browseRow.style.transform = 'translate3d(' + (-bx).toFixed(2) + 'px,0,0)';
       if (bMax > 0) {
         const span = browseBar.clientWidth - browseThumb.clientWidth;
@@ -1010,6 +1053,14 @@ function initTimeline() {
     };
     const bClamp = (v) => Math.max(0, Math.min(bMax, v));
     browseMeasure = (reset) => {
+      const native = usesNativeBrowse();
+      browseTrack.classList.toggle('tl-browse-track--native', native);
+      if (native) {
+        browseRow.style.removeProperty('transform');
+        browseTrack.classList.toggle('tl-browse-track--center', browseRow.scrollWidth <= browseTrack.clientWidth + 2);
+        if (reset) browseTrack.scrollLeft = 0;
+        return;
+      }
       bMax = Math.max(0, browseRow.scrollWidth - browseTrack.clientWidth + 16);
       browseTrack.classList.toggle('tl-browse-track--center', bMax <= 2);
       if (reset || bMax <= 2) { bx = 0; bTarget = 0; }
@@ -1020,6 +1071,7 @@ function initTimeline() {
       bPaint();
     };
     browseTrack.addEventListener('wheel', (event) => {
+      if (usesNativeBrowse()) return;
       if (bMax <= 2) return;
       event.preventDefault();
       event.stopPropagation();
@@ -1031,6 +1083,7 @@ function initTimeline() {
     let dragStartTarget = 0;
     let dragging = false;
     browseThumb.addEventListener('pointerdown', (event) => {
+      if (usesNativeBrowse()) return;
       event.preventDefault();
       event.stopPropagation();
       dragging = true;
@@ -1051,6 +1104,7 @@ function initTimeline() {
     browseThumb.addEventListener('pointerup', endThumbDrag);
     browseThumb.addEventListener('pointercancel', endThumbDrag);
     browseBar.addEventListener('pointerdown', (event) => {
+      if (usesNativeBrowse()) return;
       if (event.target === browseThumb || dragging) return;
       const rect = browseBar.getBoundingClientRect();
       bTarget = bClamp(((event.clientX - rect.left) / rect.width) * bMax - browseTrack.clientWidth / 4);
@@ -1061,33 +1115,49 @@ function initTimeline() {
       if (!card) return;
       const left = card.offsetLeft;
       const right = left + card.offsetWidth;
+      if (usesNativeBrowse()) {
+        if (left < browseTrack.scrollLeft + 12) browseTrack.scrollLeft = Math.max(0, left - 12);
+        else if (right > browseTrack.scrollLeft + browseTrack.clientWidth - 12) browseTrack.scrollLeft = right - browseTrack.clientWidth + 12;
+        return;
+      }
       if (left < bTarget + 20) bTarget = bClamp(left - 20);
       else if (right > bTarget + browseTrack.clientWidth - 20) bTarget = bClamp(right - browseTrack.clientWidth + 20);
       bKick();
     });
     let touchGliding = false;
     let touchMoved = false;
+    let touchClaimed = false;
     let touchStartX = 0;
+    let touchStartY = 0;
     let touchStartTarget = 0;
     browseTrack.addEventListener('pointerdown', (event) => {
+      if (usesNativeBrowse()) return;
       if (event.pointerType !== 'touch' || event.target.closest('[data-browse-bar]')) return;
       touchGliding = true;
       touchMoved = false;
+      touchClaimed = false;
       touchStartX = event.clientX;
+      touchStartY = event.clientY;
       touchStartTarget = bTarget;
-      browseTrack.setPointerCapture(event.pointerId);
     });
     browseTrack.addEventListener('pointermove', (event) => {
       if (!touchGliding) return;
       const delta = touchStartX - event.clientX;
-      if (Math.abs(delta) > 4) touchMoved = true;
-      if (!touchMoved) return;
+      const deltaY = touchStartY - event.clientY;
+      if (!touchClaimed) {
+        if (Math.abs(delta) < 7 && Math.abs(deltaY) < 7) return;
+        if (Math.abs(deltaY) >= Math.abs(delta) * 0.9) { touchGliding = false; return; }
+        touchClaimed = true;
+        touchMoved = true;
+        browseTrack.setPointerCapture(event.pointerId);
+      }
       event.preventDefault();
       bTarget = bClamp(touchStartTarget + delta);
       bKick();
     });
     const endTouchGlide = () => {
       touchGliding = false;
+      touchClaimed = false;
       window.setTimeout(() => { touchMoved = false; }, 0);
     };
     browseTrack.addEventListener('pointerup', endTouchGlide);
@@ -1097,6 +1167,10 @@ function initTimeline() {
       event.preventDefault();
       event.stopPropagation();
     }, true);
+    browseTrack.addEventListener('scroll', () => {
+      if (!usesNativeBrowse() || browseRendered >= browseItems.length) return;
+      if (browseTrack.scrollLeft + browseTrack.clientWidth >= browseTrack.scrollWidth - browseTrack.clientWidth * 1.5) appendBrowseBatch();
+    }, { passive: true, signal: tlSig });
     window.addEventListener('resize', () => { if (browsing) browseMeasure(false); }, { passive: true, signal: tlSig });
   }
   const closeBrowse = () => {
@@ -1105,8 +1179,15 @@ function initTimeline() {
     clearTimeout(retargetTimer);
     if (browsePanel) browsePanel.classList.remove('retargeting');
     if (monitor) monitor.classList.remove('browsing');
+    if (stage) {
+      stage.removeAttribute('aria-hidden');
+      if ('inert' in stage) stage.inert = false;
+    }
     window.setTimeout(() => { if (browsePanel && !browsing) browsePanel.hidden = true; }, 520);
-    if (monImg && monImg.tabIndex >= 0) monImg.focus({ preventScroll: true });
+    const returnTarget = monImg && monImg.tabIndex >= 0
+      ? monImg
+      : board.querySelector('.clip[data-idx="' + current + '"]');
+    if (returnTarget) returnTarget.focus({ preventScroll: true });
   };
   const setActive = (idx) => {
     const prev = board.querySelector('.clip.is-active');
@@ -1150,16 +1231,9 @@ function initTimeline() {
     if (browsing) {
       if (!vids.length) {
         closeBrowse();
-      } else if (browsePanel && !reduce) {
-        // switching channels while the video browser is open: dissolve out, rebuild, stagger back in
-        browsePanel.classList.add('retargeting');
-        clearTimeout(retargetTimer);
-        retargetTimer = window.setTimeout(() => {
-          buildBrowse(entry);
-          requestAnimationFrame(() => browsePanel.classList.remove('retargeting'));
-        }, 190);
       } else {
         buildBrowse(entry);
+        requestAnimationFrame(() => browsePanel?.classList.remove('retargeting'));
       }
     }
   };
@@ -1170,6 +1244,7 @@ function initTimeline() {
     const token = ++cutToken;
     const ready = ensureMonitorAsset(credits[idx]);
     stage.classList.add('cut');
+    if (browsing && browsePanel && !reduce) browsePanel.classList.add('retargeting');
     clearTimeout(cutTimer);
     const commit = () => {
       ready.then(async (src) => {
@@ -1245,8 +1320,14 @@ function initTimeline() {
     performing = false;
     if (performRaf) { cancelAnimationFrame(performRaf); performRaf = 0; }
   };
+  const syncTimelineEdges = () => {
+    body.classList.toggle('at-start', body.scrollLeft <= 2);
+    body.classList.toggle('at-end', body.scrollLeft + body.clientWidth >= body.scrollWidth - 2);
+  };
   body.addEventListener('pointerenter', () => { refreshRect(); interrupt(); });
-  body.addEventListener('scroll', () => { fieldRect = null; }, { passive: true });
+  body.addEventListener('pointerdown', () => { refreshRect(); interrupt(); }, { passive: true });
+  body.addEventListener('scroll', () => { fieldRect = null; syncTimelineEdges(); }, { passive: true });
+  requestAnimationFrame(syncTimelineEdges);
   if (monitor) {
     monitor.addEventListener('pointerenter', interrupt);
     monitor.addEventListener('pointerdown', interrupt, { passive: true });
@@ -1286,7 +1367,6 @@ function initTimeline() {
     });
   });
   monImg.addEventListener('click', () => { if (browsing) closeBrowse(); else openBrowse(); });
-  const monCard = board.querySelector('[data-mon-card]');
   if (monCard) monCard.addEventListener('click', (event) => {
     if (event.target === monImg) return;
     if (browsing) closeBrowse(); else openBrowse();
@@ -1311,11 +1391,15 @@ function initTimeline() {
     if (!from) return;
     const dir = event.key === 'ArrowRight' ? 1 : -1;
     let next = dir === 1 ? from.nextElementSibling : from.previousElementSibling;
+    while (next && !next.classList.contains('clip')) next = dir === 1 ? next.nextElementSibling : next.previousElementSibling;
     if (!next) {
       const laneEls = Array.from(board.querySelectorAll('.tl-lane'));
       const li = laneEls.indexOf(from.parentElement);
       const targetLane = laneEls[li + dir];
-      if (targetLane) next = dir === 1 ? targetLane.firstElementChild : targetLane.lastElementChild;
+      if (targetLane) {
+        const laneClips = Array.from(targetLane.querySelectorAll('.clip'));
+        next = dir === 1 ? laneClips[0] : laneClips[laneClips.length - 1];
+      }
     }
     if (!next || !next.classList || !next.classList.contains('clip')) return;
     event.preventDefault();
@@ -1532,6 +1616,7 @@ function initChrome() {
       document.body.classList.add('in');
       document.body.classList.remove('lock');
       window.dispatchEvent(new Event('prsa:reveal'));
+      window.setTimeout(() => document.documentElement.classList.add('hero-settled'), reduceIntro ? 0 : 1800);
       if (window.__prsaIntroFailsafe) {
         clearTimeout(window.__prsaIntroFailsafe);
         window.__prsaIntroFailsafe = 0;
@@ -1616,6 +1701,20 @@ function initChrome() {
       updateMenuLocation();
     });
   }, { passive: true });
+  let responsiveFrame = 0;
+  const refreshResponsiveGeometry = () => {
+    if (responsiveFrame) return;
+    responsiveFrame = requestAnimationFrame(() => {
+      responsiveFrame = 0;
+      tlPanel = null;
+      onScroll();
+      updateMenuLocation();
+      window.dispatchEvent(new Event('prsa:geometry'));
+    });
+  };
+  window.addEventListener('resize', refreshResponsiveGeometry, { passive: true });
+  window.addEventListener('orientationchange', refreshResponsiveGeometry, { passive: true });
+  if (window.visualViewport) window.visualViewport.addEventListener('resize', refreshResponsiveGeometry, { passive: true });
   const pageRegions = [nav, document.querySelector('main'), document.querySelector('footer')].filter(Boolean);
   let menuScrollY = 0;
   let restoringMenuScroll = false;
@@ -1891,6 +1990,7 @@ function initMotion() {
       ticking = true;
     }
   }, { passive: true });
+  window.addEventListener('prsa:geometry', update);
   const kick = () => {
     if (document.body.classList.contains('in')) update();
     else requestAnimationFrame(kick);
