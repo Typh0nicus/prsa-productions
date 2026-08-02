@@ -1832,9 +1832,12 @@ function initChrome() {
   // Mobile scroll-away chrome: the floating wordmark collides with content constantly on a phone
   // (kicker lines, social links, timeline clips - seen on Typhon's device July 30). It tucks away while
   // reading downward and returns the moment you scroll up or reach the top. Desktop is untouched.
+  // The landscape clause is not optional: a phone on its side is 844x390, which clears the 820px gate while
+  // being the MOST cramped view there is - the wordmark sat on top of the email address (Aug 2).
+  const TUCK_AT = '(max-width:820px),(max-height:560px) and (orientation:landscape)';
   let lastY = window.scrollY;
   const tuckNav = () => {
-    if (!matchMedia('(max-width:820px)').matches || document.body.classList.contains('menu-open')) {
+    if (!matchMedia(TUCK_AT).matches || document.body.classList.contains('menu-open')) {
       nav.classList.remove('nav-tuck');
       lastY = window.scrollY;
       return;
