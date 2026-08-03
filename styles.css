@@ -527,8 +527,8 @@ html.js .contact-hero.in-view .contact-email{transform:none}
 .contact-copy:focus-visible{outline:2px solid rgba(47,107,255,.45);outline-offset:3px}
 .contact-utility{margin-top:40px;padding-top:26px;display:flex;align-items:center;justify-content:space-between;gap:20px 32px;border-top:1px solid rgba(19,21,26,.18)}
 .contact-elsewhere-links{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:8px 28px}
-.contact-elsewhere-links a{position:relative;display:inline-flex;align-items:center;padding:9px 0;outline:0;color:rgba(49,51,54,.7);font-size:13px;font-weight:500;letter-spacing:-.01em;transition:color .28s var(--ease)}
-.contact-elsewhere-links a::after{content:"";position:absolute;left:0;right:0;bottom:4px;height:1px;background:var(--blue);transform:scaleX(0);transform-origin:right center;transition:transform .34s var(--ease-silk)}
+.contact-elsewhere-links a{position:relative;display:inline-flex;align-items:center;padding:9px 12px;margin-inline:-12px;outline:0;color:rgba(49,51,54,.7);font-size:13px;font-weight:500;letter-spacing:-.01em;transition:color .28s var(--ease)}
+.contact-elsewhere-links a::after{content:"";position:absolute;left:12px;right:12px;bottom:4px;height:1px;background:var(--blue);transform:scaleX(0);transform-origin:right center;transition:transform .34s var(--ease-silk)}
 .contact-elsewhere-links a:hover,.contact-elsewhere-links a:focus-visible{color:var(--blue)}
 .contact-elsewhere-links a:hover::after,.contact-elsewhere-links a:focus-visible::after{transform:scaleX(1);transform-origin:left center}
 .contact-elsewhere-links a:focus-visible{outline:2px solid rgba(47,107,255,.45);outline-offset:4px}
@@ -801,6 +801,13 @@ html.js body:not(.cs-ready) .poster-section{opacity:0;transform:translateY(30px)
   .tl-lane{height:56px}
   .clip{height:42px;font-size:11.5px;padding:0 11px;border-radius:10px}
   .clip-pfp{width:21px;height:21px}
+  /* Pan affordance parity (audit F3, Aug 3): the board pans on a 940-980px canvas here too, so the coarse-band
+     at-start/at-end reactive edge masks apply below 821px as well. syncTimelineEdges already maintains the
+     classes at every width - this is pure CSS parity, no new motion. */
+  .tl-body{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%)}
+  .tl-body.at-start{-webkit-mask-image:linear-gradient(90deg,#000 0,#000 95%,transparent 100%);mask-image:linear-gradient(90deg,#000 0,#000 95%,transparent 100%)}
+  .tl-body.at-end{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 100%);mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 100%)}
+  .tl-body.at-start.at-end{-webkit-mask-image:none;mask-image:none}
   /* MOBILE ABOUT = ONE CINEMATIC SCENE (July 30, Typhon: "the about can deffo be more peak"). The portrait goes
      FULL-BLEED behind the copy and the statement anchors LOW-LEFT - the hero's own composition. The old stacked
      "text block, then a 250px photo block with a hard bottom cut" read as two flat panels, not a room. */
@@ -941,7 +948,7 @@ html.js body:not(.cs-ready) .poster-section{opacity:0;transform:translateY(30px)
   .contact-copy,.btn{min-height:44px}
   .contact-utility{display:grid;grid-template-columns:1fr;gap:14px;margin-top:30px;padding-top:20px}
   .contact-elsewhere-links{justify-content:start}
-  .contact-elsewhere-links a{min-height:44px;padding:11px 0}
+  .contact-elsewhere-links a{min-height:44px;padding:11px 12px}
   .footer-cta{padding:64px 0 68px}
   .footer-cta-inner{gap:36px}
   .footer-cta-main{gap:30px}
@@ -977,7 +984,7 @@ html.js body:not(.cs-ready) .poster-section{opacity:0;transform:translateY(30px)
   .tl-body.at-start.at-end{-webkit-mask-image:none;mask-image:none}
   .tl-corner,.tl-track-label{position:sticky;left:0;z-index:5;background:#0b0e14}
   .contact-copy,.btn,.cs-back,.cs-actions a{min-height:44px}
-  .contact-elsewhere-links a{min-height:44px}
+  .contact-elsewhere-links a{min-height:44px;min-width:44px}
   .foot-socials a{width:44px;height:44px}
   .cs-menu-project{display:none}
   footer:not(.site-footer){padding-bottom:calc(30px + env(safe-area-inset-bottom))}
@@ -999,8 +1006,8 @@ html.js body:not(.cs-ready) .poster-section{opacity:0;transform:translateY(30px)
   .tl-monitor-identity strong{font-size:19px}
   .tl-monitor-identity img{width:62px;height:62px}
   .tl-monitor-identity img.is-lockup{width:min(190px,80%);height:44px;max-width:none;max-height:none;object-fit:contain}
-  .tl-monitor-ch{font-size:8.5px}
-  .tl-monitor-hint{display:block;opacity:.72;transform:none;margin-top:0;font-size:8px}
+  .tl-monitor-ch{font-size:9.5px}
+  .tl-monitor-hint{display:block;opacity:.72;transform:none;margin-top:0;font-size:10px}
   .tl-scroll{min-width:940px}
   .tl-tick-label{display:none}
   .about-scene h2{font-size:38px}
