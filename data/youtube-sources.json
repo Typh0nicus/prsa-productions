@@ -1,0 +1,21 @@
+{
+ "note": "Direct-from-YouTube scrape jobs for work that is NOT listed on Gregor's YTJobs profile. tools/scrape-youtube.mjs walks each channel's Videos tab from newest back to oldestId, drops anything matching excludeTitles/excludeIds, and attributes what's left to `client` (a credits.json name). New uploads above the newest entry are picked up automatically on the next run — that is deliberate: these channels are ongoing retainers. YTJobs remains the source of truth for every other channel.",
+ "sources": [
+  {
+   "client": "Cash",
+   "handle": "@CashBlox",
+   "channel": "CashBlox",
+   "approvedOn": "2026-08-05",
+   "approvedBy": "Typhon",
+   "oldestId": "Ov089OMpJ-c",
+   "oldestTitle": "ROBLOX +1 SHRINK PER STEP",
+   "maxScan": 120,
+   "excludeTitles": [
+    "NOOB to PRO",
+    "PAY TO WIN"
+   ],
+   "excludeIds": [],
+   "note": "Typhon supplied the set as screenshots of the Videos tab on Aug 5, 2026 — 32 uploads from 'This MUKBANG GAME Has a DARK SECRET..' back to 'ROBLOX +1 SHRINK PER STEP', minus the three NOOB to PRO uploads and 'Testing The Most PAY TO WIN Roblox Games..'. CashBlox retitles uploads often, so IDs are the identity and titles are refreshed on every run."
+  }
+ ]
+}

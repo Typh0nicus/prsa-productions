@@ -1,11 +1,15 @@
 {
  "source": "https://app.ytjobs.co/api/talents/58142",
- "fetchedAt": "2026-07-29T20:29:20.449Z",
- "totalViews": 1604285135,
- "abvViews": "1.6B",
- "abvLikes": "21.08M",
- "abvComments": "735.54K",
- "videoCount": 384,
- "attributedVideos": 384,
- "channelCount": 64
+ "fetchedAt": "2026-08-05T19:42:57.919Z",
+ "totalViews": 1665200747,
+ "abvViews": "1.67B",
+ "abvLikes": "21.41M",
+ "abvComments": "743.92K",
+ "videoCount": 385,
+ "attributedVideos": 411,
+ "channelCount": 64,
+ "libraryViews": 1683704986,
+ "libraryAbvViews": "1.68B",
+ "directVideos": 28,
+ "directViews": 20094244
 }

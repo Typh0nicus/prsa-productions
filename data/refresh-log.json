@@ -1,0 +1,169 @@
+{
+ "note": "Written by tools/auto-refresh.mjs. Newest run first; the last 20 are kept. Audit trail for the unattended refresh — nothing on the site reads this.",
+ "runs": [
+  {
+   "startedAt": "2026-08-05T19:42:28.722Z",
+   "finishedAt": "2026-08-05T19:42:57.979Z",
+   "steps": [
+    "scrape-youtube",
+    "refresh-stats"
+   ],
+   "libraryVideos": 411,
+   "libraryViews": 1683704986,
+   "viewsDelta": 31157,
+   "videosDelta": 0,
+   "addedVideos": [],
+   "removedVideos": [],
+   "reattributed": [],
+   "newClients": [],
+   "unclaimedClients": [
+    "Lah Mike",
+    "Whimzee",
+    "Tays & Ginge Off Stream",
+    "Lana Rae",
+    "Caprice",
+    "The Bov Boys",
+    "Dom Brack",
+    "morbidforfun",
+    "Old & Bald",
+    "Bov Boys +",
+    "tuvington",
+    "Jon Barr",
+    "Beem Team",
+    "Digital Bricks Network"
+   ],
+   "groupingSuggestions": [
+    {
+     "channel": "Lah Mike",
+     "looksLike": [
+      "LawByMike"
+     ],
+     "onWall": true,
+     "videos": 1
+    },
+    {
+     "channel": "Lana Rae",
+     "looksLike": [
+      "Lana's Life"
+     ],
+     "onWall": true,
+     "videos": 1
+    },
+    {
+     "channel": "The Bov Boys",
+     "looksLike": [
+      "Bov Boys +"
+     ],
+     "onWall": false,
+     "videos": 1
+    },
+    {
+     "channel": "Bov Boys +",
+     "looksLike": [
+      "The Bov Boys"
+     ],
+     "onWall": false,
+     "videos": 1
+    }
+   ]
+  },
+  {
+   "startedAt": "2026-08-05T19:02:28.343Z",
+   "finishedAt": "2026-08-05T19:02:53.642Z",
+   "steps": [
+    "refresh-stats"
+   ],
+   "libraryVideos": 411,
+   "libraryViews": 1683673829,
+   "viewsDelta": 0,
+   "videosDelta": 0,
+   "addedVideos": [],
+   "removedVideos": [],
+   "reattributed": [],
+   "newClients": [],
+   "unclaimedClients": [
+    "Lah Mike",
+    "Whimzee",
+    "Tays & Ginge Off Stream",
+    "Lana Rae",
+    "Caprice",
+    "The Bov Boys",
+    "Dom Brack",
+    "morbidforfun",
+    "Old & Bald",
+    "Bov Boys +",
+    "tuvington",
+    "Jon Barr",
+    "Beem Team",
+    "Digital Bricks Network"
+   ],
+   "groupingSuggestions": [
+    {
+     "channel": "Lah Mike",
+     "looksLike": [
+      "LawByMike"
+     ],
+     "onWall": true,
+     "videos": 1
+    },
+    {
+     "channel": "Lana Rae",
+     "looksLike": [
+      "Lana's Life"
+     ],
+     "onWall": true,
+     "videos": 1
+    },
+    {
+     "channel": "The Bov Boys",
+     "looksLike": [
+      "Bov Boys +"
+     ],
+     "onWall": false,
+     "videos": 1
+    },
+    {
+     "channel": "Bov Boys +",
+     "looksLike": [
+      "The Bov Boys"
+     ],
+     "onWall": false,
+     "videos": 1
+    }
+   ]
+  },
+  {
+   "startedAt": "2026-08-05T18:59:02.060Z",
+   "finishedAt": "2026-08-05T18:59:48.566Z",
+   "steps": [
+    "scrape-youtube",
+    "refresh-stats"
+   ],
+   "libraryVideos": 411,
+   "libraryViews": 1683673829,
+   "viewsDelta": 8542,
+   "videosDelta": 0,
+   "addedVideos": [],
+   "removedVideos": [],
+   "reattributed": [],
+   "newClients": [],
+   "unclaimedClients": [
+    "Lah Mike",
+    "Whimzee",
+    "Tays & Ginge Off Stream",
+    "Lana Rae",
+    "Caprice",
+    "The Bov Boys",
+    "Dom Brack",
+    "morbidforfun",
+    "Old & Bald",
+    "Bov Boys +",
+    "tuvington",
+    "Jon Barr",
+    "Beem Team",
+    "Digital Bricks Network"
+   ],
+   "groupingSuggestions": []
+  }
+ ]
+}
